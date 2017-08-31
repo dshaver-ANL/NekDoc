@@ -1,5 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!doctype html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,7 +9,7 @@
     
     <title>Introduction &#8212; Nek5000 17.0 documentation</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -25,19 +26,79 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Quickstart" href="quickstart.html" />
     <link rel="prev" title="Nek5000" href="index.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head>
   <body role="document">
-  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="quickstart.html" title="Quickstart"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Nek5000"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Nek5000 17.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a><ul>
+<li><a class="reference internal" href="#computational-approach">Computational Approach</a></li>
+<li><a class="reference internal" href="#incompressible-navier-stokes-equations">Incompressible Navier-Stokes Equations</a></li>
+<li><a class="reference internal" href="#non-dimensional-navier-stokes">Non-Dimensional Navier-Stokes</a></li>
+<li><a class="reference internal" href="#energy-equation">Energy Equation</a></li>
+<li><a class="reference internal" href="#non-dimensional-energy-passive-scalar-equation">Non-Dimensional Energy / Passive Scalar Equation</a></li>
+<li><a class="reference internal" href="#passive-scalars">Passive Scalars</a></li>
+<li><a class="reference internal" href="#unsteady-stokes">Unsteady Stokes</a></li>
+<li><a class="reference internal" href="#steady-stokes">Steady Stokes</a></li>
+<li><a class="reference internal" href="#linearized-equations">Linearized Equations</a></li>
+<li><a class="reference internal" href="#steady-conduction">Steady Conduction</a></li>
+<li><a class="reference internal" href="#low-mach-navier-stokes">Low-Mach Navier-Stokes</a></li>
+<li><a class="reference internal" href="#incompressible-mhd-equations">Incompressible MHD Equations</a></li>
+<li><a class="reference internal" href="#adpative-lagrangian-eulerian-ale">Adpative Lagrangian-Eulerian (ALE)</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Nek5000</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="quickstart.html"
+                        title="next chapter">Quickstart</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/intro.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -219,9 +280,9 @@ leading to a system of equations which can be solved numerically in a similar fa
 incompressible Navier-Stokes.</p>
 <p>The Low Mach equations in non-dimensional form are</p>
 <div class="math">
-\[\begin{split}&amp;&amp;\rho\bigg(\frac{\mathrm d \mathbf u}{\mathrm d t}+ \mathbf u\cdot\nabla\mathbf u\bigg)=-\nabla p+\nabla \cdot\boldsymbol\tau+\rho\mathbf f\ \\ \nonumber
-&amp;&amp;\frac{\mathrm d \mathbf \rho}{\mathrm d t}+ \mathbf u\cdot\nabla\mathbf \rho=-\rho\nabla \cdot \mathbf u\\ \nonumber
-&amp;&amp;\rho\bigg(\frac{\mathrm d T}{\mathrm d t}+ \mathbf u\cdot\nabla T\bigg)=-\nabla \cdot k \nabla T\\ \nonumber\end{split}\]</div>
+\[\begin{split}&amp;\rho\bigg(\frac{\mathrm d \mathbf u}{\mathrm d t}+ \mathbf u\cdot\nabla\mathbf u\bigg)=-\nabla p+\nabla \cdot\boldsymbol\tau+\rho\mathbf f\ \\ \nonumber
+&amp;\frac{\mathrm d \mathbf \rho}{\mathrm d t}+ \mathbf u\cdot\nabla\mathbf \rho=-\rho\nabla \cdot \mathbf u\\ \nonumber
+&amp;\rho\bigg(\frac{\mathrm d T}{\mathrm d t}+ \mathbf u\cdot\nabla T\bigg)=-\nabla \cdot k \nabla T\\ \nonumber\end{split}\]</div>
 <p>where <span class="math">\(\boldsymbol\tau=\mu[\nabla \mathbf u+\nabla \mathbf u^{T}-\frac{2}{3}\nabla \cdot
 \mathbf u \mathbf I]\)</span>.</p>
 <p>The implementation of the equation if state for the Low Mach formulation is for the moment
@@ -240,10 +301,10 @@ solved simultaneously, and Nek5000 has an implementation for the incompressible 
 <p>Consider a fluid of velocity <span class="math">\(\mathbf u\)</span> subject to a magnetic field <span class="math">\(\mathbf B\)</span> then
 the incompressible MHD equations are</p>
 <div class="math">
-\[\begin{split}\rho(\partial_{t} \mathbf u + \mathbf u \cdot \nabla \mathbf u) &amp;=&amp; - \nabla p + \mu \Delta \mathbf u + \mathbf B\cdot \nabla \mathbf B \ ,\\
-\nabla \cdot \mathbf u &amp; =&amp; 0\\ \nonumber
-\partial_{t} \mathbf B + \mathbf u \cdot \nabla \mathbf B &amp;=&amp; - \nabla q + \eta \Delta \mathbf B + \mathbf B\cdot \nabla \mathbf u \ ,\\
-\nabla \cdot \mathbf B &amp; =&amp; 0 \nonumber\end{split}\]</div>
+\[\begin{split}\rho(\partial_{t} \mathbf u + \mathbf u \cdot \nabla \mathbf u) &amp;= - \nabla p + \mu \Delta \mathbf u + \mathbf B\cdot \nabla \mathbf B \ ,\\
+\nabla \cdot \mathbf u &amp;= 0\\ \nonumber
+\partial_{t} \mathbf B + \mathbf u \cdot \nabla \mathbf B &amp;= - \nabla q + \eta \Delta \mathbf B + \mathbf B\cdot \nabla \mathbf u \ ,\\
+\nabla \cdot \mathbf B &amp;= 0 \nonumber\end{split}\]</div>
 <p>where <span class="math">\(\rho\)</span> is the density <span class="math">\(\mu\)</span> the viscosity, <span class="math">\(\eta\)</span> resistivity, and pressure <span class="math">\(p\)</span>.</p>
 <p>The total magnetic field can be split into two parts: <span class="math">\(\mathbf{B} = \mathbf{B_0} +
 \mathbf{b}\)</span> (mean + fluctuations). The above equations become in terms of Elsässer variables
@@ -258,8 +319,8 @@ the incompressible MHD equations are</p>
 <h2>Adpative Lagrangian-Eulerian (ALE)<a class="headerlink" href="#adpative-lagrangian-eulerian-ale" title="Permalink to this headline">¶</a></h2>
 <p>We consider unsteady incompressible flow in a domain with moving boundaries:</p>
 <div class="math" id="equation-mhd1">
-<span class="eqno">(12)<a class="headerlink" href="#equation-mhd1" title="Permalink to this equation">¶</a></span>\[\begin{split}\frac{\partial\mathbf u}{\partial t}&amp;=&amp;-\nabla p +\frac{1}{Re}\nabla\cdot(\nabla + \nabla^T)\mathbf u  + NL,\\
-\nabla \cdot \mathbf u &amp;= &amp;0\end{split}\]</div>
+<span class="eqno">(12)<a class="headerlink" href="#equation-mhd1" title="Permalink to this equation">¶</a></span>\[\begin{split}\frac{\partial\mathbf u}{\partial t} &amp;= -\nabla p +\frac{1}{Re}\nabla\cdot(\nabla + \nabla^T)\mathbf u  + NL,\\
+\nabla \cdot \mathbf u &amp;= 0\end{split}\]</div>
 <p>Here, <span class="math">\(NL\)</span> represents the quadratic nonlinearities from the convective term.</p>
 <p>Our free-surface hydrodynamic formulation is based upon the arbitrary Lagrangian-Eulerian (ALE)
 formulation described in <a class="reference internal" href="bibliography.html#ho1989" id="id4">[Ho1989]</a>.  Here, the domain <span class="math">\(\Omega(t)\)</span> is also an unknown.  As
@@ -326,71 +387,26 @@ and because of this, the overhead for the moving domain formulation is very low.
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Introduction</a><ul>
-<li><a class="reference internal" href="#computational-approach">Computational Approach</a></li>
-<li><a class="reference internal" href="#incompressible-navier-stokes-equations">Incompressible Navier-Stokes Equations</a></li>
-<li><a class="reference internal" href="#non-dimensional-navier-stokes">Non-Dimensional Navier-Stokes</a></li>
-<li><a class="reference internal" href="#energy-equation">Energy Equation</a></li>
-<li><a class="reference internal" href="#non-dimensional-energy-passive-scalar-equation">Non-Dimensional Energy / Passive Scalar Equation</a></li>
-<li><a class="reference internal" href="#passive-scalars">Passive Scalars</a></li>
-<li><a class="reference internal" href="#unsteady-stokes">Unsteady Stokes</a></li>
-<li><a class="reference internal" href="#steady-stokes">Steady Stokes</a></li>
-<li><a class="reference internal" href="#linearized-equations">Linearized Equations</a></li>
-<li><a class="reference internal" href="#steady-conduction">Steady Conduction</a></li>
-<li><a class="reference internal" href="#low-mach-navier-stokes">Low-Mach Navier-Stokes</a></li>
-<li><a class="reference internal" href="#incompressible-mhd-equations">Incompressible MHD Equations</a></li>
-<li><a class="reference internal" href="#adpative-lagrangian-eulerian-ale">Adpative Lagrangian-Eulerian (ALE)</a></li>
-</ul>
-</li>
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">Nek5000</a></li>
-      <li>Next: <a href="quickstart.html" title="next chapter">Quickstart</a></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/intro.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2017, Paul Fischer, James Lottes,  Stefan Kerkemeier, Oana Marin, Katherine Heisey, Aleks Obabko, Elia Merzari, Yulia Peet, Ronald Rahaman.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="_sources/intro.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="quickstart.html" title="Quickstart"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Nek5000"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Nek5000 17.0 documentation</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Paul Fischer, James Lottes,  Stefan Kerkemeier, Oana Marin, Katherine Heisey, Aleks Obabko, Elia Merzari, Yulia Peet, Ronald Rahaman.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
   </body>
 </html>

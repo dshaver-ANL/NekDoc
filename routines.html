@@ -1,5 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!doctype html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,7 +9,7 @@
     
     <title>Routines of Interest &#8212; Nek5000 17.0 documentation</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -25,54 +26,32 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Appendices" href="appendix.html" />
     <link rel="prev" title="Performing Large-Scale Simulations in Nek5000" href="large_scale.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head>
   <body role="document">
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="routines-of-interest">
-<h1>Routines of Interest<a class="headerlink" href="#routines-of-interest" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="naming-conventions">
-<h2>Naming Conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="subroutines">
-<h2>Subroutines<a class="headerlink" href="#subroutines" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="functions">
-<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="an-example-of-specifying-surface-normals-in-the-usr-file">
-<h2>An Example of Specifying Surface Normals in the .usr File<a class="headerlink" href="#an-example-of-specifying-surface-normals-in-the-usr-file" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="spectral-interpolation-tool">
-<h2>Spectral Interpolation Tool<a class="headerlink" href="#spectral-interpolation-tool" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="grid-to-grid-interpolation">
-<h2>Grid-to-Grid Interpolation<a class="headerlink" href="#grid-to-grid-interpolation" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="lagrangian-particle-tracking">
-<h2>Lagrangian Particle Tracking<a class="headerlink" href="#lagrangian-particle-tracking" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
-
-
-          </div>
-        </div>
-      </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="appendix.html" title="Appendices"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="large_scale.html" title="Performing Large-Scale Simulations in Nek5000"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Nek5000 17.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
@@ -88,15 +67,13 @@
 </ul>
 </li>
 </ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="large_scale.html" title="previous chapter">Performing Large-Scale Simulations in Nek5000</a></li>
-      <li>Next: <a href="appendix.html" title="next chapter">Appendices</a></li>
-  </ul></li>
-</ul>
-</div>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="large_scale.html"
+                        title="previous chapter">Performing Large-Scale Simulations in Nek5000</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="appendix.html"
+                        title="next chapter">Appendices</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -116,22 +93,339 @@
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="routines-of-interest">
+<h1>Routines of Interest<a class="headerlink" href="#routines-of-interest" title="Permalink to this headline">¶</a></h1>
+<p>The most common routines needed in Nek5000 are</p>
+<div class="section" id="naming-conventions">
+<h2>Naming Conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">f(a,b,c)</span></code><ul>
+<li><code class="docutils literal"><span class="pre">a</span></code>- returned variable</li>
+<li><code class="docutils literal"><span class="pre">b,c</span></code> -input data</li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">op[]</span></code> represent operations on operators</li>
+<li><code class="docutils literal"><span class="pre">c[]</span></code>  operations on constants</li>
+<li><code class="docutils literal"><span class="pre">gl[]</span></code> global operations</li>
+<li><code class="docutils literal"><span class="pre">col2[]</span> <span class="pre">---</span></code></li>
+<li><code class="docutils literal"><span class="pre">col3[]</span> <span class="pre">--</span></code></li>
+</ul>
+</div>
+<div class="section" id="subroutines">
+<h2>Subroutines<a class="headerlink" href="#subroutines" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">rescale_x(x,x0,x1)</span></code></dt>
+<dd>Rescales the array <code class="docutils literal"><span class="pre">x</span></code> to be in the range <code class="docutils literal"><span class="pre">(x0,x1)</span></code>. This is usually called from <code class="docutils literal"><span class="pre">usrdat2</span></code> in the <code class="docutils literal"><span class="pre">.usr</span></code> file</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">normvc(h1,semi,l2,linf,x1,x2,x3)</span></code></dt>
+<dd>Computes the error norms of a vector field variable <code class="docutils literal"><span class="pre">(x1,x2,x3)</span></code> defined on mesh 1, the velocity mesh. The error norms are normalized with respect to the volume, with the exception on the infinity norm, <code class="docutils literal"><span class="pre">linf</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">comp_vort3(vort,work1,work2,u,v,w)</span></code></dt>
+<dd>Computes the vorticity (<code class="docutils literal"><span class="pre">vort</span></code>) of the velocity field, <code class="docutils literal"><span class="pre">(u,v,w)</span></code></dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">lambda2(l2)</span></code></dt>
+<dd>Generates the Lambda-2 vortex criterion proposed by Jeong and Hussain (1995)</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">planar_average_z(ua,u,w1,w2)</span></code></dt>
+<dd>Computes the r-s planar average of the quantity <code class="docutils literal"><span class="pre">u</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">torque_calc(scale,x0,ifdout,iftout)</span></code></dt>
+<dd>Computes torque about the point <code class="docutils literal"><span class="pre">x0</span></code>. Here scale is a user supplied multiplier so that the results may be scaled to any convenient non-dimensionalization. Both the drag and the torque can be printed to the screen by switching the appropriate <code class="docutils literal"><span class="pre">ifdout(drag)</span></code> or <code class="docutils literal"><span class="pre">iftout(torque)</span></code> logical.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">set_obj</span></code></dt>
+<dd>Defines objects for surface integrals by changing the value of <code class="docutils literal"><span class="pre">hcode</span></code> for future calculations. Typically called once within <code class="docutils literal"><span class="pre">userchk</span></code> (for <code class="docutils literal"><span class="pre">istep</span> <span class="pre">=</span> <span class="pre">0</span></code>) and used for calculating torque. (see above)</dd>
+</dl>
+<p><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">avg1(avg,f,</span> <span class="pre">alpha,beta,n,name,ifverbose)</span></code></p>
+<p><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">avg2(avg,f,</span> <span class="pre">alpha,beta,n,name,ifverbose)</span></code></p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">avg3(avg,f,g,</span> <span class="pre">alpha,beta,n,name,ifverbose)</span></code></dt>
+<dd>These three subroutines calculate the (weighted) average of <code class="docutils literal"><span class="pre">f</span></code>. Depending on the value of the logical, <code class="docutils literal"><span class="pre">ifverbose</span></code>, the results will be printed to standard output along with name. In <code class="docutils literal"><span class="pre">avg2</span></code>, the <code class="docutils literal"><span class="pre">f</span></code> component is squared. In <code class="docutils literal"><span class="pre">avg3</span></code>, vector <code class="docutils literal"><span class="pre">g</span></code> also contributes to the average calculation.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">outpost(x,vy,vz,pr,tz,'</span> <span class="pre">')</span></code></dt>
+<dd>Dumps the current data of <code class="docutils literal"><span class="pre">x</span></code>, <code class="docutils literal"><span class="pre">vy</span></code>, <code class="docutils literal"><span class="pre">vz</span></code>, <code class="docutils literal"><span class="pre">pr</span></code>, <code class="docutils literal"><span class="pre">tz</span></code> to an <code class="docutils literal"><span class="pre">.fld</span></code> or <code class="docutils literal"><span class="pre">.f0????</span></code> file for post processing.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">platform_timer(ivrb)</span></code></dt>
+<dd>Runs the battery of timing tests for matrix-matrix products,contention-free processor-to-processor ping-pong tests, and <code class="docutils literal"><span class="pre">mpi_all_reduce</span></code> times. Allows one to check the performance of the communication routines used on specific platforms.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">quickmv</span></code></dt>
+<dd>Moves the mesh to allow user affine motion.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">runtimeavg(ay,y,j,istep1,ipostep,s5)</span></code></dt>
+<dd>Computes, stores, and (for <code class="docutils literal"><span class="pre">ipostep!0</span></code>) prints runtime averages of <code class="docutils literal"><span class="pre">j</span></code>-quantity <code class="docutils literal"><span class="pre">y</span></code> (along w/ <code class="docutils literal"><span class="pre">y</span></code> itself unless <code class="docutils literal"><span class="pre">ipostep&lt;0</span></code>) with <code class="docutils literal"><span class="pre">j</span></code> + &#8216;<code class="docutils literal"><span class="pre">rtavg_</span></code>&#8216; + (unique) <code class="docutils literal"><span class="pre">s5</span></code> every <code class="docutils literal"><span class="pre">ipostep</span></code> for <code class="docutils literal"><span class="pre">istep&gt;=istep1</span></code>. <code class="docutils literal"><span class="pre">s5</span></code> is a string to append to <code class="docutils literal"><span class="pre">rtavg_</span></code> for storage file naming.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">lagrng(uo,y,yvec,uvec,work,n,m)</span></code></dt>
+<dd>Compute Lagrangian interpolant for <code class="docutils literal"><span class="pre">uo</span></code></dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">opcopy(a1,a2,a3,b1,b2,b3)</span></code></dt>
+<dd>Copies <code class="docutils literal"><span class="pre">b1</span></code> to <code class="docutils literal"><span class="pre">a1</span></code>, <code class="docutils literal"><span class="pre">b2</span></code> to <code class="docutils literal"><span class="pre">a2</span></code>, and <code class="docutils literal"><span class="pre">b3</span></code> to <code class="docutils literal"><span class="pre">a3</span></code>, when <code class="docutils literal"><span class="pre">ndim</span> <span class="pre">=</span> <span class="pre">3</span></code>,</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">cadd(a,const,n)</span></code></dt>
+<dd>Adds <code class="docutils literal"><span class="pre">const</span></code> to vector <code class="docutils literal"><span class="pre">a</span></code> of size <code class="docutils literal"><span class="pre">n</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">col2(a,b,n)</span></code></dt>
+<dd>For <code class="docutils literal"><span class="pre">n</span></code> entries, calculates <code class="docutils literal"><span class="pre">a=a*b</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">col3(a,b,c,n)</span></code></dt>
+<dd>For <code class="docutils literal"><span class="pre">n</span></code> entries, calculates <code class="docutils literal"><span class="pre">a=b*c</span></code>.</dd>
+</dl>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">glmax(a,n)</span></code></p>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">glamax(a,n)</span></code></p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">function</span> <span class="pre">iglmax(a,n)</span></code></dt>
+<dd>Calculates the (absolute) max of a vector that is size <code class="docutils literal"><span class="pre">n</span></code>. Prefix <code class="docutils literal"><span class="pre">i</span></code> implies integer type.</dd>
+<dt><code class="docutils literal"><span class="pre">function</span> <span class="pre">i8glmax(a,n)</span></code></dt>
+<dd>Calculates the max of an integer*8 vector that is size <code class="docutils literal"><span class="pre">n</span></code>.</dd>
+</dl>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">glmin(a,n)</span></code></p>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">glamin(a,n)</span></code></p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">function</span> <span class="pre">iglmin(a,n)</span></code></dt>
+<dd>Calculates the (absolute) min of a vector that is size <code class="docutils literal"><span class="pre">n</span></code>. Prefix <code class="docutils literal"><span class="pre">i</span></code> implies integer type.</dd>
+</dl>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">glsc2(a,b,n)</span></code></p>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">glsc3(a,b,mult,n)</span></code></p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">function</span> <span class="pre">glsc23(z,y,z,n)</span></code></dt>
+<dd>Performs the inner product in double precision. <code class="docutils literal"><span class="pre">glsc3</span></code> uses a multiplier, <code class="docutils literal"><span class="pre">mult</span></code> and <code class="docutils literal"><span class="pre">glsc23</span></code> performs <code class="docutils literal"><span class="pre">x*x*y*z</span></code>.</dd>
+</dl>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">glsum(x,n)</span></code></p>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">iglsum(x,n)</span></code></p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">function</span> <span class="pre">i8glsum(x,n)</span></code></dt>
+<dd>Computes the global sum of <code class="docutils literal"><span class="pre">x</span></code>, where the prefix, <code class="docutils literal"><span class="pre">i</span></code> specifies type integer, and <code class="docutils literal"><span class="pre">i8</span></code> specifies type integer*8.</dd>
+</dl>
+</div>
+<div class="section" id="an-example-of-specifying-surface-normals-in-the-usr-file">
+<h2>An Example of Specifying Surface Normals in the .usr File<a class="headerlink" href="#an-example-of-specifying-surface-normals-in-the-usr-file" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">subroutine </span><span class="n">userbc</span> <span class="p">(</span><span class="n">ix</span><span class="p">,</span><span class="n">iy</span><span class="p">,</span><span class="n">iz</span><span class="p">,</span><span class="n">iside</span><span class="p">,</span><span class="n">eg</span><span class="p">)</span>
+<span class="k">include</span> <span class="s1">&#39;SIZE&#39;</span>
+<span class="k">include</span> <span class="s1">&#39;TOTAL&#39;</span>
+<span class="k">include</span> <span class="s1">&#39;NEKUSE&#39;</span>
+
+<span class="kt">integer </span><span class="n">e</span><span class="p">,</span><span class="n">eg</span><span class="p">,</span><span class="n">f</span>
+<span class="kt">real </span><span class="n">snx</span><span class="p">,</span><span class="n">sny</span><span class="p">,</span><span class="n">snz</span>   <span class="c">! surface normals</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">eface1</span><span class="p">(</span><span class="n">iside</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">gllel</span> <span class="p">(</span><span class="n">eg</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">eq</span><span class="p">.</span><span class="mf">1.</span><span class="nb">or</span><span class="p">.</span><span class="n">f</span><span class="p">.</span><span class="n">eq</span><span class="p">.</span><span class="mi">2</span><span class="p">)</span> <span class="k">then</span>      <span class="c">! &quot;r face&quot;</span>
+   <span class="n">snx</span> <span class="o">=</span> <span class="n">unx</span><span class="p">(</span><span class="n">iy</span><span class="p">,</span><span class="n">iz</span><span class="p">,</span><span class="n">iside</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>                 <span class="c">! Note:  iy,iz</span>
+   <span class="n">sny</span> <span class="o">=</span> <span class="n">uny</span><span class="p">(</span><span class="n">iy</span><span class="p">,</span><span class="n">iz</span><span class="p">,</span><span class="n">iside</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+   <span class="n">snz</span> <span class="o">=</span> <span class="n">unz</span><span class="p">(</span><span class="n">iy</span><span class="p">,</span><span class="n">iz</span><span class="p">,</span><span class="n">iside</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+<span class="k">else if</span> <span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">eq</span><span class="p">.</span><span class="mf">3.</span><span class="nb">or</span><span class="p">.</span><span class="n">f</span><span class="p">.</span><span class="n">eq</span><span class="p">.</span><span class="mi">4</span><span class="p">)</span>  <span class="k">then</span> <span class="c">! &quot;s face&quot;</span>
+   <span class="n">snx</span> <span class="o">=</span> <span class="n">unx</span><span class="p">(</span><span class="n">ix</span><span class="p">,</span><span class="n">iz</span><span class="p">,</span><span class="n">iside</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>                 <span class="c">!        ix,iz</span>
+   <span class="n">sny</span> <span class="o">=</span> <span class="n">uny</span><span class="p">(</span><span class="n">ix</span><span class="p">,</span><span class="n">iz</span><span class="p">,</span><span class="n">iside</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+   <span class="n">snz</span> <span class="o">=</span> <span class="n">unz</span><span class="p">(</span><span class="n">ix</span><span class="p">,</span><span class="n">iz</span><span class="p">,</span><span class="n">iside</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+<span class="k">else if</span> <span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">eq</span><span class="p">.</span><span class="mf">5.</span><span class="nb">or</span><span class="p">.</span><span class="n">f</span><span class="p">.</span><span class="n">eq</span><span class="p">.</span><span class="mi">6</span><span class="p">)</span>  <span class="k">then</span> <span class="c">! &quot;t face&quot;</span>
+   <span class="n">snx</span> <span class="o">=</span> <span class="n">unx</span><span class="p">(</span><span class="n">ix</span><span class="p">,</span><span class="n">iy</span><span class="p">,</span><span class="n">iside</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>                 <span class="c">!        ix,iy</span>
+   <span class="n">sny</span> <span class="o">=</span> <span class="n">uny</span><span class="p">(</span><span class="n">ix</span><span class="p">,</span><span class="n">iy</span><span class="p">,</span><span class="n">iside</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+   <span class="n">snz</span> <span class="o">=</span> <span class="n">unz</span><span class="p">(</span><span class="n">ix</span><span class="p">,</span><span class="n">iy</span><span class="p">,</span><span class="n">iside</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+<span class="k">end if</span>
+
+<span class="n">ux</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="n">uy</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="n">uz</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="n">temp</span><span class="o">=</span><span class="mf">0.0</span>
+
+<span class="k">return</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>This example will load a list of field files (filenames are read from a file) into the solver using the <code class="docutils literal"><span class="pre">load_fld()</span></code> function. After the data is loaded, the user is free to compute other postprocessing quantities. At the end the results are dumped onto a regular (uniform) mesh by a subsequent call to <code class="docutils literal"><span class="pre">prepost()</span></code>.</p>
+<p>Note: The regular grid data (field files) cannot be used as a restart file (uniform-&gt;GLL interpolation is unstable)!</p>
+<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">subroutine </span><span class="n">userchk</span>
+<span class="k">include</span> <span class="s1">&#39;SIZE&#39;</span>
+<span class="k">include</span> <span class="s1">&#39;TOTAL&#39;</span>
+<span class="k">include</span> <span class="s1">&#39;RESTART&#39;</span>
+
+<span class="kt">character</span><span class="o">*</span><span class="mi">80</span> <span class="n">filename</span><span class="p">(</span><span class="mi">9999</span><span class="p">)</span>
+
+<span class="n">ntot</span>   <span class="o">=</span> <span class="n">nx1</span><span class="o">*</span><span class="n">ny1</span><span class="o">*</span><span class="n">nz1</span><span class="o">*</span><span class="n">nelv</span>
+
+<span class="n">ifreguo</span> <span class="o">=</span> <span class="p">.</span><span class="n">true</span><span class="p">.</span>   <span class="c">! dump on regular (uniform) grid instead of GLL</span>
+<span class="n">nrg</span>     <span class="o">=</span> <span class="mi">16</span>       <span class="c">! dimension of regular grid (nrg**ndim)</span>
+
+<span class="c">! read file-list</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">nid</span><span class="p">.</span><span class="n">eq</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">   open</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="mi">199</span><span class="p">,</span><span class="k">file</span><span class="o">=</span><span class="s1">&#39;file.list&#39;</span><span class="p">,</span><span class="n">form</span><span class="o">=</span><span class="s1">&#39;formatted&#39;</span><span class="p">,</span><span class="n">status</span><span class="o">=</span><span class="s1">&#39;old&#39;</span><span class="p">)</span>
+   <span class="k">read</span><span class="p">(</span><span class="mi">199</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="n">nfiles</span>
+   <span class="k">read</span><span class="p">(</span><span class="mi">199</span><span class="p">,</span><span class="s1">&#39;(A80)&#39;</span><span class="p">)</span> <span class="p">(</span><span class="n">filename</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nfiles</span><span class="p">)</span>
+   <span class="k">close</span><span class="p">(</span><span class="mi">199</span><span class="p">)</span>
+<span class="k">end if</span>
+<span class="k">call </span><span class="n">bcast</span><span class="p">(</span><span class="n">nfiles</span><span class="p">,</span><span class="n">isize</span><span class="p">)</span>
+<span class="k">call </span><span class="n">bcast</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">nfiles</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+
+<span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="n">nfiles</span>
+   <span class="k">call </span><span class="n">load_fld</span><span class="p">(</span><span class="n">filename</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+
+   <span class="c">! do something</span>
+   <span class="c">! note: make sure you save the result into arrays which are</span>
+   <span class="c">!       dumped by prepost() e.g. T(nx1,ny1,nz1,nelt,ldimt)</span>
+   <span class="c">! ...</span>
+
+   <span class="c">! dump results into file</span>
+   <span class="k">call </span><span class="n">prepost</span><span class="p">(.</span><span class="n">true</span><span class="p">.,</span><span class="s1">&#39;his&#39;</span><span class="p">)</span>
+<span class="k">end do</span>
+
+<span class="c">! we&#39;re done</span>
+<span class="k">call </span><span class="n">exitt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="spectral-interpolation-tool">
+<h2>Spectral Interpolation Tool<a class="headerlink" href="#spectral-interpolation-tool" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Check</span> <span class="pre">intpts().</span></code>
+Monitor Points</p>
+<p>Multiple monitor points can be defined in the file <code class="docutils literal"><span class="pre">hpts.in</span></code> to examine the field data at every timestep.</p>
+<ul>
+<li><p class="first">setup an ASCII file called <code class="docutils literal"><span class="pre">hpts.in</span></code> e.g:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>3 !number of monitoring points
+1.1 -1.2 1.0
+. . .
+x y z
+</pre></div>
+</div>
+</li>
+<li><p class="first">depending on the number number of monitoring points you may need to increase <code class="docutils literal"><span class="pre">lhis</span></code> in SIZE.</p>
+</li>
+<li><p class="first">add <code class="docutils literal"><span class="pre">'call</span> <span class="pre">hpts()'</span></code> to <code class="docutils literal"><span class="pre">userchk()</span></code></p>
+</li>
+</ul>
+</div>
+<div class="section" id="grid-to-grid-interpolation">
+<h2>Grid-to-Grid Interpolation<a class="headerlink" href="#grid-to-grid-interpolation" title="Permalink to this headline">¶</a></h2>
+<p>To interpolate an existing field file (e.g. <code class="docutils literal"><span class="pre">base.fld</span></code>) onto a new mesh do the following:</p>
+<ul>
+<li><p class="first">set <code class="docutils literal"><span class="pre">lpart</span></code> in SIZE to a large value (e.g. 100,000 or larger) depending on your memory footprint</p>
+</li>
+<li><p class="first">compile Nek with MPI/IO support</p>
+</li>
+<li><p class="first">set <code class="docutils literal"><span class="pre">NSTEPS=0</span></code> in the <code class="docutils literal"><span class="pre">.rea</span></code> file (post-processing mode)</p>
+</li>
+<li><p class="first">run Nek using the new geometry (e.g. <code class="docutils literal"><span class="pre">new_geom.f0000</span></code>)</p>
+</li>
+<li><p class="first">run Nek using the old geometry and add this code snippet to <code class="docutils literal"><span class="pre">userchk()</span></code></p>
+<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="kt">character</span><span class="o">*</span><span class="mi">132</span>  <span class="n">newfld</span><span class="p">,</span> <span class="n">oldfld</span><span class="p">,</span> <span class="n">newgfld</span>
+<span class="k">data </span><span class="n">newfld</span><span class="p">,</span> <span class="n">oldfld</span><span class="p">,</span> <span class="n">newgfld</span> <span class="o">/</span><span class="s1">&#39;new0.f0001&#39;</span><span class="p">,</span><span class="s1">&#39;base.fld&#39;</span><span class="p">,</span><span class="s1">&#39;new_geom.f0000&#39;</span><span class="o">/</span>
+<span class="k">call </span><span class="n">g2gi</span><span class="p">(</span><span class="n">newfld</span><span class="p">,</span> <span class="n">oldfld</span><span class="p">,</span> <span class="n">newgfld</span><span class="p">)</span> <span class="c">! grid2grid interpolation</span>
+<span class="k">call </span><span class="n">exitt</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="lagrangian-particle-tracking">
+<h2>Lagrangian Particle Tracking<a class="headerlink" href="#lagrangian-particle-tracking" title="Permalink to this headline">¶</a></h2>
+<p>The interpolation tool can be used for Lagrangian particle tracking (the particles are the interpolation points).</p>
+<p>Workflow: Set initial particle positions (e.g. reading a file <code class="docutils literal"><span class="pre">particle.pos0</span></code>) <code class="docutils literal"><span class="pre">x_part</span> <span class="pre">&lt;-</span> <span class="pre">x_pos0</span></code></p>
+<p>LOOP</p>
+<ul class="simple">
+<li>compute field quantities</li>
+<li>interpolate field quantities for all particles using <code class="docutils literal"><span class="pre">intpts()</span></code></li>
+<li>dump/store particle data</li>
+<li>advect particles using <code class="docutils literal"><span class="pre">particle_advect()</span></code></li>
+</ul>
+<p>END LOOP</p>
+<div class="highlight-fortranfixed"><div class="highlight"><pre><span></span><span class="nl">     </span> <span class="k">subroutine </span><span class="n">particle_advect</span><span class="p">(</span><span class="n">rtl</span><span class="p">,</span><span class="n">mr</span><span class="p">,</span><span class="n">npart</span><span class="p">,</span><span class="n">dt_p</span><span class="p">)</span>
+<span class="c">c</span>
+<span class="c">c     Advance particle position in time using 4th-order Adams-Bashford.</span>
+<span class="c">c     U[x\_ i(t)] for a given x\_ i(t) will be evaluated by spectral interpolation.</span>
+<span class="c">c     Note: The particle timestep dt_p has be constant!</span>
+<span class="c">c</span>
+<span class="nl">     </span> <span class="k">include</span> <span class="s1">&#39;SIZE&#39;</span>
+<span class="nl">     </span> <span class="k">include</span> <span class="s1">&#39;TOTAL&#39;</span>
+
+<span class="nl">     </span> <span class="kt">real </span><span class="n">rtl</span><span class="p">(</span><span class="n">mr</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nl">     </span> <span class="kt">real </span><span class="n">vell</span><span class="p">(</span><span class="n">ldim</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">lpart</span><span class="p">)</span>  <span class="c">! lagged velocities</span>
+<span class="nl">     </span> <span class="k">save </span><span class="n">vell</span>
+
+<span class="nl">     </span> <span class="kt">integer </span><span class="n">icalld</span>
+<span class="nl">     </span> <span class="k">save    </span><span class="n">icalld</span>
+<span class="nl">     </span> <span class="k">data    </span><span class="n">icalld</span> <span class="o">/</span><span class="mi">0</span><span class="o">/</span>
+
+<span class="nl">     </span> <span class="k">if</span><span class="p">(</span><span class="n">npart</span><span class="p">.</span><span class="n">gt</span><span class="p">.</span><span class="n">lpart</span><span class="p">)</span> <span class="k">then</span>
+<span class="nl">     </span>   <span class="k">write</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s1">&#39;ABORT: npart&gt;lpart - increase lpart in SIZE. &#39;</span><span class="p">,</span><span class="n">nid</span>
+<span class="nl">     </span>   <span class="k">call </span><span class="n">exitt</span>
+<span class="nl">     </span> <span class="k">end if</span>
+
+<span class="nl">     </span> <span class="c">! compute AB coefficients (for constant timestep)</span>
+<span class="nl">     </span> <span class="k">if</span> <span class="p">(</span><span class="n">icalld</span><span class="p">.</span><span class="n">eq</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+<span class="nl">     </span>    <span class="k">call </span><span class="n">rzero</span><span class="p">(</span><span class="n">vell</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="n">ldim</span><span class="o">*</span><span class="n">npart</span><span class="p">)</span> <span class="c">! k = 1</span>
+<span class="nl">     </span>    <span class="n">c0</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="nl">     </span>    <span class="n">c1</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="nl">     </span>    <span class="n">c2</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="nl">     </span>    <span class="n">c3</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="nl">     </span>    <span class="n">icalld</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nl">     </span> <span class="k">else if</span> <span class="p">(</span><span class="n">icalld</span><span class="p">.</span><span class="n">eq</span><span class="p">.</span><span class="mi">1</span><span class="p">)</span> <span class="k">then</span>        <span class="c">! k = 2</span>
+<span class="nl">     </span>    <span class="n">c0</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="nl">     </span>    <span class="n">c1</span> <span class="o">=</span> <span class="o">-</span><span class="p">.</span><span class="mi">5</span>
+<span class="nl">     </span>    <span class="n">c2</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="nl">     </span>    <span class="n">c3</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="nl">     </span>    <span class="n">icalld</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="nl">     </span> <span class="k">else if</span> <span class="p">(</span><span class="n">icalld</span><span class="p">.</span><span class="n">eq</span><span class="p">.</span><span class="mi">2</span><span class="p">)</span> <span class="k">then</span>        <span class="c">! k = 3</span>
+<span class="nl">     </span>    <span class="n">c0</span> <span class="o">=</span> <span class="mi">2</span><span class="mf">3.</span>
+<span class="nl">     </span>    <span class="n">c1</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="mf">6.</span>
+<span class="nl">     </span>    <span class="n">c2</span> <span class="o">=</span> <span class="mf">5.</span>
+<span class="nl">     </span>    <span class="n">c0</span> <span class="o">=</span> <span class="n">c0</span><span class="o">/</span><span class="mi">1</span><span class="mf">2.</span>
+<span class="nl">     </span>    <span class="n">c1</span> <span class="o">=</span> <span class="n">c1</span><span class="o">/</span><span class="mi">1</span><span class="mf">2.</span>
+<span class="nl">     </span>    <span class="n">c2</span> <span class="o">=</span> <span class="n">c2</span><span class="o">/</span><span class="mi">1</span><span class="mf">2.</span>
+<span class="nl">     </span>    <span class="n">c3</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="nl">     </span>    <span class="n">icalld</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="nl">     </span> <span class="k">else</span>                             <span class="c">! k = 4</span>
+<span class="nl">     </span>    <span class="n">c0</span> <span class="o">=</span> <span class="mi">5</span><span class="mf">5.</span>
+<span class="nl">     </span>    <span class="n">c1</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span><span class="mf">9.</span>
+<span class="nl">     </span>    <span class="n">c2</span> <span class="o">=</span> <span class="mi">3</span><span class="mf">7.</span>
+<span class="nl">     </span>    <span class="n">c3</span> <span class="o">=</span> <span class="o">-</span><span class="mf">9.</span>
+<span class="nl">     </span>    <span class="n">c0</span> <span class="o">=</span> <span class="n">c0</span><span class="o">/</span><span class="mi">2</span><span class="mf">4.</span>
+<span class="nl">     </span>    <span class="n">c1</span> <span class="o">=</span> <span class="n">c1</span><span class="o">/</span><span class="mi">2</span><span class="mf">4.</span>
+<span class="nl">     </span>    <span class="n">c2</span> <span class="o">=</span> <span class="n">c2</span><span class="o">/</span><span class="mi">2</span><span class="mf">4.</span>
+<span class="nl">     </span>    <span class="n">c3</span> <span class="o">=</span> <span class="n">c3</span><span class="o">/</span><span class="mi">2</span><span class="mf">4.</span>
+<span class="nl">     </span> <span class="k">end if</span>
+
+<span class="nl">     </span> <span class="c">! compute new position x[t(n+1)]</span>
+<span class="nl">     </span> <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">npart</span>
+<span class="nl">     </span>    <span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ndim</span>
+<span class="nl">     </span>       <span class="n">vv</span> <span class="o">=</span> <span class="n">rtl</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">ndim</span><span class="o">+</span><span class="n">k</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+<span class="nl">     </span>       <span class="n">rtl</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">k</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span>  <span class="n">rtl</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">k</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span>
+<span class="nl">     </span><span class="gs">&amp;</span>                    <span class="n">dt_p</span><span class="o">*</span><span class="p">(</span>
+<span class="nl">     </span><span class="gs">&amp;</span>                    <span class="o">+</span> <span class="n">c0</span><span class="o">*</span><span class="n">vv</span>
+<span class="nl">     </span><span class="gs">&amp;</span>                    <span class="o">+</span> <span class="n">c1</span><span class="o">*</span><span class="n">vell</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+<span class="nl">     </span><span class="gs">&amp;</span>                    <span class="o">+</span> <span class="n">c2</span><span class="o">*</span><span class="n">vell</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+<span class="nl">     </span><span class="gs">&amp;</span>                    <span class="o">+</span> <span class="n">c3</span><span class="o">*</span><span class="n">vell</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+<span class="nl">     </span><span class="gs">&amp;</span>                    <span class="p">)</span>
+<span class="nl">     </span>       <span class="c">! store velocity history</span>
+<span class="nl">     </span>       <span class="n">vell</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">vell</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+<span class="nl">     </span>       <span class="n">vell</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">vell</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+<span class="nl">     </span>       <span class="n">vell</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">vv</span>
+<span class="nl">     </span>    <span class="k">end do</span>
+<span class="nl">     </span> <span class="k">end do</span>
+
+<span class="nl">     </span> <span class="k">return</span>
+<span class="nl">     </span> <span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2017, Paul Fischer, James Lottes,  Stefan Kerkemeier, Oana Marin, Katherine Heisey, Aleks Obabko, Elia Merzari, Yulia Peet, Ronald Rahaman.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="_sources/routines.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="appendix.html" title="Appendices"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="large_scale.html" title="Performing Large-Scale Simulations in Nek5000"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Nek5000 17.0 documentation</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Paul Fischer, James Lottes,  Stefan Kerkemeier, Oana Marin, Katherine Heisey, Aleks Obabko, Elia Merzari, Yulia Peet, Ronald Rahaman.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
   </body>
 </html>

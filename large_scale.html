@@ -1,5 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!doctype html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,7 +9,7 @@
     
     <title>Performing Large-Scale Simulations in Nek5000 &#8212; Nek5000 17.0 documentation</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -25,58 +26,55 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Routines of Interest" href="routines.html" />
     <link rel="prev" title="Geometry" href="geometry.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head>
   <body role="document">
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="performing-large-scale-simulations-in-nek5000">
-<h1>Performing Large-Scale Simulations in Nek5000<a class="headerlink" href="#performing-large-scale-simulations-in-nek5000" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="large-scale-simulations">
-<h2>Large-Scale Simulations<a class="headerlink" href="#large-scale-simulations" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="parallelism-in-nek5000">
-<h2>Parallelism in Nek5000<a class="headerlink" href="#parallelism-in-nek5000" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
-
-
-          </div>
-        </div>
-      </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="routines.html" title="Routines of Interest"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="geometry.html" title="Geometry"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Nek5000 17.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Performing Large-Scale Simulations in Nek5000</a><ul>
-<li><a class="reference internal" href="#large-scale-simulations">Large-Scale Simulations</a></li>
+<li><a class="reference internal" href="#large-scale-simulations">Large-Scale Simulations</a><ul>
+<li><a class="reference internal" href="#amg-solver">AMG solver</a></li>
+<li><a class="reference internal" href="#size-related-issues">Size related issues</a></li>
+<li><a class="reference internal" href="#makenek">MAKENEK</a></li>
+<li><a class="reference internal" href="#binary-geometry">Binary geometry</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#parallelism-in-nek5000">Parallelism in Nek5000</a></li>
 </ul>
 </li>
 </ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="geometry.html" title="previous chapter">Geometry</a></li>
-      <li>Next: <a href="routines.html" title="next chapter">Routines of Interest</a></li>
-  </ul></li>
-</ul>
-</div>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="geometry.html"
+                        title="previous chapter">Geometry</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="routines.html"
+                        title="next chapter">Routines of Interest</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -96,22 +94,274 @@
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="performing-large-scale-simulations-in-nek5000">
+<h1>Performing Large-Scale Simulations in Nek5000<a class="headerlink" href="#performing-large-scale-simulations-in-nek5000" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="large-scale-simulations">
+<h2>Large-Scale Simulations<a class="headerlink" href="#large-scale-simulations" title="Permalink to this headline">¶</a></h2>
+<p>The largest simulations performed so far with Nek5000 are in the range of <span class="math">\(5\times 10^6\)</span>.
+Performance aspects to keep in mind</p>
+<ul class="simple">
+<li>design your SEM-mesh for a polynomial order N=7 or N=9 (<code class="docutils literal"><span class="pre">lx1</span></code> in SIZE)</li>
+<li>turn on dealiasing only if needed and try to minimize the polynomial order used for the fine grid (<code class="docutils literal"><span class="pre">lxd</span></code> in SIZE)</li>
+<li>ensure that you have at least 50 elements per MPI process (the more the better)</li>
+<li>explore the pressure solver performance using AMG solver (sweet spot depends on number of processors and elements)</li>
+<li>make sure <code class="docutils literal"><span class="pre">usrchk()</span></code> does not contain time consuming operations getting called in the time loop</li>
+<li>enable tuned MxM implementation for your platform (see <code class="docutils literal"><span class="pre">makenek</span></code> options)</li>
+<li>turn on residual projection scheme (see <code class="docutils literal"><span class="pre">.rea</span></code> file parameters)</li>
+<li>tune your pressure/velocity tolerances (e.g. use 5e-5 for pressure and 1e-8 for velocity solver) having in mind your overall accuracy</li>
+<li>try to maximize the timestep, if needed turn on OIFS scheme with a target Courant number of around 2.0</li>
+<li>use the parallel I/O (MPI-IO or custom kernel) to write checkpoints to disk</li>
+<li>understand where you spend most of the time - turn on solver and MPI timings to monitor solver performance (see <code class="docutils literal"><span class="pre">makenek</span></code> options)</li>
+</ul>
+<p>In such context it is recommendable to save the <code class="docutils literal"><span class="pre">.rea</span></code> file as a binary <code class="docutils literal"><span class="pre">.re2</span></code>.</p>
+<p>Also for input/output it may be necessary to use MPI I/O. In this case the code has to be compiled with MPI I/O, i.e. the line <code class="docutils literal"><span class="pre">PPLIST=&quot;MPIIO&quot;</span></code> in the <code class="docutils literal"><span class="pre">makefile</span></code> should not be commented. For output we may use <code class="docutils literal"><span class="pre">iofiles</span></code>, the parameter 65 in the <code class="docutils literal"><span class="pre">.rea</span></code> file specifies the number of directories and separate files that have to be created as specified by the user.</p>
+<p>For large scale simulations the AMG solver is a better, faster choice for solving the Poisson problem (the default solver is XXT).</p>
+<div class="section" id="amg-solver">
+<h3>AMG solver<a class="headerlink" href="#amg-solver" title="Permalink to this headline">¶</a></h3>
+<p>The code should be compiled once with the settings <code class="docutils literal"><span class="pre">AMG=true</span></code>, <code class="docutils literal"><span class="pre">AMG_DUMP=true</span></code>. In the <code class="docutils literal"><span class="pre">tools</span></code> folder of Nek5000 we can find the AMG solver, a Matlab version for the moment which is subject to further integration in the main code. The user should run the script run which will read the AMG dump files and create new ones. The new files are now to be used in the code and with <code class="docutils literal"><span class="pre">AMG_DUMP</span></code> commented out the user should recompile and run his Nek5000 version.</p>
+<p>The AMG solver is a 3 stage process.</p>
+<p>The first step will generate the files needed for the Matlab code. Next Matlab must run the setup code and generate a set of <code class="docutils literal"><span class="pre">.dat</span></code> files. Then nek can run with the <code class="docutils literal"><span class="pre">.dat</span></code> files and use the AMG pressure solver.</p>
+<p>AMG dump stage</p>
+<blockquote>
+<div><p>Make sure <code class="docutils literal"><span class="pre">IFAMG</span></code> and <code class="docutils literal"><span class="pre">IFAMG_DUMP</span></code> in <code class="docutils literal"><span class="pre">makenek</span></code> are uncommented and set to true</p>
+<p>Run <code class="docutils literal"><span class="pre">makenek</span> <span class="pre">clean</span></code> then <code class="docutils literal"><span class="pre">makenek</span> <span class="pre">&lt;casename&gt;</span></code></p>
+<p>Run Nek (this will produce a set of <code class="docutils literal"><span class="pre">*.dat</span></code> files)</p>
+</div></blockquote>
+<p>MATLAB AMG stage</p>
+<blockquote>
+<div><p>Move the <code class="docutils literal"><span class="pre">amgdmp_*.dat</span></code> files to <code class="docutils literal"><span class="pre">nek5_svn/trunk/tools/amg_matlab</span></code>:</p>
+<p><code class="docutils literal"><span class="pre">mv</span> <span class="pre">amgdmp*.dat</span> <span class="pre">../../trunk/tools/amg_matlab</span></code></p>
+<p><code class="docutils literal"><span class="pre">cd</span> <span class="pre">../../trunk/tools/amg_matlab</span></code></p>
+<p>Run the script: <code class="docutils literal"><span class="pre">tools/amg_matlab/run</span></code> (this may take several hours and will produce set of files)</p>
+</div></blockquote>
+<p>AMG run stage</p>
+<blockquote>
+<div><p>Move all <code class="docutils literal"><span class="pre">*.dat</span></code> files produced back to your case directory:</p>
+<p><code class="docutils literal"><span class="pre">mv</span> <span class="pre">*.dat</span> <span class="pre">/path/to/case/dir</span></code></p>
+<p>Comment <code class="docutils literal"><span class="pre">IFAMG_DUMP</span></code> in <code class="docutils literal"><span class="pre">makenek</span></code> (<code class="docutils literal"><span class="pre">IFAMG</span></code> should still be set to <code class="docutils literal"><span class="pre">TRUE</span></code>)</p>
+<p>Run <code class="docutils literal"><span class="pre">makenek</span> <span class="pre">clean</span></code>, then run <code class="docutils literal"><span class="pre">makenek</span> <span class="pre">&lt;casename&gt;</span></code></p>
+<p>Run Nek (the generated AMG files will be read during the AMG setup phase)</p>
+</div></blockquote>
+<p>Notes on improving AMG results:</p>
+<blockquote>
+<div><p>To help speed up the Matlab process, try running the 1st stage, the AMG dump stage, with <code class="docutils literal"><span class="pre">lx1=3</span></code> in the SIZE file. Using a lower <code class="docutils literal"><span class="pre">lx1</span></code> number will create a sparser matrix and thus a speedier Matlab resolution. <code class="docutils literal"><span class="pre">lx1</span></code> can be increased when ready to run the 2nd stage, the AMG run stage, after the <code class="docutils literal"><span class="pre">.dat</span></code> files are produced.</p>
+<p>To increase accuracy in the AMG results, try tightening the tolerances in the run script, in <code class="docutils literal"><span class="pre">trunk/tools/amg_matlab</span></code>. Specifically, the first tolerance (default set to 0.5). Lowering this (say, to 0.1), will increase the time the Matlab code stage takes, but the result will be a faster convergence in the pressure solves of the AMG run stage.</p>
+</div></blockquote>
+</div>
+<div class="section" id="size-related-issues">
+<h3>Size related issues<a class="headerlink" href="#size-related-issues" title="Permalink to this headline">¶</a></h3>
+<p>Large simulations require a high number of nodes and thus a high number of variables. So far Nek5000 supports by default 4 byte integers, however the node numbering for big meshes may exceed this size and 8 byte integers may be needed. How is this done?</p>
+<p>If more than 9 passive scalars are needed</p>
+<p>Exiting Nek5000 while a batch job in being executed should be done not using <code class="docutils literal"><span class="pre">&quot;qdel&quot;</span></code> but <code class="docutils literal"><span class="pre">echo</span> <span class="pre">-1</span> <span class="pre">&gt;</span> <span class="pre">ioinfo</span></code>.</p>
+</div>
+<div class="section" id="makenek">
+<h3>MAKENEK<a class="headerlink" href="#makenek" title="Permalink to this headline">¶</a></h3>
+<p>The shell script <code class="docutils literal"><span class="pre">makenek</span></code> is designed to assist the compilation process of Nek5000. The script will create a <code class="docutils literal"><span class="pre">makefile</span></code> based on the user settings section in <code class="docutils literal"><span class="pre">makenek</span></code>. The GNU gmake utility is used to build Nek5000.
+Available configurations options:</p>
+<table border="1" class="colwidths-given docutils" id="id1">
+<span id="tab-bdms"></span><caption><span class="caption-number">Table 8 </span><span class="caption-text">Compiler options</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="24%" />
+<col width="14%" />
+<col width="24%" />
+<col width="39%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">name</th>
+<th class="head">values</th>
+<th class="head">default</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>PPLIST</td>
+<td>string</td>
+<td>&nbsp;</td>
+<td>list of pre-processor symbols (BG,MOAB,BLAS_MXM, MPIIO)</td>
+</tr>
+<tr class="row-odd"><td>IFMPI</td>
+<td>true, false</td>
+<td>true</td>
+<td>use MPI (needed for a multiprocessor computation)</td>
+</tr>
+<tr class="row-even"><td>IFAMG_DUMP</td>
+<td>true, false</td>
+<td>false</td>
+<td>dump AMG pre-processing files</td>
+</tr>
+<tr class="row-odd"><td>IFAMG</td>
+<td>true, false</td>
+<td>false</td>
+<td>use AMG as coarse grid solver for pressure preconditioner else XXT</td>
+</tr>
+<tr class="row-even"><td>F77</td>
+<td>string</td>
+<td>mandatory</td>
+<td>Fortran compiler (e.g. MPI: mpif77)</td>
+</tr>
+<tr class="row-odd"><td>CC</td>
+<td>string</td>
+<td>mandatory</td>
+<td>C compiler (e.g. MPI: mpicc)</td>
+</tr>
+<tr class="row-even"><td>G</td>
+<td>string</td>
+<td>optional</td>
+<td>optional compilation flags</td>
+</tr>
+<tr class="row-odd"><td>OPT_FLAGS_STD7</td>
+<td>string</td>
+<td>optional</td>
+<td>optimization flags for L1,L2,L3</td>
+</tr>
+<tr class="row-even"><td>OPT_FLAGS_MAG</td>
+<td>string</td>
+<td>optional</td>
+<td>optimization flags for L4 (highest opt level)</td>
+</tr>
+<tr class="row-odd"><td>SOURCE_ROOT</td>
+<td>string</td>
+<td>mandatory</td>
+<td>path of Nek5000 source</td>
+</tr>
+<tr class="row-even"><td>USR</td>
+<td>string</td>
+<td>optional</td>
+<td>object list of additional files to compile make intructions (<code class="docutils literal"><span class="pre">makefile_usr.inc</span></code> required)</td>
+</tr>
+<tr class="row-odd"><td>USR_LFLAGS</td>
+<td>string</td>
+<td>optional</td>
+<td>optional linking flags</td>
+</tr>
+<tr class="row-even"><td>MOAB_DIR</td>
+<td>string</td>
+<td>NEK with MOAB</td>
+<td>Path to MOAB directories</td>
+</tr>
+<tr class="row-odd"><td>IFVISIT</td>
+<td>true, false</td>
+<td>false</td>
+<td>Toggles Visit in situ. See Visit_in_situ for details</td>
+</tr>
+<tr class="row-even"><td>VISIT_INSTALL</td>
+<td>string</td>
+<td>VISIT in situ</td>
+<td>Path to VISIT install path. See Visit_in_situ for details.</td>
+</tr>
+<tr class="row-odd"><td>VISIT_STOP</td>
+<td>true, false</td>
+<td>false</td>
+<td>When running VISIT in situ, simulation stops after step 1 to connect VISIT.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="binary-geometry">
+<h3>Binary geometry<a class="headerlink" href="#binary-geometry" title="Permalink to this headline">¶</a></h3>
+<p><strong>Reatore2</strong></p>
+<p>The Nek5000 tool, <code class="docutils literal"><span class="pre">reatore2</span></code> allows users to split an ASCII <code class="docutils literal"><span class="pre">.rea</span></code> file to an ASCII <code class="docutils literal"><span class="pre">.rea</span></code> and a binary <code class="docutils literal"><span class="pre">.re2</span></code> file. The <code class="docutils literal"><span class="pre">.re2</span></code> file contains the mesh and boundary condition data that is normally written in ASCII in the <code class="docutils literal"><span class="pre">.rea</span></code> file. For large simulations, this information can be substantial, so storing it in binary lowers the memory footprint for the simulation.</p>
+<p><strong>Running reatore2</strong></p>
+<p>Be sure that your <code class="docutils literal"><span class="pre">nekton</span></code> tools are up-to-date and compiled.
+At the command prompt type: <code class="docutils literal"><span class="pre">reatore2</span></code></p>
+<p>NOTE: If the executables for the tools were not placed in the <code class="docutils literal"><span class="pre">bin</span></code> directory (default),
+include the path to the <code class="docutils literal"><span class="pre">reatore2</span></code> executable</p>
+<blockquote>
+<div><p>User is prompted for name of <code class="docutils literal"><span class="pre">.rea</span></code> file</p>
+<p>-Enter the name to the <code class="docutils literal"><span class="pre">.rea</span></code> file, excluding the <code class="docutils literal"><span class="pre">.rea</span></code> extenstion</p>
+<p>User is prompted for the new files name</p>
+<p>-Enter the name for your new files</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="parallelism-in-nek5000">
+<h2>Parallelism in Nek5000<a class="headerlink" href="#parallelism-in-nek5000" title="Permalink to this headline">¶</a></h2>
+<p>The parallelism of Nek5000 is accomplished via domain decomposition methods and a suitable gather-scatter code. All this is implemented in such way that the user does not have to be concerned with the parallelism and only focus on the actual solvers while keeping in mind a few simple rules and routines that switch from local to global and back.</p>
+<ul class="simple">
+<li>Locally, the SEM is structured.</li>
+<li>Globally, the SEM is unstructured.</li>
+<li>Vectorization and serial performance derive from the structured aspects of the computation.</li>
+<li>Parallelism and geometric flexibility derive from the unstructured, element-by-element, operator evaluation.</li>
+<li>Elements, or groups of elements are distributed across processors, but an element is never subdivided.</li>
+</ul>
+<p>For the most part, the global element numbering is not relevant since Nek5000 assigns it randomly but following certain rules.</p>
+<p>There are two types of array sizes, starting with <code class="docutils literal"><span class="pre">lx1</span></code>, <code class="docutils literal"><span class="pre">lelv</span></code>, etc. which give an upper bound of the arrays. And <code class="docutils literal"><span class="pre">nx1</span></code>, <code class="docutils literal"><span class="pre">nelv</span></code>, etc. which give the actual number of elements/grid points per processors. For the example in <a class="reference internal" href="#fig-procsplit"><span class="std std-numref">Fig. 14</span></a> we have</p>
+<ul class="simple">
+<li>on proc 0, <code class="docutils literal"><span class="pre">nelt=2</span></code>  (<code class="docutils literal"><span class="pre">nelt</span></code> = no elements in temperature domain)</li>
+<li>on proc 1, <code class="docutils literal"><span class="pre">nelt=3</span></code>  (<code class="docutils literal"><span class="pre">nelv</span></code> = no elements in fluid domain, usually = <code class="docutils literal"><span class="pre">nelt</span></code>)</li>
+</ul>
+<div class="align-center figure" id="id2">
+<span id="fig-procsplit"></span><img alt="element-splitting" src="_images/serial_parallel.png" />
+<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">A simple SEM row of elements and a potential splitting</span></p>
+</div>
+<p>Arrays <code class="docutils literal"><span class="pre">lglel</span></code> that distinguish which processor has which elements,</p>
+<ul class="simple">
+<li>on proc 0, <code class="docutils literal"><span class="pre">nelt=2,</span> <span class="pre">lglel=(2,5)</span></code>, local element <code class="docutils literal"><span class="pre">1-&gt;2</span></code> and <code class="docutils literal"><span class="pre">2-&gt;5</span></code></li>
+<li>on proc 1, <code class="docutils literal"><span class="pre">nelt=3,</span> <span class="pre">lglel=(1,3,4)</span></code>, local element <code class="docutils literal"><span class="pre">1-&gt;1</span></code>, <code class="docutils literal"><span class="pre">2-&gt;3</span></code> and <code class="docutils literal"><span class="pre">4-&gt;3</span></code></li>
+</ul>
+<p>Now for global to local we have two common arrays (scaling as <code class="docutils literal"><span class="pre">nelgt</span></code>, but only two such arrays)</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">gllel=(1,1,2,3,2)</span></code>, assigns a global element to its local correspondent, i.e. global element <code class="docutils literal"><span class="pre">1-&gt;1</span></code>, <code class="docutils literal"><span class="pre">2-&gt;1</span></code> and <code class="docutils literal"><span class="pre">3-&gt;2</span></code> etc.</li>
+<li><code class="docutils literal"><span class="pre">gllnid=(1,0,1,1,0)</span></code>, assigns a global element to its processor, i.e. <code class="docutils literal"><span class="pre">1-&gt;1</span></code>, <code class="docutils literal"><span class="pre">2-&gt;0</span></code> and <code class="docutils literal"><span class="pre">3-&gt;1</span></code> etc.</li>
+</ul>
+<p>All data contiguously packed (and quad-aligned) <code class="docutils literal"><span class="pre">real</span>&#160; <span class="pre">u(lx1,ly1,lz1,lelt)</span></code> indicates that <code class="docutils literal"><span class="pre">u</span></code> is a collection of elements, <code class="docutils literal"><span class="pre">e=1,...,Nelt</span> <span class="pre">=&lt;</span> <span class="pre">lelt</span></code>, each of size <span class="math">\((N+1)d\)</span>, <span class="math">\(d\)</span> = 2 or 3.</p>
+<p><strong>Example: Summation</strong></p>
+<p>Serial version</p>
+<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">do </span><span class="n">e</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nelv</span>
+<span class="k">do </span><span class="n">iz</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nz1</span>
+<span class="k">do </span><span class="n">iy</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ny1</span>
+<span class="k">do </span><span class="n">ix</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">nx1</span>
+<span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="o">+</span><span class="n">u</span><span class="p">(</span><span class="n">ix</span><span class="p">,</span><span class="n">iy</span><span class="p">,</span><span class="n">iz</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+<span class="k">end do</span><span class="p">,...,</span><span class="k">end do</span>
+</pre></div>
+</div>
+<p>Second approach, serial version (works in parallel in Nek)</p>
+<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="n">nx1</span><span class="o">*</span><span class="n">ny1</span><span class="o">*</span><span class="n">nz1</span><span class="o">*</span><span class="n">nelv</span>
+<span class="n">s</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span>
+<span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="o">+</span><span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">end do</span>
+</pre></div>
+</div>
+<p>Nek Parallel Version</p>
+<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">=</span><span class="n">glsum</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you want a local max <code class="docutils literal"><span class="pre">s=vlmax(u,n)</span></code>, or a global max <code class="docutils literal"><span class="pre">s=glmax(u,n)</span></code>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2017, Paul Fischer, James Lottes,  Stefan Kerkemeier, Oana Marin, Katherine Heisey, Aleks Obabko, Elia Merzari, Yulia Peet, Ronald Rahaman.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="_sources/large_scale.rst.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="routines.html" title="Routines of Interest"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="geometry.html" title="Geometry"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Nek5000 17.0 documentation</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Paul Fischer, James Lottes,  Stefan Kerkemeier, Oana Marin, Katherine Heisey, Aleks Obabko, Elia Merzari, Yulia Peet, Ronald Rahaman.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+    </div>
   </body>
 </html>
