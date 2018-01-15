@@ -1,8 +1,6 @@
-.. _intro:
-
-============
-Introduction
-============
+==============
+Theory
+==============
 
 .. _intro_comput_approach:
 
@@ -22,25 +20,6 @@ through the use of tensor-product-sum factorization [Orszag1980]_.   The SEM exh
 numerical dispersion and dissipation, which can be important, for example, in stability
 calculations, for long time integrations, and for high Reynolds number flows. We refer to
 [Denville2002]_ for more details.
-
-The code Nek5000 is based on the following design principles:
-
-- Accessible both to beginners and experts alike.
-- Accessible interface via Fortran to include user-defined modules.
-- The code intrinsics can be accessed and modified via the user files for more experienced
-  developers.
-- Minimal use of external libraries to assure fast compile times.
-- Fast matrix free operator evaluation with minimal storage.
-- Matrix operations are implemented in assembler code :math:`M \times M` routines to speed up
-  computations.
-- The parallelism is "under the hood", demanding from the user only care in handling local versus
-  global operations and array sizes.
-- By testing at the beginning of each run which one of the three readily implemented
-  parallel-algorithms behaves optimally, the parallelism of Nek5000 can be automatically tuned to
-  each machine.
-- Direct access to parameters at runtime.
-- Geometry and boundary conditions are exposed to the user via the .rea file.
-- Handling complex geometries that can be imported from external codes .
 
 Nek5000 solves the unsteady incompressible two-dimensional, axisymmetric, or three-dimensional
 Stokes or Navier-Stokes equations with forced or natural convection heat transfer in both
@@ -74,9 +53,9 @@ The governing equations of flow motion in dimensional form are
 .. math::
     :label: ns_momentum
 
-    \rho(\partial_{t} \mathbf u +\mathbf u \cdot \nabla \mathbf u) = - \nabla p + \nabla \cdot \tau + \rho {\bf f} \,\, , \text{in } \Omega_f , \quad \text{  (Momentum)  } 
+    \rho\left(\frac{\partial\mathbf u}{\partial t} +\mathbf u \cdot \nabla \mathbf u\right) = - \nabla p + \nabla \cdot \tau + \rho {\bf f} \,\, , \text{in } \Omega_f , \quad \text{  (Momentum)  } 
 
-where :math:`\tau=\mu[\nabla \mathbf u+\nabla \mathbf u^{T}]`.
+where :math:`\tau=\mu[\nabla \mathbf u+\nabla \mathbf u^{T}]` and :math:`\mathbf f` is a user defined acceleration.
 
 .. math::
     :label: ns_cont
@@ -99,7 +78,7 @@ Non-Dimensional Navier-Stokes
 -----------------------------
 
 Let us introduce the following non-dimensional variables :math:`\mathbf x^*\ = \frac{\mathbf x}{L}`,
-:math:`\mathbf u^*\ = \frac{u}{U}`, :math:`t^*\ = \frac{t}{L/U}\,`.  For the pressure scale we have
+:math:`\mathbf u^*\ = \frac{u}{U}`, :math:`t^*\ = \frac{tU}{L}`, and :math:`\mathbf f^* =\frac{\mathbf f L}{U^2}`.  For the pressure scale we have
 two options:
 
 - Convective effects are dominant i.e. high velocity flows :math:`p^* = \frac{p}{\rho U^2}`
@@ -111,12 +90,11 @@ non-dimensional Navier-Stokes:
 .. math::
     :label: NS_nondim
 
-    \frac{\partial \mathbf{u^*}}{\partial t^*} + \mathbf{u^*} \cdot \nabla \mathbf{u^*}\ = -\nabla p^* + \frac{1}{Re} \nabla\cdot \tau^* + \frac{1}{Fr}\frac{\mathbf{f}}{g}.
+    \frac{\partial \mathbf{u^*}}{\partial t^*} + \mathbf{u^*} \cdot \nabla \mathbf{u^*}\ = -\nabla p^* + \frac{1}{Re} \nabla\cdot \tau^* + \mathbf f^*.
 
-where :math:`\tau^*=[\nabla \mathbf u^*+\nabla \mathbf u^{*T}]`.
+where :math:`\tau^*=[\nabla \mathbf u^*+\nabla \mathbf u^{*T}]` and :math:`\mathbf f^*` is the dimensionless user defined forcing function, e.g. gravity.
 
-The two non-dimensional numbers here are the Reynolds number :math:`Re=\frac{\nu}{U L}` :math:`Fr`
-and the Froude number, defined as :math:`Fr = \frac{U^2}{gL}`.
+The non-dimensional number here is the Reynolds number :math:`Re=\frac{\rho U L}{\mu}`.
 
 .. _intro_energy:
 
