@@ -36,7 +36,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Nek5000 17.0 documentation" href="#"/>
-        <link rel="next" title="Introduction" href="intro.html"/> 
+        <link rel="next" title="Quickstart" href="quickstart.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -90,12 +90,11 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_files.html">User Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="geometry.html">Geometry</a></li>
-<li class="toctree-l1"><a class="reference internal" href="large_scale.html">Performing Large-Scale Simulations in Nek5000</a></li>
-<li class="toctree-l1"><a class="reference internal" href="routines.html">Routines of Interest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_files.html">Problem Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendices</a></li>
 </ul>
 
@@ -162,74 +161,70 @@
             
   <div class="section" id="nek5000">
 <h1>Nek5000<a class="headerlink" href="#nek5000" title="Permalink to this headline">¶</a></h1>
-<p>Nek5000 is designed to simulate laminar, transitional, and turbulent incompressible or low
-Mach-number flows with heat transfer and species transport. It is also suitable for incompressible
-magnetohydrodynamics (MHD). Nek5000 is written in Fortran 77 and C. It uses MPI for message passing
-(but can be compiled without MPI for serial applications) and some LAPACK routines for eigenvalue
-computations (depending on the particular solver employed).  Nek5000 output formats can be read by
-either <code class="docutils literal"><span class="pre">postx</span></code> (distributed with Nek5000) or the parallel visualization package VisIt developed
-by Hank Childs and colleagues at LLNL/LBNL.  VisIt is mandatory for large problems (e.g., more than
-100,000 spectral elements).</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#computational-approach">Computational Approach</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#incompressible-navier-stokes-equations">Incompressible Navier-Stokes Equations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#non-dimensional-navier-stokes">Non-Dimensional Navier-Stokes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#energy-equation">Energy Equation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#non-dimensional-energy-passive-scalar-equation">Non-Dimensional Energy / Passive Scalar Equation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#passive-scalars">Passive Scalars</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#unsteady-stokes">Unsteady Stokes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#steady-stokes">Steady Stokes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#linearized-equations">Linearized Equations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#steady-conduction">Steady Conduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#low-mach-navier-stokes">Low-Mach Navier-Stokes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#incompressible-mhd-equations">Incompressible MHD Equations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#adpative-lagrangian-eulerian-ale">Adpative Lagrangian-Eulerian (ALE)</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#the-git-repositories">The Git Repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#a-worked-example">A Worked Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#viewing-the-first-2d-example">Viewing the First 2D Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#modifying-the-first-example">Modifying the First Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#directory-structure">Directory structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#case-files">Case files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#scripts">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#running-your-very-first-simulation">Running your very first simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#meshing">Meshing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#visualization">Visualization</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="user_files.html">User Files</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="user_files.html#session-file">SESSION File</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_files.html#case-setup-file-usr">Case Setup File (.usr)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_files.html#problem-size-file-size">Problem-Size File (SIZE)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_files.html#geometry-and-parameters-file-rea">Geometry and Parameters File (.rea)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_files.html#data-layout">Data Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#general">General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#installing-compiling-and-running">Installing, Compiling, and Running</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#pre-processing">Pre-Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#physical-models">Physical Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#computational-speed">Computational Speed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#post-processing">Post-Processing</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="geometry.html">Geometry</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="geometry.html#generating-a-mesh-with-genbox">Generating a Mesh with Genbox</a></li>
-<li class="toctree-l2"><a class="reference internal" href="geometry.html#extrusion-and-mirroring">Extrusion and Mirroring</a></li>
-<li class="toctree-l2"><a class="reference internal" href="geometry.html#moving-geometry">Moving Geometry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="geometry.html#boundary-and-initial-conditions">Boundary and Initial Conditions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="geometry.html#parallel-mesh-partitioning-with-genmap">Parallel Mesh Partitioning with Genmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/perhill.html">Periodic Hill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/conjht.html">Conjugate Heat Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/neknek.html">Overlapping Overset Grids</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="large_scale.html">Performing Large-Scale Simulations in Nek5000</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="large_scale.html#large-scale-simulations">Large-Scale Simulations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="large_scale.html#parallelism-in-nek5000">Parallelism in Nek5000</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_files.html">Problem Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="case_files.html#session-name">SESSION.NAME</a></li>
+<li class="toctree-l2"><a class="reference internal" href="case_files.html#par">par</a></li>
+<li class="toctree-l2"><a class="reference internal" href="case_files.html#re2">re2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="case_files.html#usr">usr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="case_files.html#size">SIZE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="case_files.html#map-ma2">map/ma2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="case_files.html#f-05d">f%05d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="case_files.html#boundary-conditions">Boundary Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="case_files.html#history-points">History Points</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="routines.html">Routines of Interest</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="routines.html#naming-conventions">Naming Conventions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="routines.html#subroutines">Subroutines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="routines.html#functions">Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="routines.html#an-example-of-specifying-surface-normals-in-the-usr-file">An Example of Specifying Surface Normals in the .usr File</a></li>
-<li class="toctree-l2"><a class="reference internal" href="routines.html#spectral-interpolation-tool">Spectral Interpolation Tool</a></li>
-<li class="toctree-l2"><a class="reference internal" href="routines.html#grid-to-grid-interpolation">Grid-to-Grid Interpolation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="routines.html#lagrangian-particle-tracking">Lagrangian Particle Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#computational-approach">Computational Approach</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#incompressible-navier-stokes-equations">Incompressible Navier-Stokes Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#non-dimensional-navier-stokes">Non-Dimensional Navier-Stokes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#energy-equation">Energy Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#non-dimensional-energy-passive-scalar-equation">Non-Dimensional Energy / Passive Scalar Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#passive-scalars">Passive Scalars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#unsteady-stokes">Unsteady Stokes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#steady-stokes">Steady Stokes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#linearized-equations">Linearized Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#steady-conduction">Steady Conduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#low-mach-navier-stokes">Low-Mach Navier-Stokes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#incompressible-mhd-equations">Incompressible MHD Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#arbitrary-lagrangian-eulerian-ale">Arbitrary Lagrangian-Eulerian (ALE)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendices</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="appendix.html#list-of-parameters-in-rea-file">List of Parameters in .rea File</a></li>
-<li class="toctree-l2"><a class="reference internal" href="appendix.html#list-of-parameters-in-size-file">List of Parameters in SIZE File</a></li>
-<li class="toctree-l2"><a class="reference internal" href="appendix.html#the-fld-file-format">The .fld File Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix.html#build-options">Build Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix.html#internal-input-parameters-switches">Internal Input Parameters/Switches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix.html#commonly-used-variables">Commonly used Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix.html#commonly-used-subroutines">Commonly used Subroutines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix.html#grid-to-grid-interpolation">Grid-to-Grid Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix.html#generating-a-mesh-with-genbox">Generating a Mesh with Genbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix.html#mesh-modification">Mesh Modification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix.html#mesh-extrusion-and-mirroring">Mesh Extrusion and Mirroring</a></li>
 </ul>
 </li>
 </ul>
@@ -246,7 +241,7 @@ by Hank Childs and colleagues at LLNL/LBNL.  VisIt is mandatory for large proble
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="intro.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="quickstart.html" class="btn btn-neutral float-right" title="Quickstart" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>
@@ -256,7 +251,7 @@ by Hank Childs and colleagues at LLNL/LBNL.  VisIt is mandatory for large proble
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, Paul Fischer, James Lottes,  Stefan Kerkemeier, Oana Marin, Katherine Heisey, Aleks Obabko, Elia Merzari, Yulia Peet, Ronald Rahaman.
+        &copy; Copyright 2015-2017, UCHICAGO ARGONNE, LLC.
 
     </p>
   </div>
@@ -288,7 +283,7 @@ by Hank Childs and colleagues at LLNL/LBNL.  VisIt is mandatory for large proble
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

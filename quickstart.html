@@ -36,8 +36,8 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Nek5000 17.0 documentation" href="index.html"/>
-        <link rel="next" title="User Files" href="user_files.html"/>
-        <link rel="prev" title="Introduction" href="intro.html"/> 
+        <link rel="next" title="FAQ" href="faq.html"/>
+        <link rel="prev" title="Nek5000" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -91,35 +91,19 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#the-git-repositories">The Git Repositories</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#downloading-the-source-code">Downloading the Source Code</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#downloading-the-example-problems">Downloading the Example Problems</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tools-and-scripts">Tools and Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#directory-structure">Directory structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#case-files">Case files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scripts">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-your-very-first-simulation">Running your very first simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#meshing">Meshing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visualization">Visualization</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#a-worked-example">A Worked Example</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#modifying-makenek">Modifying makenek</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#compiling-nek">Compiling Nek</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#running-a-case-in-serial">Running a case in serial</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#running-a-case-in-parallel">Running a case in parallel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#checking-console-output">Checking console output</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#viewing-the-first-2d-example">Viewing the First 2D Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#modifying-the-first-example">Modifying the First Example</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#using-the-par-file">Using the <code class="docutils literal"><span class="pre">.par</span></code> file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#using-the-rea-file">Using the <code class="docutils literal"><span class="pre">.rea</span></code> file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-par-file">The <code class="docutils literal"><span class="pre">.par</span></code> File</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="user_files.html">User Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="geometry.html">Geometry</a></li>
-<li class="toctree-l1"><a class="reference internal" href="large_scale.html">Performing Large-Scale Simulations in Nek5000</a></li>
-<li class="toctree-l1"><a class="reference internal" href="routines.html">Routines of Interest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_files.html">Problem Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendices</a></li>
 </ul>
 
@@ -185,335 +169,131 @@
            <div itemprop="articleBody">
             
   <div class="section" id="quickstart">
-<span id="id1"></span><h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
-<p>This chapter provides a quick overview to using Nek5000 for some basic flow problems distributed
-with Nek5000.</p>
-<p>Nek5000 runs under UNIX or any UNIX-like OS such as Linux, Mac OS/X, AIX, BG, Cray etc.  The source
-is maintained in a legacy SVN repository (last updated June 2, 2016) and up-to-date Git
-repositories.  Both repositories are available for download, but we recommended that new users work
-with the Git repositories.</p>
-<div class="section" id="the-git-repositories">
-<span id="quickstart-git"></span><h2>The Git Repositories<a class="headerlink" href="#the-git-repositories" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="downloading-the-source-code">
-<span id="quickstart-git-source"></span><h3>Downloading the Source Code<a class="headerlink" href="#downloading-the-source-code" title="Permalink to this headline">¶</a></h3>
-<p>The Nek5000 source code is hosted on GitHub at <a class="reference external" href="https://github.com/Nek5000/Nek5000">https://github.com/Nek5000/Nek5000</a>.  You can also
-download the source code as a <a class="reference external" href="https://github.com/Nek5000/Nek5000/archive/master.zip">.zip archive</a> or a <a class="reference external" href="https://github.com/Nek5000/Nek5000/archive/master.tar.gz">.tar.gz archive</a>.  You can also download a working copy
-of the repository itself.  The following commands will clone the repository in a directory named
-<code class="docutils literal"><span class="pre">$HOME/Nek5000</span></code> (where <code class="docutils literal"><span class="pre">$HOME</span></code> denotes your home directory):</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~
-git clone https://github.com/Nek5000/Nek5000.git -b master
+<span id="qstart"></span><h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="directory-structure">
+<h2>Directory structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h2>
+<p>Here’s a brief description of each top-level directory:</p>
+<div class="topic">
+<p class="topic-title first">/core</p>
+<p>contains the Nek5000 application sources.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">/bin</p>
+<p>contains scripts for running nek5000 and manipulating its output.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">/tools</p>
+<p>contains the sources for the pre- and post-processing tools which are stand-alone.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">/short-tests</p>
+<p>contains light-weight regression tests for verification.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">/run</p>
+<p>consistent place for users to place their problem cases.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">/examples</p>
+<p>contains example problems. Note: NOT included in the master branch on the GitHub repo.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">/doc</p>
+<p>contains the user documentation. Note: NOT included in the master branch on the GitHub repo.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">/3rd_party</p>
+<p>its purpose it to provide a consistent place for 3rd party code.</p>
+</div>
+</div>
+<div class="section" id="case-files">
+<h2>Case files<a class="headerlink" href="#case-files" title="Permalink to this headline">¶</a></h2>
+<div class="topic">
+<p class="topic-title first">SIZE</p>
+<p>contains some hardwired runtime parameters to dimension static arrays.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">foo.par</p>
+<p>contains runtime parameters.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">foo.re2</p>
+<p>contains mesh and boundary data.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">foo.ma2</p>
+<p>contains partioning data.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">foo.usr</p>
+<p>contains user specific code to initialize solver, set source terms and boundary conditions or to manipulate solver internals.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">foo.his</p>
+<p>contains probing points.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">foo.f00000</p>
+<p>contains checkpoint data.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">foo.nek5000</p>
+<p>contains metadata for VisIt or ParaView.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">foo.rea (legacy)</p>
+<p>contains runtime parameters and mesh in ASCII. Replaced by .par and .re2 file.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">foo.map (legacy)</p>
+<p>contains partioning data in ASCII.</p>
+</div>
+<p>Note: The old legacy files (.rea &amp; .map) are recommended for debugging purposes only.</p>
+</div>
+<div class="section" id="scripts">
+<h2>Scripts<a class="headerlink" href="#scripts" title="Permalink to this headline">¶</a></h2>
+<p>Let’s walk through some useful batch scripts:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">makenek</span> <span class="pre">&lt;case&gt;</span></code> compiles your case</li>
+<li><code class="docutils literal"><span class="pre">nek/nekb</span> <span class="pre">&lt;case&gt;</span></code> runs a serial job in foreground or background</li>
+<li><code class="docutils literal"><span class="pre">nekmpi/nekbmpi</span> <span class="pre">&lt;case&gt;</span> <span class="pre">&lt;number</span> <span class="pre">of</span> <span class="pre">ranks&gt;</span></code> runs a parallel job</li>
+<li><code class="docutils literal"><span class="pre">neknek</span> <span class="pre">&lt;case1&gt;</span> <span class="pre">&lt;cas2&gt;</span> <span class="pre">&lt;ranks</span> <span class="pre">1&gt;</span> <span class="pre">&lt;ranks</span> <span class="pre">2&gt;</span></code> runs Nek5000 with two overlapping component grids</li>
+<li><code class="docutils literal"><span class="pre">visnek</span> <span class="pre">&lt;case&gt;</span></code> creates metadata file required by <a class="reference external" href="https://wci.llnl.gov/simulation/computer-codes/visit/">VisIt</a> and <a class="reference external" href="https://www.paraview.org/">ParaView</a>.</li>
+<li><code class="docutils literal"><span class="pre">mvn</span> <span class="pre">&lt;old</span> <span class="pre">name&gt;</span> <span class="pre">&lt;new</span> <span class="pre">name&gt;</span></code> renames all case files</li>
+<li><code class="docutils literal"><span class="pre">cpn</span> <span class="pre">&lt;old</span> <span class="pre">name&gt;</span> <span class="pre">&lt;new</span> <span class="pre">name&gt;</span></code> copies all case files</li>
+</ul>
+</div>
+<div class="section" id="running-your-very-first-simulation">
+<h2>Running your very first simulation<a class="headerlink" href="#running-your-very-first-simulation" title="Permalink to this headline">¶</a></h2>
+<p>Hold your horses, this needs less than 5 min.
+Begin by downloading the latest release tarball from <a class="reference external" href="https://github.com/Nek5000/Nek5000/releases">here</a>.
+Then follow the instructions below</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>cd ~
+tar -xvzf Nek5000_X.Y.tar.gz
+export PATH=$HOME/Nek5000/bin:$PATH
+cd ~/Nek5000/tools; ./maketools genmap
+cd ~/Nek5000/run
+cp -r ../examples/eddy_uv .
+cd eddy_uv
+genmap                       # run partioner, on input type eddy_uv
+makenek eddy_uv              # build case, edit script to change settings
+nekbmpi eddy_uv 2            # run Nek5000 on 2 ranks in the background
+tail logfile                 # view solver output
+visnek eddy_uv; visit -o eddy_uv.nek5000 # requires a VisIt/Paraview installation
 </pre></div>
 </div>
-<p>You can also clone the repository in any directory of your choice:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/my-repos/
-git clone https://github.com/Nek5000/Nek5000.git -b master
-</pre></div>
+<p>Note that this will not work if you clone the master branch from GitHub, as the <code class="docutils literal"><span class="pre">examples</span></code> folder is NOT included.</p>
 </div>
+<div class="section" id="meshing">
+<span id="qstart-meshing"></span><h2>Meshing<a class="headerlink" href="#meshing" title="Permalink to this headline">¶</a></h2>
+<p>Nek5000 is mainly a solver. However, simple box type meshes can be generated with the <code class="docutils literal"><span class="pre">genbox</span></code> tool. For more complex meshes please consider using <code class="docutils literal"><span class="pre">PRENEK</span></code> and the meshing tools <code class="docutils literal"><span class="pre">nekmerge</span></code> and <code class="docutils literal"><span class="pre">n2to3</span></code>. We provide mesh converters like <code class="docutils literal"><span class="pre">exo2nek</span></code> and <code class="docutils literal"><span class="pre">msh2nek</span></code> which are quite handy if you want to use your favorite mesh generator. Also check our
+<a class="reference external" href="https://github.com/Nek5000/NekBazaar">Bazaar</a> for 3rd party meshing tools.</p>
 </div>
-<div class="section" id="downloading-the-example-problems">
-<span id="quickstart-git-examples"></span><h3>Downloading the Example Problems<a class="headerlink" href="#downloading-the-example-problems" title="Permalink to this headline">¶</a></h3>
-<p>The Nek5000 example problems are hosted in a second repository on GitHub,
-<a class="reference external" href="https://github.com/Nek5000/NekExamples">https://github.com/Nek5000/NekExamples</a>.  Likewise, you can download the examples as a <a class="reference external" href="https://github.com/Nek5000/NekExample/archive/master.zip">.zip archive</a>, a <a class="reference external" href="https://github.com/Nek5000/NekExamples/archive/master.tar.gz">.tar.gz archive</a>.  If you&#8217;d like to use Git, you can
-download a working copy of the repository to your home directory:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~
-git clone https://github.com/Nek5000/NekExamples.git -b master
-</pre></div>
-</div>
-<p>or any directory of your choice:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/my-repos/
-git clone https://github.com/Nek5000/Nek5000.git -b master
-</pre></div>
-</div>
-</div>
-<div class="section" id="tools-and-scripts">
-<span id="quickstart-git-tools"></span><h3>Tools and Scripts<a class="headerlink" href="#tools-and-scripts" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal"><span class="pre">Nek5000/tools</span></code> directory contains programs for pre- and post-processing tasks, such as
-generating meshes from geometry descriptions.  The following commands will build the tools in
-<code class="docutils literal"><span class="pre">Nek5000/bin</span></code>:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> Nek5000/tools
-./maketools all
-</pre></div>
-</div>
-<p>By default, the <code class="docutils literal"><span class="pre">maketools</span></code> script will use gfortran and gcc as the Fortran and C compilers; you
-can specify a different set of compilers by editing <code class="docutils literal"><span class="pre">maketools</span></code>.  You can also build the tools
-in another directory of your choice by providing a second argument to <code class="docutils literal"><span class="pre">maketools</span></code>; for example:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> Nek5000/tools
-./maketools all ~/my-tools-bin/
-</pre></div>
-</div>
-<p>Besides the compiled tools, there are several convenience scripts in <code class="docutils literal"><span class="pre">Nek5000/bin</span></code> that allow you
-to easily set up and execute runs of Nek5000.  These scripts are executable as-is and do not need
-to be compiled.</p>
-<p>We recommend that you add <code class="docutils literal"><span class="pre">Nek5000/bin</span></code> to the <code class="docutils literal"><span class="pre">$PATH</span></code> variable in your shell&#8217;s environment.  This
-will allow you execute the tools and scripts without typing the full path to the executables.  For
-example, In the bash shell, if you have cloned Nek5000 in <code class="docutils literal"><span class="pre">$HOME/Nek5000</span></code> and compiled tools
-in <code class="docutils literal"><span class="pre">$HOME/Nek5000/bin</span></code>, you can edit your executable path with:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/Nek5000/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
-</pre></div>
-</div>
-<p>In the following examples, we will assume that the tools and scripts have been added to <code class="docutils literal"><span class="pre">$PATH</span></code>.</p>
-</div>
-</div>
-<div class="section" id="a-worked-example">
-<h2>A Worked Example<a class="headerlink" href="#a-worked-example" title="Permalink to this headline">¶</a></h2>
-<p>As a first example, we consider the eddy problem presented by Walsh
-<a class="reference internal" href="bibliography.html#walsh1992" id="id4">[Walsh1992]</a>.  To get started, execute the following commands for the Git
-repositories:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$HOME</span>/Nek5000/run
-cp -r <span class="nv">$HOME</span>/Nek5000/short_tests/eddy_par .
-<span class="nb">cd</span> eddy_par
-cp <span class="nv">$HOME</span>/Nek5000/bin/makenek .
-</pre></div>
-</div>
-<p>Or, to run using the legacy <code class="docutils literal"><span class="pre">.rea</span></code> setup, execute the commands as:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$HOME</span>/Nek5000/run
-cp -r <span class="nv">$HOME</span>/Nek5000/short_tests/eddy .
-<span class="nb">cd</span> eddy
-cp <span class="nv">$HOME</span>/Nek5000/bin/makenek .
-</pre></div>
-</div>
-<div class="section" id="modifying-makenek">
-<h3>Modifying makenek<a class="headerlink" href="#modifying-makenek" title="Permalink to this headline">¶</a></h3>
-<p>If you do not have MPI installed on your system, edit <code class="docutils literal"><span class="pre">makenek</span></code>, uncomment the <code class="docutils literal"><span class="pre">MPI=0</span></code>
-flag, and change the Fortran and C compilers according to what is available on your machine.  (Most
-any Fortran compiler save g77 or g95 will work.)</p>
-<p>Nek5000 is written in F77 which has implicit typesetting as default. This means in practice that if
-the user defines a new variable in the user file and forgets to define its type explicitly then
-variable beginning with a character from I to N, its type is <code class="docutils literal"><span class="pre">INTEGER</span></code>. Otherwise, it is <code class="docutils literal"><span class="pre">REAL</span></code>.</p>
-<p>This common type of mistake for a beginner can be avoided using a warning flag <code class="docutils literal"><span class="pre">-Wimplicit</span></code>. This
-flag warns whenever a variable, array, or function is implicitly declared. Has an effect similar to
-using the <code class="docutils literal"><span class="pre">IMPLICIT</span> <span class="pre">NONE</span></code> statement in every program unit.</p>
-<p>Another useful flag may <code class="docutils literal"><span class="pre">-mcmodel</span></code> which allows for arrays of size larger than 2GB. This option
-tells the compiler to use a specific memory model to generate code and store data. It can affect
-code size and performance. If your program has global and static data with a total size smaller than
-2GB, <code class="docutils literal"><span class="pre">-mcmodel=small</span></code> is sufficient. Global and static data larger than 2GB requires
-<code class="docutils literal"><span class="pre">-mcmodel=medium</span></code> or <code class="docutils literal"><span class="pre">-mcmodel=large</span></code>.</p>
-</div>
-<div class="section" id="compiling-nek">
-<h3>Compiling Nek<a class="headerlink" href="#compiling-nek" title="Permalink to this headline">¶</a></h3>
-<p>If you have MPI installed on your system or have made the prescribed changes to makenek, the eddy
-problem can be compiled as follows:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>makenek eddy_uv
-</pre></div>
-</div>
-<p>If all works properly, upon comilation the executable <code class="docutils literal"><span class="pre">nek5000</span></code> will be generated using
-<code class="docutils literal"><span class="pre">eddy_uv.usr</span></code> to provide user-supplied initial conditions and analysis.  Note that if you
-encountered a problem during a prior attempt to build the code you should type:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>makenek clean
-makenek eddy_uv
-</pre></div>
-</div>
-</div>
-<div class="section" id="running-a-case-in-serial">
-<h3>Running a case in serial<a class="headerlink" href="#running-a-case-in-serial" title="Permalink to this headline">¶</a></h3>
-<p>Once compilation is successful, start the simulation by typing:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>nekb eddy_uv
-</pre></div>
-</div>
-<p>which runs the executable in the background (<code class="docutils literal"><span class="pre">nekb</span></code>, as opposed to <code class="docutils literal"><span class="pre">nek</span></code>, which will run in the
-foreground).</p>
-</div>
-<div class="section" id="running-a-case-in-parallel">
-<h3>Running a case in parallel<a class="headerlink" href="#running-a-case-in-parallel" title="Permalink to this headline">¶</a></h3>
-<p>If you are running on a multi-processor machine that supports MPI, you can also run this case via:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>nekbmpi eddy_uv <span class="m">4</span>
-</pre></div>
-</div>
-<p>which would run on 4 processors.    If you are running on a system that supports queuing for batch
-jobs (e.g., pbs), then the following would be a typical job submission command:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>nekpbs eddy_uv <span class="m">4</span>
-</pre></div>
-</div>
-<p>In most cases, however, the details of the <code class="docutils literal"><span class="pre">nekpbs</span></code> script would need to be modified to accommodate an
-individual&#8217;s user account, the desired runtime and perhaps the particular queue.   Note that the
-scripts <code class="docutils literal"><span class="pre">nek</span></code>, <code class="docutils literal"><span class="pre">nekb</span></code>, <code class="docutils literal"><span class="pre">nekmpi</span></code>, <code class="docutils literal"><span class="pre">nekbmpi</span></code>, etc. perform some essential file manipulations prior to
-executing <code class="docutils literal"><span class="pre">nek5000</span></code>, so it is important to use them rather than invoking <code class="docutils literal"><span class="pre">nek5000</span></code> directly.</p>
-</div>
-<div class="section" id="checking-console-output">
-<h3>Checking console output<a class="headerlink" href="#checking-console-output" title="Permalink to this headline">¶</a></h3>
-<p>To check the error for this case, type:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>grep -i err eddy_uv.log <span class="p">|</span> tail
-</pre></div>
-</div>
-<p>or equivalently:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>grep -i err logfile <span class="p">|</span> tail
-</pre></div>
-</div>
-<p>where, because of the <code class="docutils literal"><span class="pre">nekb</span></code> script, <code class="docutils literal"><span class="pre">logfile</span></code> is linked to the <code class="docutils literal"><span class="pre">.log</span></code> file of the given
-simulation.  If the run has completed, the above <code class="docutils literal"><span class="pre">grep</span></code> command should yield lines like</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>1000  1.000000E-01  6.759103E-05  2.764445E+00  2.764444E+00  1.000000E+00  X err
-1000  1.000000E-01  7.842019E-05  1.818632E+00  1.818628E+00  3.000000E-01  Y err
-</pre></div>
-</div>
-<p>which gives for the <span class="math">\(x\)</span>- and <span class="math">\(y\)</span>-velocity components the step number, the physical time,
-the maxiumum error, the maximum exact and computed values and the mean (bulk) values.</p>
-<p>A common command to check on the progress of a simulation is:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>grep tep logfile <span class="p">|</span> tail
-</pre></div>
-</div>
-<p>which typically produces lines such as:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>Step    <span class="m">996</span>, <span class="nv">t</span><span class="o">=</span> <span class="m">9</span>.9600000E-02, <span class="nv">DT</span><span class="o">=</span> <span class="m">1</span>.0000000E-04, <span class="nv">C</span><span class="o">=</span>  <span class="m">0</span>.015 <span class="m">4</span>.6555E+01 <span class="m">3</span>.7611E-02
-</pre></div>
-</div>
-<p>indicating, respectively, the step number, the physical time, the
-timestep size, the Courant (or CFL) number, the cumulative wall clock time (in seconds)
-and the wall-clock time for the most recent step.   Generally, one would
-adjust <span class="math">\(\Delta t\)</span> to have a CFL of <span class="math">\(\sim0.5\)</span>.</p>
-</div>
-</div>
-<div class="section" id="viewing-the-first-2d-example">
-<h2>Viewing the First 2D Example<a class="headerlink" href="#viewing-the-first-2d-example" title="Permalink to this headline">¶</a></h2>
-<p>The preferred mode for data visualization and analysis with Nek5000 is
-to use VisIt.  For a quick
-peek at the data, however, we list a few commands for the native Nek5000
-postprocessor.   Assuming that the <code class="docutils literal"><span class="pre">maketools</span></code> script has been executed
-and that <code class="docutils literal"><span class="pre">/bin</span></code> is in the execution path, then typing:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>postx
-</pre></div>
-</div>
-<p>in the working directory should open a new window with a sidebar menu.
-With the cursor focus in this window (move the cursor to the window and
-left click), hit <code class="docutils literal"><span class="pre">return</span></code> on the keyboard accept the default session name and click <strong>plot</strong> with the left mouse button.  This should bring up
-a color plot of the pressure distribution for the first output file
-from the simulation (here, <code class="docutils literal"><span class="pre">eddy_uv.fld01</span></code>), which contains the
-geometry, velocity, and pressure.</p>
-<p>Alternatively one can use the script <em>visnek</em>, to be found in <code class="docutils literal"><span class="pre">/scripts</span></code>. It is sufficent to run:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>visnek eddy_uv
-</pre></div>
-</div>
-<p><em>(or the name of your session)</em> to obatain a file named <code class="docutils literal"><span class="pre">eddy_uv.nek5000</span></code> which can be recognized in <a class="reference external" href="https://wci.llnl.gov/simulation/computer-codes/visit/">VisIt.</a></p>
-<p><strong>Plotting the error:</strong>
-For this case, the error has been written to
-<code class="docutils literal"><span class="pre">eddy_uv.fld11</span></code> by making a call to <code class="docutils literal"><span class="pre">outpost()</span></code> in the <code class="docutils literal"><span class="pre">userchk()</span></code>
-routine in <code class="docutils literal"><span class="pre">eddy_uv.usr</span></code>.  The error in the velocity components
-is stored in the velocity-field locations and can be viewed with
-postx, or VisIt as before.</p>
-</div>
-<div class="section" id="modifying-the-first-example">
-<h2>Modifying the First Example<a class="headerlink" href="#modifying-the-first-example" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="using-the-par-file">
-<h3>Using the <code class="docutils literal"><span class="pre">.par</span></code> file<a class="headerlink" href="#using-the-par-file" title="Permalink to this headline">¶</a></h3>
-<p>A common step in the Nek5000 workflow is to rerun with a higher
-polynomial order.   Typically, one runs a relatively low-order case
-(e.g., <code class="docutils literal"><span class="pre">lx1</span></code> =5) for one or two flow-through times and then uses
-the result as an initial condition for a higher-order run
-(e.g., <code class="docutils literal"><span class="pre">lx1</span></code> =8).  We illustrate the procedure with the
-<code class="docutils literal"><span class="pre">eddy_uv</span></code> example.
-..
-Assuming that the contents of <code class="docutils literal"><span class="pre">Nek5000/bin</span></code>
-are in the execution path, begin by typing:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>cpn eddy_uv eddy_new
-</pre></div>
-</div>
-<p>which will copy the requisite <code class="docutils literal"><span class="pre">eddy_uv</span></code> case files
-to <code class="docutils literal"><span class="pre">eddy_new</span></code>.
-Next, edit <code class="docutils literal"><span class="pre">SIZE</span></code> and change the two lines defining
-<code class="docutils literal"><span class="pre">lx1</span></code> and <code class="docutils literal"><span class="pre">lxd</span></code> from:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>parameter <span class="o">(</span><span class="nv">lx1</span><span class="o">=</span><span class="m">8</span><span class="o">)</span>                ! p-order <span class="o">(</span>avoid uneven and values &lt;<span class="m">6</span><span class="o">)</span>
-parameter <span class="o">(</span><span class="nv">lxd</span><span class="o">=</span><span class="m">12</span><span class="o">)</span>               ! p-order <span class="k">for</span> over-integration <span class="o">(</span>dealiasing<span class="o">)</span>
-</pre></div>
-</div>
-<p>to:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>parameter <span class="o">(</span><span class="nv">lx1</span><span class="o">=</span><span class="m">12</span><span class="o">)</span>                ! p-order <span class="o">(</span>avoid uneven and values &lt;<span class="m">6</span><span class="o">)</span>
-parameter <span class="o">(</span><span class="nv">lxd</span><span class="o">=</span><span class="m">18</span><span class="o">)</span>               ! p-order <span class="k">for</span> over-integration <span class="o">(</span>dealiasing<span class="o">)</span>
-</pre></div>
-</div>
-<p>Then recompile the source by typing:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>makenek eddy_new
-</pre></div>
-</div>
-<p>Next, edit <code class="docutils literal"><span class="pre">eddy_new.par</span></code> and add the following line in the <code class="docutils literal"><span class="pre">GENERAL</span></code></p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>startFrom = eddy_uv.fld12
-</pre></div>
-</div>
-<p>which tells Nek5000 to use the contents of <code class="docutils literal"><span class="pre">eddy_uv.fld12</span></code>
-as the initial condition for <code class="docutils literal"><span class="pre">eddy_new</span></code>.
-The simulation is started in the usual way:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>nekb eddy_new
-</pre></div>
-</div>
-<p>after which the command:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>grep err logfile <span class="p">|</span> tail
-</pre></div>
-</div>
-<p>will show a much smaller error (<span class="math">\(\sim 10^{-9}\)</span>) than the <code class="docutils literal"><span class="pre">lx1=8</span></code>
-case.</p>
-<p>Note that one normally would not use a restart file for the <em>eddy</em>
-problem, which is really designed as a convergence study.  The purpose here, however, was two-fold, namely,
-to illustrate a change of order and its impact on the error, and to
-demonstrate the frequently-used restart procedure. However for a higher order timestepping scheme an accurate restart would require a number of field files of the same size (+1) as the order of the multistep scheme</p>
-</div>
-<div class="section" id="using-the-rea-file">
-<h3>Using the <code class="docutils literal"><span class="pre">.rea</span></code> file<a class="headerlink" href="#using-the-rea-file" title="Permalink to this headline">¶</a></h3>
-<p>Modifying the legacy <code class="docutils literal"><span class="pre">.rea</span></code> and <code class="docutils literal"><span class="pre">SIZE</span></code> file formats is done in a similar way to above. In the lgeacy <code class="docutils literal"><span class="pre">SIZE</span></code> file, change:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>parameter <span class="o">(</span><span class="nv">lx1</span><span class="o">=</span><span class="m">8</span>,ly1<span class="o">=</span>lx1,lz1<span class="o">=</span><span class="m">1</span>,lelt<span class="o">=</span><span class="m">300</span>,lelv<span class="o">=</span>lelt<span class="o">)</span>
-parameter <span class="o">(</span><span class="nv">lxd</span><span class="o">=</span><span class="m">12</span>,lyd<span class="o">=</span>lxd,lzd<span class="o">=</span><span class="m">1</span><span class="o">)</span>
-</pre></div>
-</div>
-<p>to:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>parameter <span class="o">(</span><span class="nv">lx1</span><span class="o">=</span><span class="m">12</span>,ly1<span class="o">=</span>lx1,lz1<span class="o">=</span><span class="m">1</span>,lelt<span class="o">=</span><span class="m">300</span>,lelv<span class="o">=</span>lelt<span class="o">)</span>
-parameter <span class="o">(</span><span class="nv">lxd</span><span class="o">=</span><span class="m">18</span>,lyd<span class="o">=</span>lxd,lzd<span class="o">=</span><span class="m">1</span><span class="o">)</span>
-</pre></div>
-</div>
-<p>Then recompile the source by typing:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>makenek eddy_new
-</pre></div>
-</div>
-<p>Next, edit the legacy <code class="docutils literal"><span class="pre">.rea</span></code> format, edit <code class="docutils literal"><span class="pre">eddy_new.rea</span></code> and change the line</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>0 PRESOLVE/RESTART OPTIONS  *****
-</pre></div>
-</div>
-<p>(found roughly 33 lines from the bottom of the file) to</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>           1 PRESOLVE/RESTART OPTIONS  *****
-eddy_uv.fld12
-</pre></div>
-</div>
-<p>which tells Nek5000 to use the contents of <code class="docutils literal"><span class="pre">eddy_uv.fld12</span></code>
-as the initial condition for <code class="docutils literal"><span class="pre">eddy_new</span></code>.</p>
-<p>The simulation can now be run in a similar way to the above <code class="docutils literal"><span class="pre">.par</span></code> section.</p>
-</div>
-<div class="section" id="the-par-file">
-<h3>The <code class="docutils literal"><span class="pre">.par</span></code> File<a class="headerlink" href="#the-par-file" title="Permalink to this headline">¶</a></h3>
-<p>In the future of Nek5000, the <code class="docutils literal"><span class="pre">.rea</span></code> file format will be replaced by the new <code class="docutils literal"><span class="pre">.par</span></code> file format. This is because the new format is simpler to read (as can be seen in the <em>eddy</em> problem). Here, we introduce the basics of the <code class="docutils literal"><span class="pre">.par</span></code> file as used in this example case.</p>
-<p>In the <code class="docutils literal"><span class="pre">short_tests/eddy_par</span></code> directory, there is a file labeled <code class="docutils literal"><span class="pre">eddy_uv.par</span></code>, which is broken into four sections: <code class="docutils literal"><span class="pre">GENERAL</span></code>, <code class="docutils literal"><span class="pre">PROBLEMTPYE</span></code>, <code class="docutils literal"><span class="pre">PRESSURE</span></code>, and <code class="docutils literal"><span class="pre">VELOCITY</span></code>. Each of these sections contains necessary and optional parameters for Nek5000 to run that the user inputs, similar to the legacy <code class="docutils literal"><span class="pre">.rea</span></code> format. Analogs to each of the parameters can be found in <code class="docutils literal"><span class="pre">eddy_uv.rea</span></code>, along with descriptions. As well, detailed analog information can be found in the <code class="docutils literal"><span class="pre">core/readat_new.f</span></code> file (where each numbered parameter is matched with its new name in the <code class="docutils literal"><span class="pre">.par</span></code> file).</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>#
-# nek parameter file
-#
-[GENERAL]
-#startFrom = restart.fld
-stopAt = numSteps #endTime
-numSteps = 1000
-
-dt = -1E-04
-timeStepper = bdf #char #steady
-tOrder = 3
-
-writeControl = timeStep #runTime
-writeInterval = 100
-
-dealiasing = yes
-
-maxCFL = 1
-
-userParam01 = 1 #u0 transational velocity (formerly param(96))
-userParam02 = 0.3 #v0 translational velocity (formerly param(97))
-
-[PROBLEMTYPE]
-#stressFormulation = yes
-
-[PRESSURE]
-preconditioner = schwarz #semg #amg
-residualTol = 1E-09
-residualProj = yes
-
-[VELOCITY]
-residualTol = 1E-12
-residualProj = yes
-density = 1
-viscosity = -20
-</pre></div>
-</div>
-</div>
+<div class="section" id="visualization">
+<span id="qstart-vis"></span><h2>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h2>
+<p>Nek5000 output (<code class="docutils literal"><span class="pre">.fld</span></code> or <code class="docutils literal"><span class="pre">0.f%05d</span></code>) files can be read by <a class="reference external" href="https://wci.llnl.gov/simulation/computer-codes/visit/">VisIt</a> or
+<a class="reference external" href="https://www.paraview.org/">ParaView</a>. This requires using <code class="docutils literal"><span class="pre">visnek</span></code> to generate a metadata file.
+There is also an build-in X-Window based postprocessor called <code class="docutils literal"><span class="pre">POSTNEK</span></code> located in tools.</p>
 </div>
 </div>
 
@@ -527,10 +307,10 @@ viscosity = -20
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="user_files.html" class="btn btn-neutral float-right" title="User Files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="faq.html" class="btn btn-neutral float-right" title="FAQ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="intro.html" class="btn btn-neutral" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="Nek5000" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -539,7 +319,7 @@ viscosity = -20
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, Paul Fischer, James Lottes,  Stefan Kerkemeier, Oana Marin, Katherine Heisey, Aleks Obabko, Elia Merzari, Yulia Peet, Ronald Rahaman.
+        &copy; Copyright 2015-2017, UCHICAGO ARGONNE, LLC.
 
     </p>
   </div>
@@ -571,7 +351,7 @@ viscosity = -20
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

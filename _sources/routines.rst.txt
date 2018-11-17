@@ -1,28 +1,8 @@
-====================
-Routines of Interest
-====================
+.. _append_subroutines:
 
-The most common routines needed in Nek5000 are
-
-------------------
-Naming Conventions
-------------------
-
-- ``subroutine f(a,b,c)``
-
-  - ``a``- returned variable
-  - ``b,c`` -input data
-
-- ``op[]`` represent operations on operators
-- ``c[]``  operations on constants
-- ``gl[]`` global operations
-- ``col2[] ---``
-- ``col3[] --``
-
-
------------
-Subroutines
------------
+-------------------------
+Commonly used Subroutines
+-------------------------
 
 ``subroutine rescale_x(x,x0,x1)``
     Rescales the array ``x`` to be in the range ``(x0,x1)``. This is usually called from ``usrdat2`` in the ``.usr`` file
@@ -79,10 +59,6 @@ Subroutines
 ``subroutine col3(a,b,c,n)``
     For ``n`` entries, calculates ``a=b*c``.
 
----------
-Functions
----------
-
 ``function glmax(a,n)``
 
 ``function glamax(a,n)``
@@ -116,224 +92,21 @@ Functions
 ``function i8glsum(x,n)``
     Computes the global sum of ``x``, where the prefix, ``i`` specifies type integer, and ``i8`` specifies type integer*8.
 
----------------------------------------------------------
-An Example of Specifying Surface Normals in the .usr File
----------------------------------------------------------
+``subroutine surface_int(dphi,dS,phi,ielem,iside)``
+    Computes the surface integral of scalar array ``phi`` over face ``iside`` of element ``ielem``. 
+    The resulting integral is storted in ``dphi`` and the area in ``dS``.
 
-.. code-block:: fortran
-
-   subroutine userbc (ix,iy,iz,iside,eg)
-   include 'SIZE'
-   include 'TOTAL'
-   include 'NEKUSE'
-
-   integer e,eg,f
-   real snx,sny,snz   ! surface normals
-
-   f = eface1(iside)
-   e = gllel (eg)
-
-   if (f.eq.1.or.f.eq.2) then      ! "r face"
-      snx = unx(iy,iz,iside,e)                 ! Note:  iy,iz
-      sny = uny(iy,iz,iside,e)
-      snz = unz(iy,iz,iside,e)
-   else if (f.eq.3.or.f.eq.4)  then ! "s face"
-      snx = unx(ix,iz,iside,e)                 !        ix,iz
-      sny = uny(ix,iz,iside,e)
-      snz = unz(ix,iz,iside,e)
-   else if (f.eq.5.or.f.eq.6)  then ! "t face"
-      snx = unx(ix,iy,iside,e)                 !        ix,iy
-      sny = uny(ix,iy,iside,e)
-      snz = unz(ix,iy,iside,e)
-   end if
-
-   ux=0.0
-   uy=0.0
-   uz=0.0
-   temp=0.0
-
-   return
-   end
-
-This example will load a list of field files (filenames are read from a file) into the solver using the ``load_fld()`` function. After the data is loaded, the user is free to compute other postprocessing quantities. At the end the results are dumped onto a regular (uniform) mesh by a subsequent call to ``prepost()``.
-
-Note: The regular grid data (field files) cannot be used as a restart file (uniform->GLL interpolation is unstable)!
-
-.. code-block:: fortran
-
-   subroutine userchk
-   include 'SIZE'
-   include 'TOTAL'
-   include 'RESTART'
-
-   character*80 filename(9999)
-
-   ntot   = nx1*ny1*nz1*nelv
-
-   ifreguo = .true.   ! dump on regular (uniform) grid instead of GLL
-   nrg     = 16       ! dimension of regular grid (nrg**ndim)
-
-   ! read file-list
-   if (nid.eq.0) then
-      open(unit=199,file='file.list',form='formatted',status='old')
-      read(199,*) nfiles
-      read(199,'(A80)') (filename(i),i=1,nfiles)
-      close(199)
-   end if
-   call bcast(nfiles,isize)
-   call bcast(filename,nfiles*80)
-
-   do i = 1,nfiles
-      call load_fld(filename(i))
-
-      ! do something
-      ! note: make sure you save the result into arrays which are
-      !       dumped by prepost() e.g. T(nx1,ny1,nz1,nelt,ldimt)
-      ! ...
-
-      ! dump results into file
-      call prepost(.true.,'his')
-   end do
-
-   ! we're done
-   call exitt
-
----------------------------
-Spectral Interpolation Tool
----------------------------
-
-``Check intpts().``
-Monitor Points
-
-Multiple monitor points can be defined in the file ``hpts.in`` to examine the field data at every timestep.
-
-- setup an ASCII file called ``hpts.in`` e.g:
-
-  .. code-block:: none
-
-     3 !number of monitoring points
-     1.1 -1.2 1.0
-     . . .
-     x y z
-- depending on the number number of monitoring points you may need to increase ``lhis`` in SIZE.
-- add ``'call hpts()'`` to ``userchk()``
+.. _append_g2g:
 
 --------------------------
 Grid-to-Grid Interpolation
 --------------------------
 
-To interpolate an existing field file (e.g. ``base.fld``) onto a new mesh do the following:
+To restart from an existing field file onto a new mesh you can call the generic field file reader interpolation subroutine in userchk. 
+Note that selection of specific fields to read is not currently supported and the source file must include the coordinates. 
+That means all fields included in ``foo.f00001`` will be overwritten. Usage example:
 
-- set ``lpart`` in SIZE to a large value (e.g. 100,000 or larger) depending on your memory footprint
-- compile Nek with MPI/IO support
-- set ``NSTEPS=0`` in the ``.rea`` file (post-processing mode)
-- run Nek using the new geometry (e.g. ``new_geom.f0000``)
-- run Nek using the old geometry and add this code snippet to ``userchk()``
+   .. code-block:: none
 
-  .. code-block:: fortran
-
-     character*132  newfld, oldfld, newgfld
-     data newfld, oldfld, newgfld /'new0.f0001','base.fld','new_geom.f0000'/
-     call g2gi(newfld, oldfld, newgfld) ! grid2grid interpolation
-     call exitt()
-
-----------------------------
-Lagrangian Particle Tracking
-----------------------------
-
-The interpolation tool can be used for Lagrangian particle tracking (the particles are the interpolation points).
-
-Workflow: Set initial particle positions (e.g. reading a file ``particle.pos0``) ``x_part <- x_pos0``
-
-LOOP
-
-- compute field quantities
-- interpolate field quantities for all particles using ``intpts()``
-- dump/store particle data
-- advect particles using ``particle_advect()``
-
-END LOOP
-
-.. code-block:: fortranfixed
-
-         subroutine particle_advect(rtl,mr,npart,dt_p)
-   c
-   c     Advance particle position in time using 4th-order Adams-Bashford.
-   c     U[x\_ i(t)] for a given x\_ i(t) will be evaluated by spectral interpolation.
-   c     Note: The particle timestep dt_p has be constant!
-   c
-         include 'SIZE'
-         include 'TOTAL'
-
-         real rtl(mr,1)
-
-         real vell(ldim,3,lpart)  ! lagged velocities
-         save vell
-
-         integer icalld
-         save    icalld
-         data    icalld /0/
-
-         if(npart.gt.lpart) then
-           write(6,*) 'ABORT: npart>lpart - increase lpart in SIZE. ',nid
-           call exitt
-         end if
-
-         ! compute AB coefficients (for constant timestep)
-         if (icalld.eq.0) then
-            call rzero(vell,3*ldim*npart) ! k = 1
-            c0 = 1.
-            c1 = 0.
-            c2 = 0.
-            c3 = 0.
-            icalld = 1
-         else if (icalld.eq.1) then        ! k = 2
-            c0 = 1.5
-            c1 = -.5
-            c2 = 0.
-            c3 = 0.
-            icalld = 2
-         else if (icalld.eq.2) then        ! k = 3
-            c0 = 23.
-            c1 = -16.
-            c2 = 5.
-            c0 = c0/12.
-            c1 = c1/12.
-            c2 = c2/12.
-            c3 = 0.
-            icalld = 3
-         else                             ! k = 4
-            c0 = 55.
-            c1 = -59.
-            c2 = 37.
-            c3 = -9.
-            c0 = c0/24.
-            c1 = c1/24.
-            c2 = c2/24.
-            c3 = c3/24.
-         end if
-
-         ! compute new position x[t(n+1)]
-         do i=1,npart
-            do k=1,ndim
-               vv = rtl(1+2*ndim+k,i)
-               rtl(1+k,i) =  rtl(1+k,i) +
-        &                    dt_p*(
-        &                    + c0*vv
-        &                    + c1*vell(k,1,i)
-        &                    + c2*vell(k,2,i)
-        &                    + c3*vell(k,3,i)
-        &                    )
-               ! store velocity history
-               vell(k,3,i) = vell(k,2,i)
-               vell(k,2,i) = vell(k,1,i)
-               vell(k,1,i) = vv
-            end do
-         end do
-
-         return
-         end
-
-
-
+      if (istep.eq.0) call gfldr('foo.f00001')
 

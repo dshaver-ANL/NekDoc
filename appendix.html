@@ -36,8 +36,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Nek5000 17.0 documentation" href="index.html"/>
-        <link rel="next" title="&lt;no title&gt;" href="bibliography.html"/>
-        <link rel="prev" title="Routines of Interest" href="routines.html"/> 
+        <link rel="prev" title="Theory" href="theory.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -91,30 +90,39 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_files.html">User Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="geometry.html">Geometry</a></li>
-<li class="toctree-l1"><a class="reference internal" href="large_scale.html">Performing Large-Scale Simulations in Nek5000</a></li>
-<li class="toctree-l1"><a class="reference internal" href="routines.html">Routines of Interest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_files.html">Problem Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Appendices</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#list-of-parameters-in-rea-file">List of Parameters in .rea File</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#build-options">Build Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#internal-input-parameters-switches">Internal Input Parameters/Switches</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#available-parameters">Available Parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#available-logical-switches">Available Logical Switches</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#logical-switches">Logical switches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other-inut-varaibles">Other Inut Varaibles</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#list-of-parameters-in-size-file">List of Parameters in SIZE File</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#parameters-in-size-inc-file">Parameters in SIZE.inc File</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#deprecated-parameters">Deprecated Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#commonly-used-variables">Commonly used Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#solution-variables">Solution Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#geometry-variables">Geometry Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-setup-variables">Problem Setup Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#averaging-variables">Averaging Variables</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#the-fld-file-format">The .fld File Format</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#header">Header</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#data">Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#commonly-used-subroutines">Commonly used Subroutines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#grid-to-grid-interpolation">Grid-to-Grid Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generating-a-mesh-with-genbox">Generating a Mesh with Genbox</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uniformly-distributed-mesh">Uniformly Distributed Mesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#graded-mesh">Graded Mesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-specified-distribution">User-Specified Distribution</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#mesh-modification">Mesh Modification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cylindrical-cartesian-transition-annuli">Cylindrical/Cartesian-transition Annuli</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mesh-extrusion-and-mirroring">Mesh Extrusion and Mirroring</a></li>
 </ul>
 </li>
 </ul>
@@ -182,673 +190,1006 @@
             
   <div class="section" id="appendices">
 <h1>Appendices<a class="headerlink" href="#appendices" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="list-of-parameters-in-rea-file">
-<h2>List of Parameters in .rea File<a class="headerlink" href="#list-of-parameters-in-rea-file" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="build-options">
+<h2>Build Options<a class="headerlink" href="#build-options" title="Permalink to this headline">¶</a></h2>
+<p>The shell script <code class="docutils literal"><span class="pre">makenek</span></code> is designed to assist the compilation process of Nek5000. The script will create a <code class="docutils literal"><span class="pre">makefile</span></code> based on the user settings section in <code class="docutils literal"><span class="pre">makenek</span></code>. The GNU gmake utility is used to build Nek5000.
+Available configurations options:</p>
+<span id="tab-bdms"></span><table border="1" class="colwidths-given docutils" id="id1">
+<caption><span class="caption-number">Table 18 </span><span class="caption-text">Compiler options</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="24%" />
+<col width="14%" />
+<col width="24%" />
+<col width="39%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">name</th>
+<th class="head">values</th>
+<th class="head">default</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>PPLIST</td>
+<td>string</td>
+<td>&#160;</td>
+<td>list of pre-processor symbols (CVODE, …)</td>
+</tr>
+<tr class="row-odd"><td>MPI</td>
+<td>1, 0</td>
+<td>1</td>
+<td>use MPI (needed for a multiprocessor computation)</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>FC</td>
+<td>string</td>
+<td>optional</td>
+<td>Fortran compiler (mpif77)</td>
+</tr>
+<tr class="row-even"><td>CC</td>
+<td>string</td>
+<td>optional</td>
+<td>C compiler (mpicc)</td>
+</tr>
+<tr class="row-odd"><td>FCLAGS</td>
+<td>string</td>
+<td>optional</td>
+<td>optional Fortan compilation flags</td>
+</tr>
+<tr class="row-even"><td>CCLAGS</td>
+<td>string</td>
+<td>optional</td>
+<td>optional C compilation flags</td>
+</tr>
+<tr class="row-odd"><td>SOURCE_ROOT</td>
+<td>string</td>
+<td>optional</td>
+<td>path of Nek5000 source</td>
+</tr>
+<tr class="row-even"><td>USR</td>
+<td>string</td>
+<td>optional</td>
+<td>object list of additional files to compile make intructions (<code class="docutils literal"><span class="pre">makefile_usr.inc</span></code> required)</td>
+</tr>
+<tr class="row-odd"><td>USR_LFLAGS</td>
+<td>string</td>
+<td>optional</td>
+<td>optional linking flags</td>
+</tr>
+<tr class="row-even"><td>PROFILING</td>
+<td>1, 0</td>
+<td>1</td>
+<td>enable internal timers for performance statistics</td>
+</tr>
+<tr class="row-odd"><td>VISIT</td>
+<td>1, 0</td>
+<td>0</td>
+<td>Toggles Visit in situ. See Visit_in_situ for details</td>
+</tr>
+<tr class="row-even"><td>VISIT_INSTALL</td>
+<td>string</td>
+<td>VISIT in situ</td>
+<td>Path to VISIT install path. See Visit_in_situ for details.</td>
+</tr>
+<tr class="row-odd"><td>VISIT_STOP</td>
+<td>true, false</td>
+<td>false</td>
+<td>When running VISIT in situ, simulation stops after step 1 to connect VISIT.</td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="docutils literal"><span class="pre">PPLIST</span></code> field can be used to activate several features at compilation time.
+A list of possible options is below:</p>
+<table border="1" class="docutils" id="id2">
+<caption><span class="caption-number">Table 19 </span><span class="caption-text">PPLIST options</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Symbol</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>NOMPIIO</td>
+<td>deactivate MPI-IO support</td>
+</tr>
+<tr class="row-odd"><td>BGQ</td>
+<td>use Blue Gene Q optimized mxm</td>
+</tr>
+<tr class="row-even"><td>XSMM</td>
+<td>use libxsmm for mxm</td>
+</tr>
+<tr class="row-odd"><td>CVODE</td>
+<td>compile with CVODE support for scalars</td>
+</tr>
+<tr class="row-even"><td>VENDOR_BLAS</td>
+<td>use VENDOR BLAS/LAPACK</td>
+</tr>
+<tr class="row-odd"><td>EXTBAR</td>
+<td>add underscore to exit call (for BGQ)</td>
+</tr>
+<tr class="row-even"><td>NEKNEK</td>
+<td>activate overlapping mesh solver (experimental)</td>
+</tr>
+<tr class="row-odd"><td>CMTNEK</td>
+<td>activate discontinuous Galerkin compressible-flow solver (experimental)</td>
+</tr>
+</tbody>
+</table>
+<p>In addition to these preprocessor items, the user can add compilation and linking flags.
+<code class="docutils literal"><span class="pre">FFLAGS</span></code> allows the user to add Fortran compilation flags while <code class="docutils literal"><span class="pre">CCFAGS</span></code> allows the user to
+add C compilation flags.
+These will be compiler dependent and the user is encouraged to consult the manual of the compiler if specific options are needed/desired.
+A commonly used flag is <code class="docutils literal"><span class="pre">-mcmodel</span></code> which allows for arrays of size larger than 2GB.
+This option  tells the compiler to use a specific memory model to generate code and store data.
+It can affect code size and performance.
+If your program has global and static data with a total size smaller than 2GB, <code class="docutils literal"><span class="pre">-mcmodel=small</span></code> is sufficient.
+Global and static data larger than 2GB requires <code class="docutils literal"><span class="pre">-mcmodel=medium</span></code> or <code class="docutils literal"><span class="pre">-mcmodel=large</span></code>.</p>
+</div>
+<div class="section" id="internal-input-parameters-switches">
+<h2>Internal Input Parameters/Switches<a class="headerlink" href="#internal-input-parameters-switches" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="parameters">
 <h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
-<p>This section tells Nek5000</p>
-<ul class="simple">
-<li>If the input file reflects a 2D or 3D job (it should match the <code class="docutils literal"><span class="pre">ldim</span></code> parameter in the SIZE file).</li>
-<li>The combination of heat transfer, Stokes, Navier-Stokes, steady or unsteady to be run.</li>
-<li>The relevant physical parameters.</li>
-<li>The solution algorithm within Nek5000 to use.</li>
-<li>The timestep size or Courant number to use, or whether to run variable DT (<span class="math">\(dt\)</span>), etc.</li>
-</ul>
-<p>A <code class="docutils literal"><span class="pre">.rea</span></code> file starts with the following three parameters:</p>
-<p><strong>NEKTON VERSION</strong> the version of Nek5000</p>
-<p><strong>DIMENSIONAL RUN</strong> number of spatial dimensions (<code class="docutils literal"><span class="pre">NDIM</span></code> =2,3 - has to match the setting in the SIZE file).</p>
-<p><strong>PARAMETERS FOLLOW</strong> the number of parameters which are going to be followed in the <code class="docutils literal"><span class="pre">.rea</span></code> file.(<code class="docutils literal"><span class="pre">NPARAM</span></code>)</p>
-<p>The latter specifies how many lines of <code class="docutils literal"><span class="pre">.rea</span></code> file, starting from the next line, are the parameters and have to be read by the program.</p>
-</div>
-<div class="section" id="available-parameters">
-<h3>Available Parameters<a class="headerlink" href="#available-parameters" title="Permalink to this headline">¶</a></h3>
 <style> .red {color:red} </style><div class="line-block">
-<div class="line"><strong>P001  DENSITY</strong> density for the case of constant properties (for variable density see parameter <code class="docutils literal"><span class="pre">P030</span></code>).</div>
+<div class="line"><strong>P001</strong>  density for the case of constant properties</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P002  VISCOS</strong>  kinematic viscosity (if <span class="math">\(&lt;0 \rightarrow Re\)</span>, otherwise <span class="math">\(1/Re\)</span>).</div>
+<div class="line"><strong>P002</strong>  dynamic viscosity</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P003  BETAG</strong> if <span class="math">\(&gt;0\)</span>, natural convection is turned on (Boussinesq approximation). <span class="red">NOT IN USE!</span></div>
+<div class="line"><strong>P007</strong>  heat capacity for the case of constant properties</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P004  GTHETA</strong> model parameter for Boussinesq approximation (see parameter P003). <span class="red">NOT IN USE!</span></div>
+<div class="line"><strong>P008</strong>  conductivity for the case of constant properties</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P005  PGRADX</strong> <span class="red">NOT IN USE!</span></div>
+<div class="line"><strong>P010</strong>  simulation end time</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P006</strong> <span class="red">NOT IN USE!</span></div>
+<div class="line"><strong>P011</strong>  number of time steps</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P007  RHOCP</strong> <code class="docutils literal"><span class="pre">navier5.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">param(7)</span> <span class="pre">=</span> <span class="pre">param(1)</span>&#160; <span class="pre">!</span> <span class="pre">rhoCP</span>&#160;&#160; <span class="pre">=</span> <span class="pre">rho</span></code> <span class="red">NOT IN USE!</span></div>
+<div class="line"><strong>P012</strong>  time step size</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P008  CONDUCT</strong> conductivity for the case of constant properties (if <span class="math">\(&lt;0\)</span>, it defines the Peclet number, see parameter P030).</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">connect2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">if(param(8)</span> <span class="pre">.lt.0.0)</span> <span class="pre">param(8)</span>&#160; <span class="pre">=</span> <span class="pre">-1.0/param(8)</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">navier5.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">param(8)</span> <span class="pre">=</span> <span class="pre">param(2)</span>&#160; <span class="pre">!</span> <span class="pre">conduct</span> <span class="pre">=</span> <span class="pre">dyn.</span> <span class="pre">visc</span></code></div>
+<div class="line"><strong>P014</strong>  time fequency to dump fld files</div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P009</strong> <span class="red">NOT IN USE!</span> (passed to <code class="docutils literal"><span class="pre">CPFLD(2,3)</span></code>!)</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">connect2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">CPFLD(2,3)=PARAM(9)</span></code></div>
+<div class="line"><strong>P015</strong>  step frequency to dump fld files</div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P010  FINTIME</strong> if <span class="math">\(&gt;0\)</span>, specifies simulation end time. Otherwise, use <code class="docutils literal"><span class="pre">NSTEP</span></code> (P011).</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">drive2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">FINTIM</span> <span class="pre">=</span> <span class="pre">PARAM(10)</span></code></div>
+<div class="line"><strong>P021</strong>  pressure solver tolernace</div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P011  NSTEP</strong> number of time steps.</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">connect2.f:</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">param(11)</span> <span class="pre">=</span> <span class="pre">1.0</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">drive2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">NSTEPS</span> <span class="pre">=</span> <span class="pre">PARAM(11)</span></code></div>
+<div class="line"><strong>P022</strong>  velocity solver tolerance</div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P012  DT</strong> upper bound on time step <span class="math">\(dt\)</span>   (if <span class="math">\(&lt;0\)</span>, then <span class="math">\(dt=|P012|\)</span> constant)</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">connect2.f:</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">param(12)</span> <span class="pre">=</span> <span class="pre">1.0</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">drive2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">DT</span>&#160;&#160;&#160;&#160; <span class="pre">=</span> <span class="pre">abs(PARAM(12))</span></code></div>
+<div class="line"><strong>P023</strong>  number of passive scalars</div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P013  IOCOMM</strong> frequency of iteration histories</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">drive2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">IOCOMM</span> <span class="pre">=</span> <span class="pre">PARAM(13)</span></code></div>
+<div class="line"><strong>P024</strong>  relative tolerance for Helmholtz solver</div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P014  IOTIME</strong> if <span class="math">\(&gt;0\)</span>, time interval to dump the fld file. Otherwise, use <code class="docutils literal"><span class="pre">IOSTEP</span></code> (P015).</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">drive2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">TIMEIO</span> <span class="pre">=</span> <span class="pre">PARAM(14)</span></code></div>
+<div class="line"><strong>P025</strong>  absolute tolerance for Helmholtz solver</div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P015  IOSTEP</strong> dump frequency, number of time steps between dumps.</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">drive2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">IOSTEP</span> <span class="pre">=</span> <span class="pre">PARAM(15)</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">navier5.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">if</span>&#160; <span class="pre">(iastep.eq.0)</span> <span class="pre">iastep=param(15)</span>&#160;&#160; <span class="pre">!</span> <span class="pre">same</span> <span class="pre">as</span> <span class="pre">iostep</span></code></div>
+<div class="line"><strong>P026</strong>  target Courant number (determines the number of RK4 substeps for OIFS)</div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P016  PSSOLVER</strong> heat/passive scalar solver:</div>
-<div class="line-block">
-<div class="line">1. Helmholz</div>
-<div class="line">2. <code class="docutils literal"><span class="pre">CVODE</span></code></div>
-<div class="line">3. <code class="docutils literal"><span class="pre">CVODE</span></code> with user-supplied Jacobian</div>
-<div class="line">Note: a negative number will set source terms to 0.</div>
+<div class="line"><strong>P027</strong>  temporal discretization order</div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P017  AXIS</strong>  <span class="red">NOT IN USE!</span></div>
+<div class="line"><strong>P028</strong>  temporal discretization order for mesh solver</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P018  GRID</strong> <span class="red">NOT IN USE!</span></div>
+<div class="line"><strong>P029</strong>  magnetic viscosity</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P019  INTYPE</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">connect2.f:</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">param(19)</span> <span class="pre">=</span> <span class="pre">0.0</span></code></div>
+<div class="line"><strong>P030</strong>  material properties (0: constant, 1: uservp)</div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P020  NORDER</strong>  <span class="red">NOT IN USE!</span></div>
+<div class="line"><strong>P031</strong>  number of perturbation modes in linearized N-S.</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P021  DIVERGENCE</strong> tolerance for the pressure solver.</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">drive2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">TOLPDF</span> <span class="pre">=</span> <span class="pre">abs(PARAM(21))</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">hmholtz.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">if</span> <span class="pre">(name.eq.'PRES'.and.param(21).ne.0)</span> <span class="pre">tol=abs(param(21))</span></code></div>
+<div class="line"><strong>P032</strong>  number of boundary conditions in .re2 file</div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P022  HELMHOLTZ</strong> tolerance for the velocity solver.</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">drive2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">TOLHDF</span> <span class="pre">=</span> <span class="pre">abs(PARAM(22))</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">hmholtz.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">if</span> <span class="pre">(param(22).ne.0)</span> <span class="pre">tol=abs(param(22))</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">hmholtz.f:</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">if</span> <span class="pre">(param(22).lt.0)</span> <span class="pre">tol=abs(param(22))*rbn0</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">navier4.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">if</span> <span class="pre">(param(22).ne.0)</span> <span class="pre">tol</span> <span class="pre">=</span> <span class="pre">abs(param(22))</span></code></div>
+<div class="line"><strong>P033</strong>  first field index in .re2</div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P023  NPSCAL</strong> number of passive scalars.</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">connect2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">NPSCAL=INT(PARAM(23))</span></code></div>
-<div class="line"><br /></div>
-</div>
-<div class="line"><strong>P024  TOLREL</strong> relative tolerance for the passive scalar solver (<code class="docutils literal"><span class="pre">CVODE</span></code>).</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">drive2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">TOLREL</span> <span class="pre">=</span> <span class="pre">abs(PARAM(24))</span></code></div>
-<div class="line"><br /></div>
-</div>
-<div class="line"><strong>P025  TOLABS</strong> absolute tolerance for the passive scalar solver (<code class="docutils literal"><span class="pre">CVODE</span></code>).</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">drive2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">TOLABS</span> <span class="pre">=</span> <span class="pre">abs(PARAM(25))</span></code></div>
-<div class="line"><br /></div>
-</div>
-<div class="line"><strong>P026  COURANT</strong> maximum Courant number (number of RK4 substeps if OIFS is used).</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">drive2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">CTARG</span>&#160; <span class="pre">=</span> <span class="pre">PARAM(26)</span></code></div>
-<div class="line"><br /></div>
-</div>
-<div class="line"><strong>P027  TORDER</strong> temporal discretization order (2 or 3).</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">drive2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">NBDINP</span> <span class="pre">=</span> <span class="pre">PARAM(27)</span></code></div>
-<div class="line"><br /></div>
-</div>
-<div class="line"><strong>P028  NABMSH</strong> Order of temporal integration for mesh velocity. If 1, 2, or 3 use Adams-Bashforth of corresponding order. Otherwise, extrapolation of order <code class="docutils literal"><span class="pre">TORDER</span></code> (P027).</div>
-<div class="line"><br /></div>
-<div class="line"><strong>P029  MHD_VISCOS</strong> if <span class="math">\(&gt;0 \rightarrow\)</span> magnetic viscosity, if <span class="math">\(&lt;0 \rightarrow\)</span> magnetic Reynolds number.</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">connect2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">if(param(29).lt.0.0)</span> <span class="pre">param(29)</span> <span class="pre">=</span> <span class="pre">-1.0/param(29)</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">connect2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">if</span> <span class="pre">(param(29).ne.0.)</span> <span class="pre">ifmhd</span>&#160; <span class="pre">=</span> <span class="pre">.true.</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">connect2.f:</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">cpfld(ifldmhd,1)</span> <span class="pre">=</span> <span class="pre">param(29)</span>&#160; <span class="pre">!</span> <span class="pre">magnetic</span> <span class="pre">viscosity</span></code></div>
-<div class="line"><br /></div>
-</div>
-<div class="line"><strong>P030  USERVP</strong> if</div>
-<div class="line-block">
-<div class="line">0. constant properties</div>
-<div class="line">1. user-defined properties via <code class="docutils literal"><span class="pre">uservp</span></code> subroutine (each scalar separately)</div>
-<div class="line">2. user-defined properties via <code class="docutils literal"><span class="pre">uservp</span></code> subroutine (all scalars at once)</div>
-<div class="line"><br /></div>
-</div>
-<div class="line"><strong>P031  NPERT</strong>  if <span class="math">\(\neq 0\)</span>, number of perturbation modes in linearized N-S.</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">connect2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">if</span> <span class="pre">(param(31).ne.0.)</span> <span class="pre">ifpert</span> <span class="pre">=</span> <span class="pre">.true.</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">connect2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">if</span> <span class="pre">(param(31).lt.0.)</span> <span class="pre">ifbase</span> <span class="pre">=</span> <span class="pre">.false.</span>&#160;&#160; <span class="pre">!</span> <span class="pre">don't</span> <span class="pre">time</span> <span class="pre">adv</span> <span class="pre">base</span> <span class="pre">flow</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">connect2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">npert</span> <span class="pre">=</span> <span class="pre">abs(param(31))</span></code></div>
-<div class="line"><br /></div>
-</div>
-<div class="line"><strong>P032  NBCRE2</strong> if <span class="math">\(&gt;0\)</span>, number of BCs in <code class="docutils literal"><span class="pre">.re2</span></code> file, 0: all.</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">connect2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">if</span> <span class="pre">(param(32).gt.0)</span> <span class="pre">nfldt</span> <span class="pre">=</span> <span class="pre">ibc</span> <span class="pre">+</span> <span class="pre">param(32)-1</span></code></div>
-<div class="line"><br /></div>
-</div>
-<div class="line"><strong>P033</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P034</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P035</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P036 XMAGNET</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P037 NGRIDES</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P038 NORDER2</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P039 NORDER3</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P040</strong> <span class="red">NOT IN USE!</span></div>
+<div class="line"><strong>P040</strong>  pressure coarse grid solver (0: XXT, 1: AMG)</div>
 <div class="line"><br /></div>
 <div class="line"><strong>P041</strong> 1 <span class="math">\(\rightarrow\)</span> multiplicative SEMG</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">hsmg.f:c</span>&#160;&#160;&#160;&#160; <span class="pre">if</span> <span class="pre">(param(41).eq.1)</span> <span class="pre">ifhybrid</span> <span class="pre">=</span> <span class="pre">.true.</span></code> <span class="math">\(\leftarrow\)</span> <span class="red">NOT IN USE!</span></div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P042</strong> linear solver for the pressure equation, 0 <span class="math">\(\rightarrow\)</span> GMRES or 1 <span class="math">\(\rightarrow\)</span> PCG</div>
+<div class="line"><strong>P042</strong> linear solver for the pressure equation (0: GMRES, 1: CG)</div>
 <div class="line"><br /></div>
 <div class="line"><strong>P043</strong> 0: additive multilevel scheme - 1: original two level scheme.</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">navier6.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">if</span> <span class="pre">(lx1.eq.2)</span> <span class="pre">param(43)=1.</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">navier6.f:</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">if</span> <span class="pre">(param(43).eq.0)</span> <span class="pre">call</span> <span class="pre">hsmg_setup</span></code></div>
 <div class="line"><br /></div>
-</div>
 <div class="line"><strong>P044</strong> 0=E-based additive Schwarz for PnPn-2; 1=A-based.</div>
 <div class="line"><br /></div>
 <div class="line"><strong>P045</strong> Free-surface stability control (defaults to 1.0)</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">subs1.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">FACTOR</span> <span class="pre">=</span> <span class="pre">PARAM(45)</span></code></div>
 <div class="line"><br /></div>
-</div>
 <div class="line"><strong>P046</strong> if <span class="math">\(&gt;0\)</span>, do not set Initial Condition (no call to subroutine <code class="docutils literal"><span class="pre">SETICS</span></code>).</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">drive2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">irst</span> <span class="pre">=</span> <span class="pre">param(46)</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">ic.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">irst</span> <span class="pre">=</span> <span class="pre">param(46)</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">!</span> <span class="pre">for</span> <span class="pre">lee's</span> <span class="pre">restart</span> <span class="pre">(rarely</span> <span class="pre">used)</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">subs1.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">irst</span> <span class="pre">=</span> <span class="pre">param(46)</span></code></div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P047</strong> parameter for moving mesh (Poisson ratio for mesh elasticity solve (default 0.4)).</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">mvmesh.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">VNU</span>&#160;&#160;&#160; <span class="pre">=</span> <span class="pre">param(47)</span></code></div>
+<div class="line"><strong>P047</strong> Poisson ratio for mesh elasticity solve (default 0.4)</div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P048</strong> <span class="red">NOT IN USE!</span></div>
+<div class="line"><strong>P054</strong> direction of fixed flowrate (1: x, 2: y, 3: z), negative means fixed bulk</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P049</strong> if <span class="math">\(&lt;0\)</span>, mixing length factor <span class="red">NOT IN USE!</span>.</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">drive2.f:c</span>&#160;&#160;&#160;&#160; <span class="pre">IF</span> <span class="pre">(PARAM(49)</span> <span class="pre">.LE.</span> <span class="pre">0.0)</span> <span class="pre">PARAM(49)</span> <span class="pre">=</span> <span class="pre">TLFAC</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">turb.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">TLFAC</span> <span class="pre">=</span> <span class="pre">PARAM(49)</span></code></div>
+<div class="line"><strong>P055</strong> volumetric flowrate or bulk velocity (see p054) for periodic case</div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P050</strong> <span class="red">NOT IN USE!</span></div>
+<div class="line"><strong>P059</strong> deformed element switch</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P051</strong> <span class="red">NOT IN USE!</span></div>
+<div class="line"><strong>P060</strong> initialize velocity to 1e-10 (for steady Stokes problem).</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P052  HISTEP</strong> if <span class="math">\(&gt;1\)</span>, history points dump frequency (in number of steps).</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">prepost.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">if</span> <span class="pre">(param(52).ge.1)</span> <span class="pre">iohis=param(52)</span></code></div>
+<div class="line"><strong>P062</strong> byte swap for output</div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P053</strong> <span class="red">NOT IN USE!</span></div>
+<div class="line"><strong>P063</strong> output precision (4: SP, 8: DP)</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P054</strong> direction of fixed mass flowrate (1: <span class="math">\(x\)</span>-, 2: <span class="math">\(y\)</span>-, 3: <span class="math">\(z\)</span>-direction). If 0: <span class="math">\(x\)</span>-direction.</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">drive2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">if</span> <span class="pre">(param(54).ne.0)</span> <span class="pre">icvflow</span> <span class="pre">=</span> <span class="pre">abs(param(54))</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">drive2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">if</span> <span class="pre">(param(54).lt.0)</span> <span class="pre">iavflow</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">!</span> <span class="pre">mean</span> <span class="pre">velocity</span></code></div>
+<div class="line"><strong>P064</strong> restart perturbation solution</div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P055</strong> volumetric flow rate for periodic case;  if p54:math:<cite>&lt;0</cite>, then p55:=mean velocity.</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">drive2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">flowrate</span> <span class="pre">=</span> <span class="pre">param(55)</span></code></div>
-<div class="line"><br /></div>
-</div>
-<div class="line"><strong>P056</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P057</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P058</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P059</strong> if <span class="math">\(\neq0\)</span>, deformed elements (only relevant for FDM). !=0 <span class="math">\(\rightarrow\)</span> full Jac. eval. for each el.</div>
-<div class="line"><br /></div>
-<div class="line"><strong>P060</strong> if <span class="math">\(\neq0\)</span>, initialize velocity to 1e-10 (for steady Stokes problem).</div>
-<div class="line"><br /></div>
-<div class="line"><strong>P061</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P062</strong> if <span class="math">\(&gt;0\)</span>, swap bytes for output.</div>
-<div class="line"><br /></div>
-<div class="line"><strong>P063  WDSIZO</strong> real output wordsize (8: 8-byte reals, else 4-byte).</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">prepost.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">if</span> <span class="pre">(param(63).gt.0)</span> <span class="pre">wdsizo</span> <span class="pre">=</span> <span class="pre">8</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">!</span> <span class="pre">64-bit</span> <span class="pre">.fld</span> <span class="pre">file</span></code></div>
-<div class="line"><br /></div>
-</div>
-<div class="line"><strong>P064</strong> if <span class="math">\(=1\)</span>, restart perturbation solution</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">pertsupport.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">if(param(64).ne.1)</span> <span class="pre">then</span> <span class="pre">!fresh</span> <span class="pre">start,</span> <span class="pre">param(64)</span> <span class="pre">is</span> <span class="pre">restart</span> <span class="pre">flag</span></code></div>
-<div class="line"><br /></div>
-</div>
 <div class="line"><strong>P065</strong> number of I/O nodes (if <span class="math">\(&lt; 0\)</span> write in separate subdirectories).</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P066</strong> Output format: (only <code class="docutils literal"><span class="pre">postx</span></code> uses <code class="docutils literal"><span class="pre">.rea</span></code> value; other nondefault should be set in <code class="docutils literal"><span class="pre">usrdat</span></code>) (if <span class="math">\(\geq 0\)</span> binary else ASCII).</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">connect2.f:</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">param(66)</span> <span class="pre">=</span> <span class="pre">6</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">!</span> <span class="pre">binary</span> <span class="pre">is</span> <span class="pre">default</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">connect2.f:</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">param(66)</span> <span class="pre">=</span> <span class="pre">0</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">!</span> <span class="pre">ASCII</span></code></div>
+<div class="line"><strong>P066</strong> output format (0: ASCII, 4: legacy binary, 6: binary)</div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P067</strong> read format (if <span class="math">\(\geq 0\)</span> binary else ASCII).</div>
+<div class="line"><strong>P067</strong> read format</div>
 <div class="line"><br /></div>
 <div class="line"><strong>P068</strong> averaging frequency in <code class="docutils literal"><span class="pre">avg_all</span></code> (0: every timestep).</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P069</strong> <span class="red">NOT IN USE!</span></div>
+<div class="line"><strong>P084</strong> custom inital time step</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P070</strong> <span class="red">NOT IN USE!</span></div>
+<div class="line"><strong>P086</strong> use skew-symmetric instead of convective form.</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P071</strong> <span class="red">NOT IN USE!</span></div>
+<div class="line"><strong>P093</strong> number of previous solutions to use for residual projection.</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P072</strong> <span class="red">NOT IN USE!</span></div>
+<div class="line"><strong>P094</strong> number of steps starting residual projection for velocity and passive scalars</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P073</strong> <span class="red">NOT IN USE!</span></div>
+<div class="line"><strong>P095</strong> number of steps starting residual projection for pressure</div>
 <div class="line"><br /></div>
-<div class="line"><strong>P074</strong> if <span class="math">\(&gt; 0\)</span> print Helmholtz solver iterations.</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">hmholtz.f:</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">if</span> <span class="pre">(nid.eq.0.and.ifprint.and.param(74).ne.0)</span> <span class="pre">ifprinthmh=.true.</span></code></div>
+<div class="line"><strong>P099</strong> dealiasing mode (<span class="math">\(&lt;0\)</span>: disabled, 3: old dealiasing, 4: new dealiasing)</div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P075</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P076</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P077</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P078</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P079</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P080</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P081</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P082</strong> coarse-grid dimension (2: linear). <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P083</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P084</strong> if <span class="math">\(&lt;0\)</span>, force initial time step to this value.</div>
-<div class="line"><br /></div>
-<div class="line"><strong>P085</strong> set <span class="math">\(dt\)</span> in <em>setdt</em>.</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">subs1.f:</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">dt=dtopf*param(85)i</span></code></div>
-<div class="line"><br /></div>
-</div>
-<div class="line"><strong>P086</strong> <span class="red">RESERVED!</span> if <span class="math">\(\neq0\)</span>, use skew-symmetric form, else convective form.</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">drive2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">PARAM(86)</span> <span class="pre">=</span> <span class="pre">0</span> <span class="pre">!</span> <span class="pre">No</span> <span class="pre">skew-symm.</span> <span class="pre">convection</span> <span class="pre">for</span> <span class="pre">now</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">navier1.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">if</span> <span class="pre">(param(86).ne.0.0)</span> <span class="pre">then</span>&#160; <span class="pre">!</span> <span class="pre">skew-symmetric</span> <span class="pre">form</span></code></div>
-<div class="line"><br /></div>
-</div>
-<div class="line"><strong>P087</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P088</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P089</strong> <span class="red">RESERVED!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P090</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P091</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P092</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P093</strong>  number of previous solutions to use for residual projection.</div>
-<div class="line-block">
-<div class="line">(adjust <code class="docutils literal"><span class="pre">MXPREF</span></code> in <code class="docutils literal"><span class="pre">SIZEu</span></code> accordingly)</div>
-<div class="line"><br /></div>
-</div>
-<div class="line"><strong>P094</strong> if <span class="math">\(&gt;0\)</span>, start projecting velocity and passive scalars after P094 steps</div>
-<div class="line"><br /></div>
-<div class="line"><strong>P095</strong> if <span class="math">\(&gt;0\)</span>, start projecting pressure after P095 steps</div>
-<div class="line"><br /></div>
-<div class="line"><strong>P096</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P097</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P098</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P099</strong> dealiasing:</div>
-<div class="line-block">
-<div class="line"><span class="math">\(&lt;0\)</span>:  disable</div>
-<div class="line">3:  old dealiasing</div>
-<div class="line">4:  new dealiasing</div>
-<div class="line"><br /></div>
-</div>
 <div class="line"><strong>P100</strong> <span class="red">RESERVED!</span> pressure preconditioner when using CG solver (0: Jacobi, <span class="math">\(&gt;0\)</span>: two-level Schwarz) <span class="red">or viseversa?</span></div>
 <div class="line"><br /></div>
-<div class="line"><strong>P101</strong> number of additional modes to filter (0: only last mode)</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">navier5.f:</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">ncut</span> <span class="pre">=</span> <span class="pre">param(101)+1</span></code></div>
+<div class="line"><strong>P101</strong> number of additional modes to filter</div>
 <div class="line"><br /></div>
-</div>
-<div class="line"><strong>P102</strong> <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>P103</strong> filter weight for last mode (<span class="math">\(&lt;0\)</span>: disabled)</div>
+<div class="line"><strong>P103</strong> filter weight for last mode</div>
 <div class="line"><br /></div>
 <div class="line"><strong>P107</strong> if <span class="math">\(\neq0\)</span>, add it to <code class="docutils literal"><span class="pre">h2</span></code> in <code class="docutils literal"><span class="pre">sethlm</span></code></div>
 <div class="line"><br /></div>
-<div class="line"><strong>P116 NELX</strong> number of elements in <span class="math">\(x\)</span> for Fast Tensor Product FTP solver (0: do not use FTP).</div>
-<div class="line-block">
-<div class="line">NOTE: box geometries, constant properties only!</div>
+<div class="line"><strong>P116 NELX</strong> number of elements in <span class="math">\(x\)</span> for FTP</div>
+<div class="line"><br /></div>
+<div class="line"><strong>P117 NELY</strong> number of elements in <span class="math">\(y\)</span> for FTP</div>
+<div class="line"><br /></div>
+<div class="line"><strong>P118 NELZ</strong> number of elements in <span class="math">\(z\)</span> for FTP</div>
 <div class="line"><br /></div>
 </div>
-<div class="line"><strong>P117  NELY</strong> number of elements in <span class="math">\(y\)</span> for FTP</div>
-<div class="line"><br /></div>
-<div class="line"><strong>P118  NELZ</strong> number of elements in <span class="math">\(z\)</span> for FTP</div>
-</div>
-</div>
-<div class="section" id="available-logical-switches">
-<h3>Available Logical Switches<a class="headerlink" href="#available-logical-switches" title="Permalink to this headline">¶</a></h3>
-<p>This part of <code class="docutils literal"><span class="pre">.rea</span></code> file starts with such a line:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span>   <span class="n">LOGICAL</span> <span class="n">SWITCHES</span> <span class="n">FOLLOW</span>
-</pre></div>
-</div>
-<p>where <code class="docutils literal"><span class="pre">n</span></code> is the number of logical switches which is set in the following lines.</p>
 </div>
 <div class="section" id="logical-switches">
 <span id="sec-switches"></span><h3>Logical switches<a class="headerlink" href="#logical-switches" title="Permalink to this headline">¶</a></h3>
-<p>Note that by default all logical switches are set to false.</p>
-<p><strong>IFFLOW</strong> solve for fluid (velocity, pressure).</p>
-<p><strong>IFHEAT</strong> solve for heat (temperature and/or scalars).</p>
-<p><strong>IFTRAN</strong> solve transient equations (otherwise, solve the steady Stokes flow).</p>
-<p><strong>IFADVC</strong> specify the fields with convection.</p>
-<p><strong>IFTMSH</strong> specify the field(s) defined on T mesh  (first field is the ALE mesh).</p>
-<p><strong>IFAXIS</strong> axisymmetric formulation.</p>
-<p><strong>IFSTRS</strong> use stress formulation in the incompressible case.</p>
-<p><strong>IFLOMACH</strong> use low Mach number compressible flow.</p>
-<p><strong>IFMGRID</strong> moving grid (for free surface flow).</p>
-<p><strong>IFMVBD</strong> moving boundary (for free surface flow).</p>
-<p><strong>IFCHAR</strong> use characteristics for convection operator.</p>
-<p><strong>IFSYNC</strong> use mpi barriers to provide better timing information.</p>
-<p><strong>IFUSERVP</strong> user-defined properties (e.g., <span class="math">\(\mu\)</span>, <span class="math">\(\rho\)</span> varying with space and time.</p>
+<p><strong>IFFLOW</strong> solve for fluid (velocity, pressure)</p>
+<p><strong>IFHEAT</strong> solve for heat (temperature and/or scalars)</p>
+<p><strong>IFTRAN</strong> solve transient equations (otherwise, solve the steady Stokes flow)</p>
+<p><strong>IFADVC</strong> specify the fields with convection</p>
+<p><strong>IFTMSH</strong> specify the field(s) defined on T mesh  (first field is the ALE mesh)</p>
+<p><strong>IFAXIS</strong> axisymmetric formulation</p>
+<p><strong>IFSTRS</strong> use stress formulation</p>
+<p><strong>IFLOMACH</strong> use low Mach number formulation</p>
+<p><strong>IFMGRID</strong> moving grid</p>
+<p><strong>IFMVBD</strong> moving boundary (for free surface flow)</p>
+<p><strong>IFCHAR</strong> use characteristics for convection operator</p>
+<p><strong>IFSYNC</strong> use upfront synchronization</p>
+<p><strong>IFUSERVP</strong> user-defined properties</p>
+</div>
+<div class="section" id="other-inut-varaibles">
+<h3>Other Inut Varaibles<a class="headerlink" href="#other-inut-varaibles" title="Permalink to this headline">¶</a></h3>
+<p><strong>filterType</strong> 0: explicit, 1: HPT-RT</p>
+<p><strong>restol(:)</strong> field solver tolerance</p>
 </div>
 </div>
-<div class="section" id="list-of-parameters-in-size-file">
-<h2>List of Parameters in SIZE File<a class="headerlink" href="#list-of-parameters-in-size-file" title="Permalink to this headline">¶</a></h2>
-<div class="line-block">
-<div class="line"><strong>ldim</strong>: number of spatial dimensions (2 or 3).</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lx1</strong>: number of (GLL) points in the <span class="math">\(x\)</span> -direction within each element of mesh1 (velocity) which is equal to the (polynomial order <span class="math">\(+1\)</span>) by definition.</div>
-<div class="line"><br /></div>
-<div class="line">(<code class="docutils literal"><span class="pre">lx1</span></code> recomeneded odd for better performance)</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lx2</strong>: number of (GLL) points in the <span class="math">\(x\)</span> -directions within each element of mesh2 (pressure). Use <code class="docutils literal"><span class="pre">lx2=lx1</span></code> for PN/PN formulation or <code class="docutils literal"><span class="pre">lx2=lx1-2</span></code> for PN/PN-2 formulation.</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lxd</strong>: number of points for over integration (dealiasing), use three half rule e.g. for <code class="docutils literal"><span class="pre">lx1=8</span></code> use <code class="docutils literal"><span class="pre">lxd=12</span></code>.</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lelx, lely, lelz</strong>: maximum number of elements per rank for global FDM (Fast Diagonalization Method) solver.</div>
-<div class="line"><br /></div>
-<div class="line"><strong>ldimt</strong>:  maximum number of T-array fields (temperature + additional scalars).</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lpmax</strong>: maximum number of ranks.</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lpmin</strong>: minimum number of ranks.</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lelg</strong>: maximum (global) number of elements (it is usually set more than the # of elements existing in the mesh, for making maximum use of memory is can be set to the exact number of mesh elements).</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lelt</strong>: maximum number of local elements for T-mesh (per rank, <code class="docutils literal"><span class="pre">lelt</span></code> <span class="math">\(\geq\)</span> <code class="docutils literal"><span class="pre">lelg/np</span> <span class="pre">+1</span></code>).</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lpelt</strong>: Number of elements of the perturbation field, number of perturbation fields</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lbelt</strong>: Total Number of elements of the B-field (MHD)</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lx1m</strong>: when the mesh is a moving type <code class="docutils literal"><span class="pre">lx1m=lx1</span></code>, otherwise it is set to 1.</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lorder</strong>: maximum time integration order (2 or 3).</div>
-<div class="line"><br /></div>
-<div class="line"><strong>maxobj</strong>: maximum number of objects. <span class="red">zero if not using objects?</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>maxmbr</strong>: maximum number of members in an object.</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lhis</strong>: maximum number of history points a single rank will read in (<code class="docutils literal"><span class="pre">NP*LHIS</span></code> <span class="math">\(&lt;\)</span> number of points in <code class="docutils literal"><span class="pre">hpts.in</span></code>).</div>
-<div class="line"><br /></div>
-<div class="line"><strong>mxprev</strong>: maximum number of history entries for residual projection (recommended value: 20).</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lgmres</strong>: dimension of Krylov subspace in GMRES (recommended value: 40).</div>
-</div>
-<div class="section" id="parameters-in-size-inc-file">
-<h3>Parameters in SIZE.inc File<a class="headerlink" href="#parameters-in-size-inc-file" title="Permalink to this headline">¶</a></h3>
-<p>The following parameters appeared in the SIZE file in previous versions, and are now moved to the internal SIZE.inc file. They are automatically set based on SIZE parameters.</p>
-<div class="line-block">
-<div class="line"><strong>ly1, lz1</strong>: number of (GLL) points in the <span class="math">\(y\)</span> and <span class="math">\(z\)</span>-directions, respectively, within each element of mesh1 (velocity) which is equal to the (polynomial order <span class="math">\(+1\)</span>) by definition. <code class="docutils literal"><span class="pre">ly1</span></code> is usually the same as <code class="docutils literal"><span class="pre">lx1</span></code> and for 2D cases <code class="docutils literal"><span class="pre">lz1=1</span></code>.</div>
-<div class="line">(is <code class="docutils literal"><span class="pre">lx1</span></code> <span class="math">\(\neq\)</span> <code class="docutils literal"><span class="pre">ly1</span></code> supported?)</div>
-<div class="line"><br /></div>
-</div>
-<div class="line-block">
-<div class="line"><strong>ly2, lz2</strong>: number of (GLL) points in the <span class="math">\(y\)</span> and <span class="math">\(z\)</span> directions, respectively, within each element of mesh2 (pressure).</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lx3, ly3, lz3</strong>: number of (GLL) points in the <span class="math">\(x\)</span>, <span class="math">\(y\)</span> and <span class="math">\(z\)</span> directions, respectively, within each element of mesh3. These are set to the same number of (GLL) point on mesh1.</div>
-<div class="line">(mesh3 is rarely used)</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lyd, lzd</strong>: number of points for over integration (dealiasing). <code class="docutils literal"><span class="pre">lyd</span> <span class="pre">=</span> <span class="pre">lxd</span></code>, and <code class="docutils literal"><span class="pre">lzd</span> <span class="pre">=</span> <span class="pre">lxd</span></code> for 3D and <code class="docutils literal"><span class="pre">lzd</span> <span class="pre">=</span> <span class="pre">1</span></code> for 2D.</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lp</strong>: <code class="docutils literal"><span class="pre">lp</span> <span class="pre">=</span> <span class="pre">lpmax</span></code></div>
-<div class="line"><br /></div>
-<div class="line"><strong>lelv</strong>: maximum number of local elements for V-mesh (<code class="docutils literal"><span class="pre">lelv</span> <span class="pre">=</span> <span class="pre">lelt</span></code>).</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lpelv</strong>: Number of elements of the perturbation field, number of perturbation fields. <code class="docutils literal"><span class="pre">lpelv</span> <span class="pre">=</span> <span class="pre">lpelt</span></code>.</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lpx1, lpy1, lpz1</strong>: Number of point in <span class="math">\(x\)</span>, <span class="math">\(y\)</span>, <span class="math">\(z\)</span> direction of perturbation field within each element of mesh1. <code class="docutils literal"><span class="pre">lpx1</span> <span class="pre">=</span> <span class="pre">lx1</span></code>, <code class="docutils literal"><span class="pre">lpy1</span> <span class="pre">=</span> <span class="pre">lpx1</span></code>, and <code class="docutils literal"><span class="pre">lpz1</span> <span class="pre">=</span> <span class="pre">lpx1</span></code> for 3D and <code class="docutils literal"><span class="pre">lpz1</span> <span class="pre">=</span> <span class="pre">1</span></code> for 2D.</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lbelv</strong>: Total Number of elements of the B-field (MHD). <code class="docutils literal"><span class="pre">lbelv</span> <span class="pre">=</span> <span class="pre">lbelt</span></code>.</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lbx1, lby1, lbz1</strong>: Number of point in <span class="math">\(x\)</span>, <span class="math">\(y\)</span>, <span class="math">\(z\)</span> direction of B-field within each element of mesh1. <code class="docutils literal"><span class="pre">lbx1</span> <span class="pre">=</span> <span class="pre">lx1</span></code>, <code class="docutils literal"><span class="pre">lby1</span> <span class="pre">=</span> <span class="pre">lbx1</span></code>, and <code class="docutils literal"><span class="pre">lbz1</span> <span class="pre">=</span> <span class="pre">lbx1</span></code> for 3D and <code class="docutils literal"><span class="pre">lbz1</span> <span class="pre">=</span> <span class="pre">1</span></code> for 2D.</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lbx2, lby2, lbz2</strong>: Number of point in <span class="math">\(x\)</span>, <span class="math">\(y\)</span>, <span class="math">\(z\)</span> direction of B-field within each element of mesh2. <code class="docutils literal"><span class="pre">lbx2</span> <span class="pre">=</span> <span class="pre">lx2</span></code>, <code class="docutils literal"><span class="pre">lby2</span> <span class="pre">=</span> <span class="pre">lbx2</span></code>, and <code class="docutils literal"><span class="pre">lbz2</span> <span class="pre">=</span> <span class="pre">lbx2</span></code> for 3D and <code class="docutils literal"><span class="pre">lbz2</span> <span class="pre">=</span> <span class="pre">1</span></code> for 2D.</div>
-<div class="line"><br /></div>
-<div class="line"><strong>ly1m, lz1m</strong>: when the mesh is a moving type <code class="docutils literal"><span class="pre">lx1m=lx1</span></code>, otherwise it is set to 1. <code class="docutils literal"><span class="pre">ly1m</span> <span class="pre">=</span> <span class="pre">lx1m</span></code>, and <code class="docutils literal"><span class="pre">lz1m</span> <span class="pre">=</span> <span class="pre">lx1m</span></code> for 3D and <code class="docutils literal"><span class="pre">lz1m</span> <span class="pre">=</span> <span class="pre">1</span></code> for 2D.</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lxz</strong>: lxz = lx1*lz1</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">connect1.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">common</span> <span class="pre">/scruz/</span>&#160; <span class="pre">snx(lxz)</span> <span class="pre">,</span> <span class="pre">sny(lxz)</span> <span class="pre">,</span> <span class="pre">snz(lxz)</span> <span class="pre">,</span>&#160; <span class="pre">efc(lxz)</span></code></div>
-<div class="line"><br /></div>
-</div>
-<div class="line"><strong>lctmp0</strong>: <code class="docutils literal"><span class="pre">lctmp0</span> <span class="pre">=</span> <span class="pre">2*lx1*ly1*lz1*lelt</span></code></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">drive1.f:c</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">COMMON</span> <span class="pre">/CTMP0/</span> <span class="pre">DUMMY0(LCTMP0)</span></code></div>
-<div class="line"><br /></div>
-</div>
-<div class="line"><strong>lctmp1</strong>: <code class="docutils literal"><span class="pre">lctmp1</span> <span class="pre">=</span> <span class="pre">4*lx1*ly1*lz1*lelt</span></code></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal"><span class="pre">drive1.f:c</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">COMMON</span> <span class="pre">/CTMP1/</span> <span class="pre">DUMMY1(LCTMP1)</span></code></div>
-<div class="line"><code class="docutils literal"><span class="pre">drive2.f:</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">COMMON</span> <span class="pre">/SCRNS/</span> <span class="pre">WORK(LCTMP1)</span></code></div>
-<div class="line"><br /></div>
-</div>
-<div class="line"><strong>maxmor</strong>: <code class="docutils literal"><span class="pre">=lelt</span></code></div>
-<div class="line"><br /></div>
-<div class="line"><strong>lzl</strong>: for 2D cases <code class="docutils literal"><span class="pre">lzl=1</span></code> and for 3D cases <code class="docutils literal"><span class="pre">lzl=3</span></code> (computed automatically).</div>
-</div>
-</div>
-<div class="section" id="deprecated-parameters">
-<h3>Deprecated Parameters<a class="headerlink" href="#deprecated-parameters" title="Permalink to this headline">¶</a></h3>
-<p>The following parameters are deprecated and were subsequently removed in newer versions.</p>
-<div class="line-block">
-<div class="line"><strong>lpert</strong>: Number of elements of the perturbation field, number of perturbation fields</div>
-<div class="line"><br /></div>
-<div class="line"><strong>lstore</strong>: <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>lsvec</strong>: <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>lmvec</strong>: <span class="red">NOT IN USE !</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>lvec</strong>: <span class="red">NOT IN USE!</span></div>
-<div class="line"><br /></div>
-<div class="line"><strong>lelgec</strong>: <code class="docutils literal"><span class="pre">lelgec</span> <span class="pre">=</span> <span class="pre">1</span></code></div>
-<div class="line"><br /></div>
-<div class="line"><strong>lxyz2</strong>: <code class="docutils literal"><span class="pre">lxyz2</span> <span class="pre">=</span> <span class="pre">1</span></code></div>
-<div class="line"><br /></div>
-<div class="line"><strong>lxz21</strong>: <code class="docutils literal"><span class="pre">lxz21</span> <span class="pre">=</span> <span class="pre">1</span></code></div>
-<div class="line"><br /></div>
-<div class="line"><strong>lmaxv</strong>: <code class="docutils literal"><span class="pre">lmaxv</span> <span class="pre">=</span> <span class="pre">lx1*ly1*lz1*lelv</span></code></div>
-<div class="line"><br /></div>
-<div class="line"><strong>lmaxt</strong>: <code class="docutils literal"><span class="pre">lmaxt</span> <span class="pre">=</span> <span class="pre">lx1*ly1*lz1*lelt</span></code></div>
-<div class="line"><br /></div>
-<div class="line"><strong>lmaxp</strong>: <code class="docutils literal"><span class="pre">lmaxp</span> <span class="pre">=</span> <span class="pre">lx1*ly1*lz1*lelv</span></code></div>
-</div>
-</div>
-</div>
-<div class="section" id="the-fld-file-format">
-<h2>The .fld File Format<a class="headerlink" href="#the-fld-file-format" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal"><span class="pre">fld</span></code> file format is used to write and read data both in serial and parallel
-in Nek5000. This section describes the format and should allow third party tool
-developers to implement pre and postprocessing tools.</p>
-<p>The file is composed of:</p>
-<blockquote>
-<div><ul class="simple">
-<li>the <em>header</em> in ASCII format,</li>
-<li>mesh data, including the geometry, saved unrolled as scalar vector
-fields</li>
-</ul>
-</div></blockquote>
-<p>We will go through each of these categories and give a description of its
-composition.</p>
-<div class="section" id="header">
-<h3>Header<a class="headerlink" href="#header" title="Permalink to this headline">¶</a></h3>
-<p>The header provides structural information about the stored data that is needed
-to parse it correctly. The header is composed of 11 values in ASCII format. It
-has a fixed size of 132 bytes and starts with the string <code class="docutils literal"><span class="pre">#std</span></code>. All
-header entries are padded to the right. After the header with 132 bytes, 4 bytes
-follow that determine the endianess of the binary file.  It is the binary
-representation of the number 6.54321 either in little or big endian.</p>
+<div class="section" id="commonly-used-variables">
+<h2>Commonly used Variables<a class="headerlink" href="#commonly-used-variables" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="solution-variables">
+<h3>Solution Variables<a class="headerlink" href="#solution-variables" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
+<col width="15%" />
+<col width="35%" />
 <col width="9%" />
-<col width="12%" />
-<col width="17%" />
-<col width="62%" />
+<col width="41%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">Entry</th>
-<th class="head">Padding</th>
-<th class="head">Name</th>
+<tr class="row-odd"><th class="head">Variable Name</th>
+<th class="head">Size</th>
+<th class="head">Type</th>
 <th class="head">Short Description</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>1</td>
-<td>2</td>
-<td><code class="docutils literal"><span class="pre">wdsizo</span></code></td>
-<td>sets the precision to 4 (float) or 8 (double)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">vx</span></code></td>
+<td>(lx1,ly1,lz1,lelv)</td>
+<td>real</td>
+<td>x-velocity (u)</td>
 </tr>
-<tr class="row-odd"><td>2</td>
-<td>3</td>
-<td><code class="docutils literal"><span class="pre">nx</span></code></td>
-<td>number of coordinates in x direction</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">vy</span></code></td>
+<td>(lx1,ly1,lz1,lelv)</td>
+<td>real</td>
+<td>y-velocity (v)</td>
 </tr>
-<tr class="row-even"><td>2</td>
-<td>3</td>
-<td><code class="docutils literal"><span class="pre">ny</span></code></td>
-<td>number of coordinates in y direction</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">vz</span></code></td>
+<td>(lx1,ly1,lz1,lelv)</td>
+<td>real</td>
+<td>z-velocity (w)</td>
 </tr>
-<tr class="row-odd"><td>2</td>
-<td>3</td>
-<td><code class="docutils literal"><span class="pre">nz</span></code></td>
-<td>number of coordinates in z direction</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">pr</span></code></td>
+<td>(lx2,ly2,lz2,lelv)</td>
+<td>real</td>
+<td>pressure (pr)</td>
 </tr>
-<tr class="row-even"><td>5</td>
-<td>11</td>
-<td><code class="docutils literal"><span class="pre">nelo</span></code></td>
-<td>number of elements</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">t</span></code></td>
+<td>(lx1,ly1,lz1,lelt,ldimt)</td>
+<td>real</td>
+<td>temperature (t) and passive scalars (ps)</td>
 </tr>
-<tr class="row-odd"><td>6</td>
-<td>11</td>
-<td><code class="docutils literal"><span class="pre">nelgt</span></code></td>
-<td><span class="red">&#8212;-</span></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">vtrans</span></code></td>
+<td>(lx1,ly1,lz1,lelt,ldimt+1)</td>
+<td>real</td>
+<td>convective coefficient</td>
 </tr>
-<tr class="row-even"><td>7</td>
-<td>21</td>
-<td><code class="docutils literal"><span class="pre">time</span></code></td>
-<td>time stamp</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">vdiff</span></code></td>
+<td>(lx1,ly1,lz1,lelt,ldimt+1)</td>
+<td>real</td>
+<td>diffusion coefficient</td>
 </tr>
-<tr class="row-odd"><td>8</td>
-<td>10</td>
-<td><code class="docutils literal"><span class="pre">iostep</span></code></td>
-<td>time step</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">vxlag</span></code></td>
+<td>(lx1,ly1,lz1,lelv,2)</td>
+<td>real</td>
+<td>x-velocity at previous time steps</td>
 </tr>
-<tr class="row-even"><td>9</td>
-<td>7</td>
-<td><code class="docutils literal"><span class="pre">fid0</span></code></td>
-<td><span class="red">field id</span></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">vylag</span></code></td>
+<td>(lx1,ly1,lz1,lelv,2)</td>
+<td>real</td>
+<td>y-velocity at previous time steps</td>
 </tr>
-<tr class="row-odd"><td>10</td>
-<td>7</td>
-<td><code class="docutils literal"><span class="pre">nfileoo</span></code></td>
-<td><span class="red">number of files</span></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">vzlag</span></code></td>
+<td>(lx1,ly1,lz1,lelv,2)</td>
+<td>real</td>
+<td>z-velocity at previous time steps</td>
 </tr>
-<tr class="row-even"><td>11</td>
-<td>4</td>
-<td><code class="docutils literal"><span class="pre">rdcode</span></code></td>
-<td>Fields written</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">prlag</span></code></td>
+<td>(lx2,ly2,lz2,lelv,lorder2)</td>
+<td>real</td>
+<td>pressure at previous time steps</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">tlag</span></code></td>
+<td>(lx1,ly1,lz1,lelv,lorder-1,ldimt+1)</td>
+<td>real</td>
+<td>t and ps at previous time steps</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">time</span></code></td>
+<td>–</td>
+<td>real</td>
+<td>physical time</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">dt</span></code></td>
+<td>–</td>
+<td>real</td>
+<td>time step size</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">dtlag</span></code></td>
+<td>( 10 )</td>
+<td>real</td>
+<td>previous time step sizes</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">istep</span></code></td>
+<td>–</td>
+<td>integer</td>
+<td>time step number</td>
 </tr>
 </tbody>
 </table>
-<p>Example of a header::</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#std 4  6  6  1         36         36  0.1000000000000E+03     10000     0      1 XUP                                              úaÑ@</span>
+</div>
+<div class="section" id="geometry-variables">
+<h3>Geometry Variables<a class="headerlink" href="#geometry-variables" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="28%" />
+<col width="13%" />
+<col width="44%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Variable Name</th>
+<th class="head">Size</th>
+<th class="head">Type</th>
+<th class="head">Short Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xm1</span></code></td>
+<td>(lx1,ly1,lz1,lelt)</td>
+<td>real</td>
+<td>x-coordinates for velocity mesh</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">ym1</span></code></td>
+<td>(lx1,ly1,lz1,lelt)</td>
+<td>real</td>
+<td>y-coordinates for velocity mesh</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">zm1</span></code></td>
+<td>(lx1,ly1,lz1,lelt)</td>
+<td>real</td>
+<td>z-coordinates for velocity mesh</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">bm1</span></code></td>
+<td>(lx1,ly1,lz1,lelt)</td>
+<td>real</td>
+<td>mass matrix for velocity mesh</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">binvm1</span></code></td>
+<td>(lx1,ly1,lz1,lelv)</td>
+<td>real</td>
+<td>inverse mass matrix for velocity mesh</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">bintm1</span></code></td>
+<td>(lx1,ly1,lz1,lelt)</td>
+<td>real</td>
+<td>inverse mass matrix for t mesh</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">volvm1</span></code></td>
+<td>–</td>
+<td>real</td>
+<td>total volume for velocity mesh</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">voltm1</span></code></td>
+<td>–</td>
+<td>real</td>
+<td>total volume for t mesh</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xm2</span></code></td>
+<td>(lx2,ly2,lz2,lelv)</td>
+<td>real</td>
+<td>x-coordinates for pressure mesh</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">ym2</span></code></td>
+<td>(lx2,ly2,lz2,lelv)</td>
+<td>real</td>
+<td>y-coordinates for pressure mesh</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">zm2</span></code></td>
+<td>(lx2,ly2,lz2,lelv)</td>
+<td>real</td>
+<td>z-coordinates for pressure mesh</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">unx</span></code></td>
+<td>(lx1,ly1,6,lelt)</td>
+<td>real</td>
+<td>x-component of face unit normal</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">uny</span></code></td>
+<td>(lx1,ly1,6,lelt)</td>
+<td>real</td>
+<td>y-component of face unit normal</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">unz</span></code></td>
+<td>(lx1,ly1,6,lelt)</td>
+<td>real</td>
+<td>z-component of face unit normal</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">area</span></code></td>
+<td>(lx1,ly1,6,lelt)</td>
+<td>real</td>
+<td>face area (surface integral weights)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="problem-setup-variables">
+<h3>Problem Setup Variables<a class="headerlink" href="#problem-setup-variables" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="28%" />
+<col width="13%" />
+<col width="44%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Variable Name</th>
+<th class="head">Size</th>
+<th class="head">Type</th>
+<th class="head">Short Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">nid</span></code></td>
+<td>–</td>
+<td>integer</td>
+<td>MPI rank id (lowest rank is always 0)</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">nio</span></code></td>
+<td>–</td>
+<td>integer</td>
+<td>I/O node id</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">nelv</span></code></td>
+<td>–</td>
+<td>integer</td>
+<td>number of elements in velocity mesh</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">nelt</span></code></td>
+<td>–</td>
+<td>integer</td>
+<td>number of elements in t mesh</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">ndim</span></code></td>
+<td>–</td>
+<td>integer</td>
+<td>dimensionality of problem (i.e. 2 or 3)</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">nsteps</span></code></td>
+<td>–</td>
+<td>integer</td>
+<td>number of time steps to run</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">iostep</span></code></td>
+<td>–</td>
+<td>integer</td>
+<td>time steps between data output</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">cbc</span></code></td>
+<td>(6,lelt,ldimt+1)</td>
+<td>character*3</td>
+<td>boundary condition</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">lglel</span></code></td>
+<td>(lelt)</td>
+<td>integer</td>
+<td>local to global element number map</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">gllel</span></code></td>
+<td>(lelg)</td>
+<td>integer</td>
+<td>global to local element number map</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="averaging-variables">
+<h3>Averaging Variables<a class="headerlink" href="#averaging-variables" title="Permalink to this headline">¶</a></h3>
+<p>Arrays associated with the <code class="docutils literal"><span class="pre">avg_all</span></code> subroutine</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="28%" />
+<col width="9%" />
+<col width="48%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Variable Name</th>
+<th class="head">Size</th>
+<th class="head">Type</th>
+<th class="head">Short Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">uavg</span></code></td>
+<td>(ax1,ay1,az1,lelt)</td>
+<td>real</td>
+<td>time averaged x-velocity</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">vavg</span></code></td>
+<td>(ax1,ay1,az1,lelt)</td>
+<td>real</td>
+<td>time averaged y-velocity</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">wavg</span></code></td>
+<td>(ax1,ay1,az1,lelt)</td>
+<td>real</td>
+<td>time averaged z-velocity</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">pavg</span></code></td>
+<td>(ax2,ay2,az2,lelt)</td>
+<td>real</td>
+<td>time averaged pressure</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">tavg</span></code></td>
+<td>(ax1,ay1,az1,lelt,ldimt)</td>
+<td>real</td>
+<td>time averaged temperature and passive scalars</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">urms</span></code></td>
+<td>(ax1,ay1,az1,lelt)</td>
+<td>real</td>
+<td>time averaged u^2</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">vrms</span></code></td>
+<td>(ax1,ay1,az1,lelt)</td>
+<td>real</td>
+<td>time averaged v^2</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">wrms</span></code></td>
+<td>(ax1,ay1,az1,lelt)</td>
+<td>real</td>
+<td>time averaged w^2</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">prms</span></code></td>
+<td>(ax1,ay1,az1,lelt)</td>
+<td>real</td>
+<td>time averaged pr^2</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">trms</span></code></td>
+<td>(ax1,ay1,az1,lelt,ldimt)</td>
+<td>real</td>
+<td>time averaged t^2 and ps^2</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">uvms</span></code></td>
+<td>(ax1,ay1,az1,lelt)</td>
+<td>real</td>
+<td>time averaged uv</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">vwms</span></code></td>
+<td>(ax1,ay1,az1,lelt)</td>
+<td>real</td>
+<td>time averaged vw</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">wums</span></code></td>
+<td>(ax1,ay1,az1,lelt)</td>
+<td>real</td>
+<td>time averaged wu</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">iastep</span></code></td>
+<td>–</td>
+<td>integer</td>
+<td>time steps between averaged data output</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="commonly-used-subroutines">
+<span id="append-subroutines"></span><h2>Commonly used Subroutines<a class="headerlink" href="#commonly-used-subroutines" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">rescale_x(x,x0,x1)</span></code></dt>
+<dd>Rescales the array <code class="docutils literal"><span class="pre">x</span></code> to be in the range <code class="docutils literal"><span class="pre">(x0,x1)</span></code>. This is usually called from <code class="docutils literal"><span class="pre">usrdat2</span></code> in the <code class="docutils literal"><span class="pre">.usr</span></code> file</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">normvc(h1,semi,l2,linf,x1,x2,x3)</span></code></dt>
+<dd>Computes the error norms of a vector field variable <code class="docutils literal"><span class="pre">(x1,x2,x3)</span></code> defined on mesh 1, the velocity mesh. The error norms are normalized with respect to the volume, with the exception on the infinity norm, <code class="docutils literal"><span class="pre">linf</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">comp_vort3(vort,work1,work2,u,v,w)</span></code></dt>
+<dd>Computes the vorticity (<code class="docutils literal"><span class="pre">vort</span></code>) of the velocity field, <code class="docutils literal"><span class="pre">(u,v,w)</span></code></dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">lambda2(l2)</span></code></dt>
+<dd>Generates the Lambda-2 vortex criterion proposed by Jeong and Hussain (1995)</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">planar_average_z(ua,u,w1,w2)</span></code></dt>
+<dd>Computes the r-s planar average of the quantity <code class="docutils literal"><span class="pre">u</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">torque_calc(scale,x0,ifdout,iftout)</span></code></dt>
+<dd>Computes torque about the point <code class="docutils literal"><span class="pre">x0</span></code>. Here scale is a user supplied multiplier so that the results may be scaled to any convenient non-dimensionalization. Both the drag and the torque can be printed to the screen by switching the appropriate <code class="docutils literal"><span class="pre">ifdout(drag)</span></code> or <code class="docutils literal"><span class="pre">iftout(torque)</span></code> logical.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">set_obj</span></code></dt>
+<dd>Defines objects for surface integrals by changing the value of <code class="docutils literal"><span class="pre">hcode</span></code> for future calculations. Typically called once within <code class="docutils literal"><span class="pre">userchk</span></code> (for <code class="docutils literal"><span class="pre">istep</span> <span class="pre">=</span> <span class="pre">0</span></code>) and used for calculating torque. (see above)</dd>
+</dl>
+<p><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">avg1(avg,f,</span> <span class="pre">alpha,beta,n,name,ifverbose)</span></code></p>
+<p><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">avg2(avg,f,</span> <span class="pre">alpha,beta,n,name,ifverbose)</span></code></p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">avg3(avg,f,g,</span> <span class="pre">alpha,beta,n,name,ifverbose)</span></code></dt>
+<dd>These three subroutines calculate the (weighted) average of <code class="docutils literal"><span class="pre">f</span></code>. Depending on the value of the logical, <code class="docutils literal"><span class="pre">ifverbose</span></code>, the results will be printed to standard output along with name. In <code class="docutils literal"><span class="pre">avg2</span></code>, the <code class="docutils literal"><span class="pre">f</span></code> component is squared. In <code class="docutils literal"><span class="pre">avg3</span></code>, vector <code class="docutils literal"><span class="pre">g</span></code> also contributes to the average calculation.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">outpost(x,vy,vz,pr,tz,'</span> <span class="pre">')</span></code></dt>
+<dd>Dumps the current data of <code class="docutils literal"><span class="pre">x</span></code>, <code class="docutils literal"><span class="pre">vy</span></code>, <code class="docutils literal"><span class="pre">vz</span></code>, <code class="docutils literal"><span class="pre">pr</span></code>, <code class="docutils literal"><span class="pre">tz</span></code> to an <code class="docutils literal"><span class="pre">.fld</span></code> or <code class="docutils literal"><span class="pre">.f0????</span></code> file for post processing.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">platform_timer(ivrb)</span></code></dt>
+<dd>Runs the battery of timing tests for matrix-matrix products,contention-free processor-to-processor ping-pong tests, and <code class="docutils literal"><span class="pre">mpi_all_reduce</span></code> times. Allows one to check the performance of the communication routines used on specific platforms.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">quickmv</span></code></dt>
+<dd>Moves the mesh to allow user affine motion.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">runtimeavg(ay,y,j,istep1,ipostep,s5)</span></code></dt>
+<dd>Computes, stores, and (for <code class="docutils literal"><span class="pre">ipostep!0</span></code>) prints runtime averages of <code class="docutils literal"><span class="pre">j</span></code>-quantity <code class="docutils literal"><span class="pre">y</span></code> (along w/ <code class="docutils literal"><span class="pre">y</span></code> itself unless <code class="docutils literal"><span class="pre">ipostep&lt;0</span></code>) with <code class="docutils literal"><span class="pre">j</span></code> + ‘<code class="docutils literal"><span class="pre">rtavg_</span></code>’ + (unique) <code class="docutils literal"><span class="pre">s5</span></code> every <code class="docutils literal"><span class="pre">ipostep</span></code> for <code class="docutils literal"><span class="pre">istep&gt;=istep1</span></code>. <code class="docutils literal"><span class="pre">s5</span></code> is a string to append to <code class="docutils literal"><span class="pre">rtavg_</span></code> for storage file naming.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">lagrng(uo,y,yvec,uvec,work,n,m)</span></code></dt>
+<dd>Compute Lagrangian interpolant for <code class="docutils literal"><span class="pre">uo</span></code></dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">opcopy(a1,a2,a3,b1,b2,b3)</span></code></dt>
+<dd>Copies <code class="docutils literal"><span class="pre">b1</span></code> to <code class="docutils literal"><span class="pre">a1</span></code>, <code class="docutils literal"><span class="pre">b2</span></code> to <code class="docutils literal"><span class="pre">a2</span></code>, and <code class="docutils literal"><span class="pre">b3</span></code> to <code class="docutils literal"><span class="pre">a3</span></code>, when <code class="docutils literal"><span class="pre">ndim</span> <span class="pre">=</span> <span class="pre">3</span></code>,</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">cadd(a,const,n)</span></code></dt>
+<dd>Adds <code class="docutils literal"><span class="pre">const</span></code> to vector <code class="docutils literal"><span class="pre">a</span></code> of size <code class="docutils literal"><span class="pre">n</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">col2(a,b,n)</span></code></dt>
+<dd>For <code class="docutils literal"><span class="pre">n</span></code> entries, calculates <code class="docutils literal"><span class="pre">a=a*b</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">col3(a,b,c,n)</span></code></dt>
+<dd>For <code class="docutils literal"><span class="pre">n</span></code> entries, calculates <code class="docutils literal"><span class="pre">a=b*c</span></code>.</dd>
+</dl>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">glmax(a,n)</span></code></p>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">glamax(a,n)</span></code></p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">function</span> <span class="pre">iglmax(a,n)</span></code></dt>
+<dd>Calculates the (absolute) max of a vector that is size <code class="docutils literal"><span class="pre">n</span></code>. Prefix <code class="docutils literal"><span class="pre">i</span></code> implies integer type.</dd>
+<dt><code class="docutils literal"><span class="pre">function</span> <span class="pre">i8glmax(a,n)</span></code></dt>
+<dd>Calculates the max of an integer*8 vector that is size <code class="docutils literal"><span class="pre">n</span></code>.</dd>
+</dl>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">glmin(a,n)</span></code></p>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">glamin(a,n)</span></code></p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">function</span> <span class="pre">iglmin(a,n)</span></code></dt>
+<dd>Calculates the (absolute) min of a vector that is size <code class="docutils literal"><span class="pre">n</span></code>. Prefix <code class="docutils literal"><span class="pre">i</span></code> implies integer type.</dd>
+</dl>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">glsc2(a,b,n)</span></code></p>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">glsc3(a,b,mult,n)</span></code></p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">function</span> <span class="pre">glsc23(z,y,z,n)</span></code></dt>
+<dd>Performs the inner product in double precision. <code class="docutils literal"><span class="pre">glsc3</span></code> uses a multiplier, <code class="docutils literal"><span class="pre">mult</span></code> and <code class="docutils literal"><span class="pre">glsc23</span></code> performs <code class="docutils literal"><span class="pre">x*x*y*z</span></code>.</dd>
+</dl>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">glsum(x,n)</span></code></p>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">iglsum(x,n)</span></code></p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">function</span> <span class="pre">i8glsum(x,n)</span></code></dt>
+<dd>Computes the global sum of <code class="docutils literal"><span class="pre">x</span></code>, where the prefix, <code class="docutils literal"><span class="pre">i</span></code> specifies type integer, and <code class="docutils literal"><span class="pre">i8</span></code> specifies type integer*8.</dd>
+<dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">surface_int(dphi,dS,phi,ielem,iside)</span></code></dt>
+<dd>Computes the surface integral of scalar array <code class="docutils literal"><span class="pre">phi</span></code> over face <code class="docutils literal"><span class="pre">iside</span></code> of element <code class="docutils literal"><span class="pre">ielem</span></code>.
+The resulting integral is storted in <code class="docutils literal"><span class="pre">dphi</span></code> and the area in <code class="docutils literal"><span class="pre">dS</span></code>.</dd>
+</dl>
+</div>
+<div class="section" id="grid-to-grid-interpolation">
+<span id="append-g2g"></span><h2>Grid-to-Grid Interpolation<a class="headerlink" href="#grid-to-grid-interpolation" title="Permalink to this headline">¶</a></h2>
+<p>To restart from an existing field file onto a new mesh you can call the generic field file reader interpolation subroutine in userchk.
+Note that selection of specific fields to read is not currently supported and the source file must include the coordinates.
+That means all fields included in <code class="docutils literal"><span class="pre">foo.f00001</span></code> will be overwritten. Usage example:</p>
+<blockquote>
+<div><div class="highlight-none"><div class="highlight"><pre><span></span>if (istep.eq.0) call gfldr(&#39;foo.f00001&#39;)
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">wdsize</span></code> sets the precision of the floating point numbers in the file. This
-is either 4 bytes for floats or 8 bytes for double precision.</p>
-<p><code class="docutils literal"><span class="pre">nx</span></code>, <code class="docutils literal"><span class="pre">ny</span></code> and <code class="docutils literal"><span class="pre">nz</span></code> set the number of coordinates in  <span class="math">\(x\)</span>, <span class="math">\(y\)</span> and <span class="math">\(z\)</span>
-direction for each element (polynomial order), respectively. <code class="docutils literal"><span class="pre">nelo</span></code> sets
-the number of total elements on the mesh.</p>
-<p><code class="docutils literal"><span class="pre">time</span></code> is the simulation time while <code class="docutils literal"><span class="pre">iostep</span></code> is the time step when the file was written.</p>
-<p><code class="docutils literal"><span class="pre">rdcode</span></code> determines which fields are contained in the file:</p>
-<blockquote>
-<div><ul class="simple">
-<li>X: Geometry</li>
-<li>U: Velocity</li>
-<li>P: Pressure</li>
-<li>T: Temperature</li>
-<li>S: Passive scalar</li>
-</ul>
 </div></blockquote>
 </div>
-<div class="section" id="data">
-<h3>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
-<p>The data field begins after the first 136 bytes of the file. The values are
-stored unrolled for each element and for each direction.
-Example code for reading the geometry field in python:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">iel</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nelo</span><span class="p">):</span>
-    <span class="n">x</span><span class="o">=</span><span class="n">ifilebuf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nxyzo8</span><span class="o">*</span><span class="n">wdsizo</span><span class="p">)</span>
-    <span class="n">xup</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">nxyzo8</span><span class="o">*</span><span class="n">c</span><span class="p">,</span><span class="n">x</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
-    <span class="n">xfield</span><span class="p">[</span><span class="n">iel</span><span class="p">,:]</span><span class="o">=</span><span class="n">xup</span>
-    <span class="n">y</span><span class="o">=</span><span class="n">ifilebuf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nxyzo8</span><span class="o">*</span><span class="n">wdsizo</span><span class="p">)</span>
-    <span class="n">yup</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">nxyzo8</span><span class="o">*</span><span class="n">c</span><span class="p">,</span><span class="n">y</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
-    <span class="n">yfield</span><span class="p">[</span><span class="n">iel</span><span class="p">,:]</span><span class="o">=</span><span class="n">yup</span>
-    <span class="k">if</span> <span class="n">if3d</span><span class="p">:</span>
-        <span class="n">z</span><span class="o">=</span><span class="n">ifilebuf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nxyzo8</span><span class="o">*</span><span class="n">wdsizo</span><span class="p">)</span>
-        <span class="n">zup</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">nxyzo8</span><span class="o">*</span><span class="n">c</span><span class="p">,</span><span class="n">z</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
-        <span class="n">zfield</span><span class="p">[</span><span class="n">iel</span><span class="p">,:]</span><span class="o">=</span><span class="n">zup</span>
+<div class="section" id="generating-a-mesh-with-genbox">
+<span id="mesh-gen"></span><h2>Generating a Mesh with Genbox<a class="headerlink" href="#generating-a-mesh-with-genbox" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="uniformly-distributed-mesh">
+<h3>Uniformly Distributed Mesh<a class="headerlink" href="#uniformly-distributed-mesh" title="Permalink to this headline">¶</a></h3>
+<p>Suppose you wish to simulate flow through an axisymmetric pipe,
+of radius <span class="math">\(R=0.5\)</span> and length <span class="math">\(L=4\)</span>.  You estimate that you will
+need 3 elements in radial <span class="math">\((y)\)</span> direction, and 5 in the <span class="math">\(x\)</span> direction,
+as depicted in <code class="xref std std-numref docutils literal"><span class="pre">fig:mesh_axi1</span></code>.
+This would be specified by the following input file (called <code class="docutils literal"><span class="pre">pipe.box</span></code>)
+to <code class="docutils literal"><span class="pre">genbox</span></code>:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>axisymmetric.rea
+2                      spatial dimension
+1                      number of fields
+#
+#    comments:   This is the box immediately behind the
+#                refined cylinder in Ugo&#39;s cyl+b.l. run.
+#
+#
+#========================================================
+#
+Box 1                         Pipe
+-5 -3                         Nelx  Nely
+0.0   4.0   1.0               x0  x1   ratio
+0.0   0.5   1.0               y0  y1   ratio
+v  ,O  ,A  ,W  ,   ,          BC&#39;s:  (cbx0, cbx1, cby0, cby1, cbz0, cbz1)
 </pre></div>
 </div>
+<div class="align-center figure" id="id3">
+<span id="fig-mesh-axi1"></span><img alt="axis-pipe-mesh" src="_images/mesh_axi1.png" />
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Axisymmetric pipe mesh.</span></p>
 </div>
+<ul class="simple">
+<li>The first line of this file supplies the name of an existing 2D <code class="docutils literal"><span class="pre">.rea</span></code> file that has the appropriate run parameters (viscosity, timestep size, etc.). These parameters can be modified later, but it is important that <code class="docutils literal"><span class="pre">axisymmetric.rea</span></code> be a 2D file, and not a 3D file.</li>
+<li>The second line indicates the number of fields for this simulation, in this case, just 1, corresponding to the velocity field (i.e., no heat transfer).</li>
+<li>The next set of lines just shows how one can place comments into a <code class="docutils literal"><span class="pre">genbox</span></code> input file.</li>
+<li>The line that starts with “Box” indicates that a new box is starting, and that the following lines describe a typical box input.  Other possible key characters (the first character of Box, “B”) are “C” and “M”, more on those later.</li>
+<li>The first line after “Box” specifies the number of elements in the
+<span class="math">\(x\)</span> and <span class="math">\(y\)</span> directions.   The fact that these values are negative indicates
+that you want <code class="docutils literal"><span class="pre">genbox</span></code> to automatically generate the element distribution
+along each axis, rather than providing it by hand.  (More on this below.)</li>
+<li>The next line specifies the distribution of the 5 elements in the <span class="math">\(x\)</span> direction.
+The mesh starts at <span class="math">\(x=0\)</span> and ends at <span class="math">\(x=4.0\)</span>.  The <code class="docutils literal"><span class="pre">ratio</span></code> indicates the
+relative size of each element, progressing from left to right.</li>
+<li>The next line specifies the distribution of the 3 elements in the <span class="math">\(y\)</span> direction,
+starting at <span class="math">\(y=0\)</span> and going to <span class="math">\(y=0.5\)</span>.  Again,
+<code class="docutils literal"><span class="pre">ratio</span></code> =1.0 indicates that the elements will be of uniform height.</li>
+<li>The last line specifies boundary conditions on each of the 4 sides of the
+box:<ul>
+<li>Lower-case <em>v</em> indicates that the left <span class="math">\((x)\)</span> boundary is to be a velocity
+boundary condition, with a user-specified distribution determined by
+routine <code class="docutils literal"><span class="pre">userbc</span></code> in the <code class="docutils literal"><span class="pre">.usr</span></code> file.  (Upper-case <span class="math">\(V\)</span> would indicate that
+the velocity is constant, with values specified in the .rea file.)</li>
+<li><em>O</em> indicates that the right <span class="math">\((x)\)</span> boundary is an outflow boundary – the
+flow leaves the domain at the left and the default exit pressure is <span class="math">\(p=0\)</span>.</li>
+<li><em>A</em> indicates that the lower <span class="math">\((y)\)</span> boundary is the axis—this condition
+is mandatory for the axisymmetric case, given the fact that the lower domain
+boundary is at <span class="math">\(y=0\)</span>, which corresponds to <span class="math">\(r=0\)</span>.</li>
+<li><em>W</em> indicates that the upper <span class="math">\((y)\)</span> boundary is a wall.  This would be
+equivalent to a <em>v</em> or <em>V</em> boundary condition, with <span class="math">\({\bf u}=0\)</span>.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="graded-mesh">
+<h3>Graded Mesh<a class="headerlink" href="#graded-mesh" title="Permalink to this headline">¶</a></h3>
+<div class="align-center figure" id="id4">
+<span id="fig-mesh-axi2"></span><img alt="axis-pipe-mesh-graded" src="_images/mesh_axi2.png" />
+<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">Axisymmetric pipe mesh, graded</span></p>
+</div>
+<p>Suppose you wish to have the mesh be graded,
+that you have increased resolution near the wall.
+In this case you change <code class="docutils literal"><span class="pre">ratio</span></code> in the <span class="math">\(y\)</span>-specification
+of the element distribution.  For example, changing the 3 lines
+in the above <code class="docutils literal"><span class="pre">genbox</span></code> input file from</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>-5 -3                         Nelx  Nely
+0.0   4.0   1.0               x0  x1   ratio
+0.0   0.5   1.0               y0  y1   ratio
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>-5 -4                         Nelx  Nely
+0.0   4.0   1.0               x0  x1   ratio
+0.0   0.5   0.7               y0  y1   ratio
+</pre></div>
+</div>
+<p>yields the mesh shown in <code class="xref std std-numref docutils literal"><span class="pre">fig:mesh_axi2</span></code>.</p>
+</div>
+<div class="section" id="user-specified-distribution">
+<h3>User-Specified Distribution<a class="headerlink" href="#user-specified-distribution" title="Permalink to this headline">¶</a></h3>
+<div class="align-center figure" id="id5">
+<span id="fig-mesh-axi3"></span><img alt="axis-pipe-mesh-user" src="_images/mesh_axi3.png" />
+<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Axisymmetric pipe mesh, user specified.</span></p>
+</div>
+<p>You can also specify your own, precise, distribution of element
+locations.   For example, another graded mesh similar to the
+one of the preceding example could be built by changing the
+<code class="docutils literal"><span class="pre">genbox</span></code> input file to contain:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>-5  4                                               Nelx  Nely
+0.0   4.0   1.0                                     x0  x1   ratio
+0.000    0.250    0.375    0.450    0.500           y0  y1 ... y4
+</pre></div>
+</div>
+<p>Here, the positive number of elements for the <span class="math">\(y\)</span> direction indicates
+that <code class="docutils literal"><span class="pre">genbox</span></code> is expecting <code class="docutils literal"><span class="pre">Nely+1</span></code> values of <span class="math">\(y\)</span> positions on the
+<span class="math">\(y\)</span>-element distribution line.   This is the <code class="docutils literal"><span class="pre">genbox</span></code> default, which
+explains why it corresponds to <code class="docutils literal"><span class="pre">Nely</span></code> <span class="math">\(&gt;\)</span> 0.  The corresponding mesh
+is shown in <code class="xref std std-numref docutils literal"><span class="pre">fig:mesh_axi3</span></code>.</p>
+</div>
+</div>
+<div class="section" id="mesh-modification">
+<h2>Mesh Modification<a class="headerlink" href="#mesh-modification" title="Permalink to this headline">¶</a></h2>
+<p>For complex shapes, it is often convenient to modify the mesh
+direction in the simulation code, Nek5000.  This can be done
+through the <code class="docutils literal"><span class="pre">usrdat2</span></code> routine provided in the <code class="docutils literal"><span class="pre">.usr</span></code> file.
+The routine <code class="docutils literal"><span class="pre">usrdat2</span></code> is called by Nek5000 immediately after
+the geometry, as specified by the <code class="docutils literal"><span class="pre">.rea</span></code> file, is established.
+Thus, one can use the existing geometry to map to a new geometry
+of interest.</p>
+<p>For example, suppose you want the above pipe geometry to have
+a sinusoidal wall.  Let <span class="math">\({\bf x} := (x,y)\)</span> denote the old geometry,
+and <span class="math">\({\bf x}' := (x',y')\)</span> denote the new geometry.  For a domain
+with <span class="math">\(y\in [0,0.5]\)</span>, the following function will map the straight
+pipe geometry to a wavy wall with amplitude <span class="math">\(A\)</span>, wavelength <span class="math">\(\lambda\)</span>:</p>
+<div class="math">
+\[y'(x,y) = y  + y A \sin( 2 \pi x / \lambda ).\]</div>
+<p>Note that, as <span class="math">\(y \longrightarrow 0\)</span>, the perturbation,
+<span class="math">\(yA \sin( 2 \pi x / \lambda )\)</span>, goes to zero.  So, near the axis,
+the mesh recovers its original form.</p>
+<p>In Nek5000, you would specify this through <code class="docutils literal"><span class="pre">usrdat2</span></code> as follows</p>
+<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">subroutine </span><span class="n">usrdat2</span>
+<span class="k">include</span> <span class="s1">&#39;SIZE&#39;</span>
+<span class="k">include</span> <span class="s1">&#39;TOTAL&#39;</span>
+
+<span class="kt">real </span><span class="n">lambda</span>
+
+<span class="n">ntot</span> <span class="o">=</span> <span class="n">nx1</span><span class="o">*</span><span class="n">ny1</span><span class="o">*</span><span class="n">nz1</span><span class="o">*</span><span class="n">nelt</span>
+
+<span class="n">lambda</span> <span class="o">=</span> <span class="mf">3.</span>
+<span class="n">A</span>      <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ntot</span>
+   <span class="n">argx</span>         <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">xm1</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">lambda</span>
+   <span class="n">ym1</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">ym1</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">ym1</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">A</span><span class="o">*</span><span class="nb">sin</span><span class="p">(</span><span class="n">argx</span><span class="p">)</span>
+<span class="k">end do</span>
+
+<span class="n">param</span><span class="p">(</span><span class="mi">59</span><span class="p">)</span> <span class="o">=</span> <span class="mf">1.</span>  <span class="c">! Force nek5 to recognize element deformation.</span>
+
+<span class="k">return</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Note that, since Nek5000 is modifying the mesh, <code class="docutils literal"><span class="pre">postx</span></code> will not
+recognize the current mesh unless you tell it to, because <code class="docutils literal"><span class="pre">postx</span></code>
+looks to the <code class="docutils literal"><span class="pre">.rea</span></code> file for the mesh geometry.  The only way for
+Nek5000 to communicate the new mesh to <code class="docutils literal"><span class="pre">postx</span></code> is via the <code class="docutils literal"><span class="pre">.fld</span></code>
+file, so you must request that the geometry be dumped to the
+<code class="docutils literal"><span class="pre">.fld</span></code> file.
+The result of above changes is shown in <code class="xref std std-numref docutils literal"><span class="pre">fig:wavypipe</span></code>.</p>
+<div class="align-center figure" id="id6">
+<span id="fig-wavypipe"></span><img alt="axis-pipe-mesh-wavy" src="_images/wavypipe.png" />
+<p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text">Axisymmetric pipe mesh.</span></p>
+</div>
+<div class="section" id="cylindrical-cartesian-transition-annuli">
+<span id="sec-genbox"></span><h3>Cylindrical/Cartesian-transition Annuli<a class="headerlink" href="#cylindrical-cartesian-transition-annuli" title="Permalink to this headline">¶</a></h3>
+<div class="align-center figure" id="id7">
+<span id="fig-cylbox-2d"></span><img alt="annuli-mesh-1" src="_images/cylbox_2d.png" />
+<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Cylinder mesh</span></p>
+</div>
+<div class="align-center figure" id="id8">
+<span id="fig-cylbox-2da"></span><img alt="annuli-mesh-2" src="_images/cylbox_2da.png" />
+<p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text">Cylinder mesh</span></p>
+</div>
+<p>More sophisticated
+transition treatments may be generated using the GLOBAL REFINE options in
+<code class="docutils literal"><span class="pre">prenek</span></code> or through an upgrade of <code class="docutils literal"><span class="pre">genb7</span></code>, as demand warrants.
+Example 2D and 3D input files are provided in the <code class="docutils literal"><span class="pre">nek5000/doc</span></code> files
+<code class="docutils literal"><span class="pre">box7.2d</span></code> and <code class="docutils literal"><span class="pre">box7.3d</span></code>.
+<code class="xref std std-numref docutils literal"><span class="pre">fig:cylbox_2d</span></code> shows a 2D example generated using
+the <code class="docutils literal"><span class="pre">box7.2d</span></code> input file, which reads:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>x2d.rea
+2                      spatial dimension
+1                      number of fields
+#
+#    comments
+#
+#
+#========================================================
+#
+Y                   cYlinder
+3 -24 1             nelr,nel_theta,nelz
+.5 .3               x0,y0 - center of cylinder
+ccbb                descriptors: c-cyl, o-oct, b-box (1 character + space)
+.5 .55 .7 .8        r0 r1 ... r_nelr
+0  1  1             theta0/2pi theta1/2pi  ratio
+v  ,W  ,E  ,E  ,    bc&#39;s (3 characters + comma)
+</pre></div>
+</div>
+<p>An example of a mesh is shown in <code class="xref std std-numref docutils literal"><span class="pre">fig:cylbox_2d</span></code>.   The mesh has been quad-refined
+once with oct-refine option of <code class="docutils literal"><span class="pre">prenek</span></code>. The 3D counterpart to this
+mesh could joined to a hemisphere/Cartesian transition built with
+the spherical mesh option in <code class="docutils literal"><span class="pre">prenek</span></code>.</p>
+</div>
+</div>
+<div class="section" id="mesh-extrusion-and-mirroring">
+<h2>Mesh Extrusion and Mirroring<a class="headerlink" href="#mesh-extrusion-and-mirroring" title="Permalink to this headline">¶</a></h2>
+<p>In <code class="docutils literal"><span class="pre">nek5000/tools</span></code>, there is a code <code class="docutils literal"><span class="pre">n2to3.f</span></code> that can be compiled with your
+local fortran compiler (preferably not g77).
+By running this code, you can extend two dimensional domains to
+three dimensional ones with a user-specified number of levels in the
+<span class="math">\(z\)</span>-direction.  Such a mesh can then be modified using the mesh modification
+approach. Assuming you have a valid two-dimensional mesh, <code class="docutils literal"><span class="pre">n2to3</span></code> is straightforward
+to run.  Below is a typical session, upon typing <code class="docutils literal"><span class="pre">n2to3</span></code> the user is prompted at the command line</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span> Input old (source) file name:
+h2e
+ Input new (output) file name:
+h3e
+ input number of levels: (1, 2, 3,... etc.?):
+16
+ input z min:
+0
+ input z max:
+16
+ input gain (0=custom,1=uniform,other=geometric spacing):
+1
+ This is for CEM: yes or no:
+n
+ Enter Z (5) boundary condition (P,v,O):
+v
+ Enter Z (6) boundary condition (v,O):
+0
+ this is cbz: v  O   &lt;---
+
+      320 elements written to h3e.rea
+FORTRAN STOP
+</pre></div>
+</div>
+<p>In this context CEM stands for computational electromagnetics, a spin-off of the original Nek5000 code.</p>
+<p>The domain in which the fluid flow/heat transfer
+problem is solved consists of two distinct subdomains. The
+first subdomain is that part of the region occupied by
+fluid, denoted <span class="math">\(\Omega_f\)</span>, while the second subdomain is that part
+of the region occupied by a solid, denoted <span class="math">\(\Omega_s\)</span>. These two
+subdomains are depicted in <a class="reference internal" href="theory.html#fig-walls"><span class="std std-numref">Fig. 9</span></a>. The entire domain is denoted as <span class="math">\(D=\Omega_f \cup \Omega_s\)</span>.
+The fluid problem is solved in the domain <span class="math">\(\Omega_f\)</span>, while the
+temperature in the energy equation is solved in the
+entire domain; the passive scalars can be solved in either
+the fluid or the entire domain.</p>
+<p>We denote the entire boundary of <span class="math">\(\Omega_f\)</span> as <span class="math">\(\partial \Omega_f\)</span>, that part
+of the boundary of <span class="math">\(\Omega_f\)</span> which is not shared by <span class="math">\(\Omega_s\)</span> as
+<span class="math">\(\overline{\partial \Omega_f}\)</span>, and
+that part of the boundary of <span class="math">\(\Omega_f\)</span> which is shared by <span class="math">\(\Omega_s\)</span>.
+In addition, <span class="math">\(\partial \Omega_{s}, \overline{\partial \Omega_s}\)</span> are analogously defined.
+These distinct portions of the
+domain boundary are illustrated in <a class="reference internal" href="theory.html#fig-walls"><span class="std std-numref">Fig. 9</span></a>.
+The restrictions on the domain for Nek5000 are itemized below.</p>
+<ul class="simple">
+<li>The domain <span class="math">\(\Omega=\Omega_f \cup \Omega_s\)</span> must correspond either to a
+planar (Cartesian) two-dimensional geometry, or to the
+cross-section of an axisymmetric region specified by
+revolution of the cross-section about a specified axis, or
+by a (Cartesian) three-dimensional geometry.</li>
+<li>For two-dimensional and axisymmetric geometries, the
+boundaries of both subdomains, <span class="math">\(\partial \Omega_f\)</span> and
+<span class="math">\(\partial \Omega_s\)</span>, must be
+representable as (or at least approximated by) the union of
+straight line segments, splines, or circular arcs.</li>
+<li>Nek5000 can interpret a two-dimensional image as either
+a planar Cartesian geometry, or
+the cross-section of an axisymmetric body. In the case of
+the latter, it is assumed that the <span class="math">\(y\)</span>-direction is the radial
+direction, that is, the axis of revolution is at <span class="math">\(y=0\)</span>.
+Although an axisymmetric geometry is, in fact,
+three-dimensional, Nek5000 can assume that the field variables
+are also axisymmetric ( that is, do not depend on azimuth,
+but only <span class="math">\(y\)</span>, that is, radius, <span class="math">\(x\)</span>, and <span class="math">\(t\)</span> ), thus reducing the
+relevant equations to “two-dimensional” form.</li>
+</ul>
+<p>Fully general three-dimensional meshes generated by other softwares
+packages can be input to <code class="docutils literal"><span class="pre">prenek</span></code> as import meshes.</p>
 </div>
 </div>
 
@@ -862,10 +1203,8 @@ Example code for reading the geometry field in python:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="bibliography.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="routines.html" class="btn btn-neutral" title="Routines of Interest" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="theory.html" class="btn btn-neutral" title="Theory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -874,7 +1213,7 @@ Example code for reading the geometry field in python:</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, Paul Fischer, James Lottes,  Stefan Kerkemeier, Oana Marin, Katherine Heisey, Aleks Obabko, Elia Merzari, Yulia Peet, Ronald Rahaman.
+        &copy; Copyright 2015-2017, UCHICAGO ARGONNE, LLC.
 
     </p>
   </div>
@@ -906,7 +1245,7 @@ Example code for reading the geometry field in python:</p>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
