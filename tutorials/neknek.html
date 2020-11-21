@@ -37,7 +37,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Nek5000 17.0 documentation" href="../index.html"/>
         <link rel="up" title="Tutorials" href="../tutorials.html"/>
-        <link rel="next" title="Problem Setup" href="../case_files.html"/>
+        <link rel="next" title="Problem Setup" href="../problem_setup.html"/>
         <link rel="prev" title="Conjugate Heat Transfer" href="conjht.html"/> 
 
   
@@ -115,7 +115,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../case_files.html">Problem Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../problem_setup.html">Problem Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix.html">Appendices</a></li>
 </ul>
@@ -272,7 +272,7 @@ P  ,P  ,int,W                             BC&#39;s:  (cbx0, cbx1, cby0, cby1)
 </div>
 <div class="align-center figure" id="id1">
 <span id="fig-hillnn-mesh"></span><img alt="neknek_mesh" src="../_images/hillnn_mesh.png" />
-<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Modified box mesh graded</span></p>
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Modified box mesh graded</span></p>
 </div>
 <p>Currently, applying a constant mass flux with <code class="docutils literal"><span class="pre">param(54)</span></code> and <code class="docutils literal"><span class="pre">param(55)</span></code> is <strong>not</strong> supported with overlapping overset grids.
 For this case, we drive the flow using a constant acceleration term in userf as:</p>
@@ -420,7 +420,7 @@ Copy the <code class="docutils literal"><span class="pre">SIZE.template</span></
 <div class="highlight-none"><div class="highlight"><pre><span></span>cp $HOME/Nek5000/core/SIZE.template SIZE
 </pre></div>
 </div>
-<p>Then, adjust the following parameters in the BASIC section</p>
+<p>Then, adjust the following parameters</p>
 <div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="p">...</span>
 
 <span class="c">! BASIC</span>
@@ -434,11 +434,13 @@ Copy the <code class="docutils literal"><span class="pre">SIZE.template</span></
 <span class="k">parameter</span> <span class="p">(</span><span class="n">lpmax</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="k">parameter</span> <span class="p">(</span><span class="n">ldimt</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
+<span class="c">! OPTIONAL</span>
+<span class="k">parameter</span> <span class="p">(</span><span class="n">nsessmax</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="p">...</span>
 </pre></div>
 </div>
 <p>For this tutorial we have set our polynomial order to be <span class="math">\(N=7\)</span> - this is defined in the <code class="docutils literal"><span class="pre">SIZE</span></code> file above as <code class="docutils literal"><span class="pre">lx1=8</span></code> which indices that there are 8 points in each spatial dimension of every element.
-Additional details on the parameters in the <code class="docutils literal"><span class="pre">SIZE</span></code> file are given in <span class="xref std std-doc">case_files</span>.</p>
+Additional details on the parameters in the <code class="docutils literal"><span class="pre">SIZE</span></code> file are given <a class="reference internal" href="../problem_setup/case_files.html#case-files-size"><span class="std std-ref">here</span></a>.</p>
 </div>
 <div class="section" id="compilation">
 <h2>Compilation<a class="headerlink" href="#compilation" title="Permalink to this headline">¶</a></h2>
@@ -468,7 +470,7 @@ Next do the same for the upper mesh to generate <code class="docutils literal"><
 <p>Using Visit, the user can post-process the results.</p>
 <div class="align-center figure" id="id2">
 <span id="fig-hillnn-flow"></span><img alt="hillnn_flow" src="../_images/hillnn_result.png" />
-<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Steady-State flow field visualized in Visit/Paraview. Vectors represent velocity. Colors represent velocity magnitude. Note, velocity vectors are equal size and not scaled by magnitude.</span></p>
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Steady-State flow field visualized in Visit/Paraview. Vectors represent velocity. Colors represent velocity magnitude. Note, velocity vectors are equal size and not scaled by magnitude.</span></p>
 </div>
 </div>
 </div>
@@ -483,7 +485,7 @@ Next do the same for the upper mesh to generate <code class="docutils literal"><
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../case_files.html" class="btn btn-neutral float-right" title="Problem Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../problem_setup.html" class="btn btn-neutral float-right" title="Problem Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="conjht.html" class="btn btn-neutral" title="Conjugate Heat Transfer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

@@ -95,7 +95,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">FAQ</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#general">General</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installing-compiling-and-running">Installing, Compiling, and Running</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pre-processing">Pre-Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pre-processing-and-numerics">Pre-Processing and Numerics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#physical-models">Physical Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#computational-speed">Computational Speed</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
@@ -103,7 +103,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="case_files.html">Problem Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problem_setup.html">Problem Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="theory.html">Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendices</a></li>
 </ul>
@@ -191,32 +191,17 @@ in a production environment!</div></blockquote>
 For more information see the <code class="docutils literal"><span class="pre">LICENSE</span></code> file included with the distribution in the root level directory.</div></blockquote>
 <p><strong>Where can I get help?</strong></p>
 <blockquote>
-<div>If you have a question, first check the mailing list <a class="reference external" href="https://lists.mcs.anl.gov/pipermail/nek5000-users/">archive</a> to see if your question is already answered somewhere.
-The mailing list also serves as a primary
-support channel. Please subscribe <a class="reference external" href="https://lists.mcs.anl.gov/mailman/listinfo/nek5000-users">here</a>.
-Postings from email addresses that are not on the list are held for moderation.</div></blockquote>
+<div><p>If you have a question, first check the <a class="reference external" href="https://groups.google.com/forum/#!forum/nek5000">Google group</a> to see if your question is already answered somewhere.
+The google group also serves as a primary support channel with the Nek5000 user community.
+Please subscribe to the google group by clicking the button “Apply to join group” right above the “Welcome to the new Nek5000 User Group!” sign.</p>
+<p>The past <a class="reference external" href="https://lists.mcs.anl.gov/pipermail/nek5000-users">mailing list archive</a> can also be checked for potential answers.</p>
+</div></blockquote>
 <p><strong>How can I report a bug / feature request?</strong></p>
 <blockquote>
 <div>Nek5000 is hosted on GitHub and all bugs are reported and tracked through the <a class="reference external" href="https://github.com/Nek5000/Nek5000/issues">Issues</a> feature on GitHub.
-However, GitHub Issues should not be used for common troubleshooting purposes. If you are having trouble
-installing the code or getting your model to run properly, you should first send a message to the User’s Group mailing list.
-If it turns out your issue really is a bug in the code, an issue will then be created on GitHub. If you want to request that a feature be added to the code,
-you may create an Issue on GitHub.</div></blockquote>
-<p><strong>How can I contribute to the Nek5000 project?</strong></p>
-<blockquote>
-<div><p>Our project is hosted on <a class="reference external" href="https://github.com/Nek5000">GitHub</a>. Here are the most important things you need to know:</p>
-<ul class="simple">
-<li>follow the usual “fork-and-pull” Git workflow</li>
-<li>all development happens on the master branch</li>
-<li>anything in master is always deployable</li>
-<li>upcoming releases get their own tags out of master</li>
-</ul>
-<p>If you are planning a large contribution, we encourage you to discuss the concept here on GitHub and interact with us frequently to ensure that your effort is well-directed.</p>
-</div></blockquote>
-<blockquote>
-<div>installing the code or getting your model to run properly, you should first send a message to the User’s Group mailing list.
-If it turns out your issue really is a bug in the code, an issue will then be created on GitHub. If you want to request that a feature be added to the code,
-you may create an Issue on GitHub.</div></blockquote>
+However, GitHub Issues should not be used for common troubleshooting purposes.
+If you are having trouble installing the code or getting your model to run properly, you should first send a message to the User’s Group mailing list.
+If it turns out your issue really is a bug in the code, an issue will then be created on GitHub. If you want to request that a feature be added to the code, you may create an Issue on GitHub.</div></blockquote>
 <p><strong>How can I contribute to the Nek5000 project?</strong></p>
 <blockquote>
 <div><p>Our project is hosted on <a class="reference external" href="https://github.com/Nek5000">GitHub</a>. Here are the most important things you need to know:</p>
@@ -244,14 +229,16 @@ a topic of active research.</div></blockquote>
 <div>Currently Intel, PGI, IBM and GNU compilers are supported.</div></blockquote>
 <p><strong>How much memory is required?</strong></p>
 <blockquote>
-<div><p>The memory footprint of a run depends on many factors and is printed to
-screen whenever Nek5000 exits. What follows is a first rough guess:</p>
-<p>lx1*ly1*lz1*lelt * 3000byte + lelg * 12byte + MPI + optional libraries (e.g. CVODE)</p>
-<p>where lelt (the maximum number of local elements) is computed as lelg/lpmin.
-The memory allocated by MPI will depend heavily on the total number of
-ranks and the considered MPI implementation. For large rank counts (say &gt; 100‘000) it’s easily 50-100MB.</p>
-<p>Note, the output of GNU`s SIZE utility is inaccurate as it does not
-take into account the dynamic memory alloation of MPI, gslib, CVODE, etc.</p>
+<div>The memory footprint of a run depends on many factors and is printed to
+screen whenever Nek5000 exits. What follows is a first rough guess:</div></blockquote>
+<div class="highlight-none"><div class="highlight"><pre><span></span>lx1*ly1*lz1*lelt * 3000byte + lelg * 12byte + MPI + optional libraries (e.g. CVODE)
+</pre></div>
+</div>
+<blockquote>
+<div><p>where <code class="docutils literal"><span class="pre">lelt</span></code> (the maximum number of local elements) is computed as lelg/lpmin.
+The memory allocated by MPI will depend heavily on the total number of ranks and the considered MPI implementation.
+For large rank counts (say &gt; 100‘000) it’s easily 50-100MB.</p>
+<p>Note, the output of GNU`s SIZE utility is inaccurate as it does not take into account the dynamic memory alloation of MPI, gslib, CVODE, etc.</p>
 </div></blockquote>
 <p><strong>Why does the compiler issue relocation errors?</strong></p>
 <blockquote>
@@ -273,8 +260,8 @@ If you are running on a machine with a queuing system, consult your sysadmin how
 <div>The examples are included by default in the release tarball (see example directory). There is nothing special you need
 to do as they are ready to run.</div></blockquote>
 </div>
-<div class="section" id="pre-processing">
-<h2>Pre-Processing<a class="headerlink" href="#pre-processing" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pre-processing-and-numerics">
+<h2>Pre-Processing and Numerics<a class="headerlink" href="#pre-processing-and-numerics" title="Permalink to this headline">¶</a></h2>
 <p><strong>How can I generate a mesh for use with Nek5000?</strong></p>
 <blockquote>
 <div>Please see quickstart section on <a class="reference internal" href="quickstart.html#qstart-meshing"><span class="std std-ref">Meshing</span></a>.</div></blockquote>
@@ -316,14 +303,38 @@ is optimized for this range of <span class="math">\(N\)</span>.</p>
 <div>Change <code class="docutils literal"><span class="pre">lx1</span></code> in the SIZE file. Note, the polynomial order is <span class="math">\(N=lx1-1\)</span>.</div></blockquote>
 <p><strong>How do I specify/change the solver runtime parameters?</strong></p>
 <blockquote>
-<div>See the section on the <a class="reference internal" href="case_files.html#case-files-par"><span class="std std-ref">par</span></a> file.</div></blockquote>
+<div>See the section on the <a class="reference internal" href="problem_setup/case_files.html#case-files-par"><span class="std std-ref">Parameter File (.par)</span></a> file.</div></blockquote>
 <p><strong>Why is ``userbc`` only called for certain element faces?</strong></p>
 <blockquote>
 <div><code class="docutils literal"><span class="pre">userbc</span></code> is ONLY called for element boundary conditions specified with a lower-case letter, e.g. ‘v’, ‘t’, or ‘o’ but NOT ‘W’, ‘E’, or ‘O’.  Note that this implies it is not necesarily called on all MPI ranks.</div></blockquote>
 <p><strong>How do I solve for a scalar?</strong></p>
 <blockquote>
 <div>Nek5000 supports solving up to 99 additional scalars.
-To solve an additional scalar equation, increase <code class="docutils literal"><span class="pre">ldimt</span></code> in the <code class="docutils literal"><span class="pre">SIZE</span></code> file to accomodate the additional scalar and specify the appropriate parameter in the <a class="reference internal" href="case_files.html#case-files-par"><span class="std std-ref">par</span></a> file. See <code class="docutils literal"><span class="pre">shear4</span></code> example for more details.</div></blockquote>
+To solve an additional scalar equation, increase <code class="docutils literal"><span class="pre">ldimt</span></code> in the <code class="docutils literal"><span class="pre">SIZE</span></code> file to accomodate the additional scalar and specify the appropriate parameter in the <a class="reference internal" href="problem_setup/case_files.html#case-files-par"><span class="std std-ref">Parameter File (.par)</span></a> file. See <code class="docutils literal"><span class="pre">shear4</span></code> example for more details.</div></blockquote>
+<p><strong>Are there any books/papers that describe the numerics of Nek5000?</strong></p>
+<blockquote>
+<div><p>There are a number of descriptions of the various numerical methods used in Nek5000 available.
+Probably the best starting point is the book <em>High-Order Methods for Incompressible Fluid Flow</em> by Deville et al. (2002).
+There are also other, perhaps shorter, expositions of the material.
+Two papers that we found particularly useful (there are of course many more) are:</p>
+<ul class="simple">
+<li>Fischer. An Overlapping Schwarz Method for Spectral Element Solution of the Incompressible Navier–Stokes Equations. <em>J. Comput. Phys.</em> 133, 84–101 (1997)</li>
+<li>Fischer et al. Simulation of high-Reynolds number vascular flows. <em>Comput. Methods Appl. Mech. Engrg.</em> 196 (2007) 3049–3060</li>
+</ul>
+<p>and also the <a class="reference external" href="http://www.mcs.anl.gov/~fischer/kth/kth_crs_2016s.pdf">lecture notes</a> by Paul Fischer (given at KTH in 2016).</p>
+</div></blockquote>
+<p><strong>Why can I see sometimes the imprint of elements in the solution?</strong></p>
+<blockquote>
+<div><p>Nek5000 is based on the spectral-element method, which relies on an expansion of the solution in terms of element-local basis functions.
+These basis functions are the Lagrange interpolants to the Legendre polynomials of a specific order.
+If using PnPn-2, the velocity is on the Gauss-Lobatto-Legendre mesh (i.e. including the boundary points), and the pressure is on the Gauss-Legendre mesh (without boundary points).
+These functions are defined within each element, and the continuity between elements is C0, i.e. only the function value is the same.
+The ansatz functions are polynomials, so you can differentiate them inside each element; however, derivatives are not continuous over element boundaries (even though this difference reduces spectrally fast).
+Note that for the PnPn-2 method, the pressure is non-continuous.</p>
+<p>This means that when visualising e.g. derivatives, one might see discontinuities, which then appear as imprints of the elements.
+This is due to the mentioned properties of the discretisation, and as such not a sign of a wrong solution.
+With increasing resolution (either p or h-type) these jumps will most certainly get smaller.</p>
+</div></blockquote>
 </div>
 <div class="section" id="physical-models">
 <h2>Physical Models<a class="headerlink" href="#physical-models" title="Permalink to this headline">¶</a></h2>
@@ -406,7 +417,7 @@ solver = none
 The scalar will then be output by default with the solution files.</div></blockquote>
 <p><strong>How do I obtain values of variables at a specific point?</strong></p>
 <blockquote>
-<div>The simplest way is through the use of history points. See the section on the <a class="reference internal" href="case_files.html#case-files-his"><span class="std std-ref">History Points</span></a> file.
+<div>The simplest way is through the use of history points. See the section on the <a class="reference internal" href="problem_setup/features.html#features-his"><span class="std std-ref">History Points</span></a> file.
 You can also use the spectral interpolation tool (see examples for more details).</div></blockquote>
 </div>
 </div>

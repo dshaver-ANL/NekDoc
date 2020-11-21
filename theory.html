@@ -37,7 +37,7 @@
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Nek5000 17.0 documentation" href="index.html"/>
         <link rel="next" title="Appendices" href="appendix.html"/>
-        <link rel="prev" title="Problem Setup" href="case_files.html"/> 
+        <link rel="prev" title="Additional Features" href="problem_setup/features.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -94,7 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="case_files.html">Problem Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problem_setup.html">Problem Setup</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Theory</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#computational-approach">Computational Approach</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#incompressible-navier-stokes-equations">Incompressible Navier-Stokes Equations</a></li>
@@ -179,7 +179,7 @@
 <h1>Theory<a class="headerlink" href="#theory" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="computational-approach">
 <span id="intro-comput-approach"></span><h2>Computational Approach<a class="headerlink" href="#computational-approach" title="Permalink to this headline">¶</a></h2>
-<p>The spatial discretization is based on the spectral element method (SEM) <a class="reference internal" href="bibliography.html#patera1984" id="id1">[Patera1984]</a>, which is a
+<p>The spatial discretization is based on the spectral element method (SEM) [Patera1984], which is a
 high-order weighted residual technique similar to the finite element method.   In the SEM, the
 solution and data are represented in terms of <span class="math">\(N\)</span> th-order tensor-product polynomials within each
 of <span class="math">\(E\)</span> deformable hexahedral (brick) elements. Typical discretizations involve
@@ -187,21 +187,21 @@ of <span class="math">\(E\)</span> deformable hexahedral (brick) elements. Typic
 element).  Vectorization and cache efficiency derive from the local lexicographical ordering within
 each macro-element and from the fact that the action of discrete operators, which nominally have
 <span class="math">\(O(EN^6)\)</span> nonzeros, can be evaluated in only <span class="math">\(O(EN^4)\)</span> work and <span class="math">\(O(EN^3)\)</span> storage
-through the use of tensor-product-sum factorization <a class="reference internal" href="bibliography.html#orszag1980" id="id2">[Orszag1980]</a>.   The SEM exhibits very little
+through the use of tensor-product-sum factorization [Orszag1980].   The SEM exhibits very little
 numerical dispersion and dissipation, which can be important, for example, in stability
 calculations, for long time integrations, and for high Reynolds number flows. We refer to
-<a class="reference internal" href="bibliography.html#denville2002" id="id3">[Denville2002]</a> for more details.</p>
+[Denville2002] for more details.</p>
 <p>Nek5000 solves the unsteady incompressible two-dimensional, axisymmetric, or three-dimensional
 Stokes or Navier-Stokes equations with forced or natural convection heat transfer in both
 stationary (fixed) or time-dependent geometry. It also solves the compressible Navier-Stokes in the
 Low Mach regime, the magnetohydrodynamic equation (MHD).  The solution variables are the fluid
 velocity <span class="math">\(\mathbf u=(u_{x},u_{y},u_{z})\)</span>, the pressure <span class="math">\(p\)</span>, the temperature <span class="math">\(T\)</span>.
 All of the above field variables are functions of space <span class="math">\({\bf x}=(x,y,z)\)</span> and time <span class="math">\(t\)</span>
-in domains <span class="math">\(\Omega_f\)</span> and/or <span class="math">\(\Omega_s\)</span> defined in <a class="reference internal" href="#fig-walls"><span class="std std-numref">Fig. 9</span></a>.
+in domains <span class="math">\(\Omega_f\)</span> and/or <span class="math">\(\Omega_s\)</span> defined in <a class="reference internal" href="#fig-walls"><span class="std std-numref">Fig. 11</span></a>.
 Additionally Nek5000 can handle conjugate heat transfer problems.</p>
 <div class="align-center figure" id="id6">
 <span id="fig-walls"></span><img alt="domains" src="_images/walls.png" />
-<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Computational domain showing respective fluid and solid subdomains, <span class="math">\(\Omega_f\)</span> and
+<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">Computational domain showing respective fluid and solid subdomains, <span class="math">\(\Omega_f\)</span> and
 <span class="math">\(\Omega_s\)</span>.  The shared boundaries are denoted <span class="math">\(\partial\Omega_f=\partial\Omega_s\)</span>
 and the solid boundary which is not shared by fluid is <span class="math">\(\overline{\partial\Omega_s}\)</span>,
 while the fluid boundary not shared by solid <span class="math">\(\overline{\partial\Omega_f}\)</span>.</span></p>
@@ -369,7 +369,7 @@ the incompressible MHD equations are</p>
 \nabla \cdot \mathbf u = 0\end{split}\]</div>
 <p>Here, <span class="math">\(NL\)</span> represents the quadratic nonlinearities from the convective term.</p>
 <p>Our free-surface hydrodynamic formulation is based upon the arbitrary Lagrangian-Eulerian (ALE)
-formulation described in <a class="reference internal" href="bibliography.html#ho1989" id="id4">[Ho1989]</a>.  Here, the domain <span class="math">\(\Omega(t)\)</span> is also an unknown.  As
+formulation described in [Ho1989].  Here, the domain <span class="math">\(\Omega(t)\)</span> is also an unknown.  As
 with the velocity, the geometry <span class="math">\(\mathbf x\)</span> is represented by high-order polynomials.  For
 viscous free-surface flows, the rapid convergence of the high-order surface approximation to the
 physically smooth solution minimizes surface-tension-induced stresses arising from non-physical
@@ -388,7 +388,7 @@ of Eq. <a class="reference internal" href="#equation-mhd1">(14)</a>: <em>Find</e
 \qquad
 (\nabla \cdot \mathbf u,q) = 0,\]</div>
 <p>for all test functions <span class="math">\((\mathbf v,q) \in X^N \times Y^N\)</span>.  Here <span class="math">\((X^N,Y^N)\)</span> are the
-compatible velocity-pressure approximation spaces introduced in <a class="reference internal" href="bibliography.html#maday1989" id="id5">[Maday1989]</a>, <span class="math">\((.,.)\)</span> denotes
+compatible velocity-pressure approximation spaces introduced in [Maday1989], <span class="math">\((.,.)\)</span> denotes
 the inner-product <span class="math">\((\mathbf f,\mathbf g) := \int_{\Omega(t)} \mathbf f \cdot \mathbf g \,dV\)</span>,
 and <span class="math">\(\mathbf S\)</span> is the stress tensor <span class="math">\(S_{ij}^{} := \frac{1}{2}( \frac{\partial
 u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} )\)</span>.  For simplicity, we have neglected the
@@ -442,7 +442,7 @@ and because of this, the overhead for the moving domain formulation is very low.
         <a href="appendix.html" class="btn btn-neutral float-right" title="Appendices" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="case_files.html" class="btn btn-neutral" title="Problem Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="problem_setup/features.html" class="btn btn-neutral" title="Additional Features" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

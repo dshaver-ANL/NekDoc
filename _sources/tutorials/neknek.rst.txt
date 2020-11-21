@@ -276,7 +276,7 @@ Copy the ``SIZE.template`` file from the core directory and rename it ``SIZE`` i
 
    cp $HOME/Nek5000/core/SIZE.template SIZE
 
-Then, adjust the following parameters in the BASIC section  
+Then, adjust the following parameters
 
 .. code-block:: fortran
 
@@ -293,11 +293,13 @@ Then, adjust the following parameters in the BASIC section
       parameter (lpmax=4)
       parameter (ldimt=1)
 
+      ! OPTIONAL
+      parameter (nsessmax=2)
       ...
 
 
 For this tutorial we have set our polynomial order to be :math:`N=7` - this is defined in the ``SIZE`` file above as ``lx1=8`` which indices that there are 8 points in each spatial dimension of every element.
-Additional details on the parameters in the ``SIZE`` file are given in :doc:`case_files`.   
+Additional details on the parameters in the ``SIZE`` file are given :ref:`here <case_files_SIZE>`.   
 
 ..........................
 Compilation 

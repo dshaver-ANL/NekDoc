@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tutorials &mdash; Nek5000 17.0 documentation</title>
+  <title>Problem Setup &mdash; Nek5000 17.0 documentation</title>
   
 
   
@@ -36,8 +36,8 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Nek5000 17.0 documentation" href="index.html"/>
-        <link rel="next" title="Periodic Hill" href="tutorials/perhill.html"/>
-        <link rel="prev" title="FAQ" href="faq.html"/> 
+        <link rel="next" title="Boundary Conditions" href="problem_setup/boundary_conditions.html"/>
+        <link rel="prev" title="Overlapping Overset Grids" href="tutorials/neknek.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -93,13 +93,13 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/perhill.html">Periodic Hill</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/conjht.html">Conjugate Heat Transfer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/neknek.html">Overlapping Overset Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Problem Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="problem_setup/boundary_conditions.html">Boundary Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problem_setup/case_files.html">Case Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problem_setup/features.html">Additional Features</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="problem_setup.html">Problem Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="theory.html">Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendices</a></li>
 </ul>
@@ -146,13 +146,13 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Tutorials</li>
+      <li>Problem Setup</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/tutorials.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/problem_setup.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -165,15 +165,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="tutorials">
-<span id="id1"></span><h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h1>
-<p>The following tutorials are provided to familiarize beginners with the features and typical workflow of Nek5000.
-For a user brand new to Nek5000, we strongly recommend beginning with the Periodic Hill tutorial.</p>
+  <div class="section" id="problem-setup">
+<span id="id1"></span><h1>Problem Setup<a class="headerlink" href="#problem-setup" title="Permalink to this headline">¶</a></h1>
+<p>A complete problem setup in Nek5000 requires a set of case files which are used for defining the geometry and physics of a problem.
+Details of how to setup a case in Nek5000 are outlined in the following sections:</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/perhill.html">Periodic Hill</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/conjht.html">Conjugate Heat Transfer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/neknek.html">Overlapping Overset Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problem_setup/boundary_conditions.html">Boundary Conditions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="problem_setup/boundary_conditions.html#fluid-velocity">Fluid Velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problem_setup/boundary_conditions.html#temperature-and-passive-scalars">Temperature and Passive Scalars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problem_setup/boundary_conditions.html#internal-boundary-conditions">Internal Boundary Conditions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="problem_setup/case_files.html">Case Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="problem_setup/case_files.html#session-name">SESSION.NAME</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problem_setup/case_files.html#parameter-file-par">Parameter File (.par)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problem_setup/case_files.html#mesh-file-re2">Mesh File (.re2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problem_setup/case_files.html#user-routines-file-usr">User Routines File (.usr)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problem_setup/case_files.html#size">SIZE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problem_setup/case_files.html#mesh-partitioning-file-map-ma2">Mesh Partitioning File (.map/.ma2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problem_setup/case_files.html#restart-output-files-f-05d">Restart/Output files (.f%05d)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="problem_setup/features.html">Additional Features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="problem_setup/features.html#history-points">History Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problem_setup/features.html#grid-to-grid-interpolation">Grid-to-Grid Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problem_setup/features.html#averaging">Averaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problem_setup/features.html#filtering">Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problem_setup/features.html#objects">Objects</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -188,10 +209,10 @@ For a user brand new to Nek5000, we strongly recommend beginning with the Period
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="tutorials/perhill.html" class="btn btn-neutral float-right" title="Periodic Hill" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="problem_setup/boundary_conditions.html" class="btn btn-neutral float-right" title="Boundary Conditions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="faq.html" class="btn btn-neutral" title="FAQ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="tutorials/neknek.html" class="btn btn-neutral" title="Overlapping Overset Grids" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -93,14 +93,14 @@
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="case_files.html">Problem Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problem_setup.html">Problem Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="theory.html">Theory</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Appendices</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#build-options">Build Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#internal-input-parameters-switches">Internal Input Parameters/Switches</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#logical-switches">Logical switches</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#other-inut-varaibles">Other Inut Varaibles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other-input-variables">Other Input Variables</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#commonly-used-variables">Commonly used Variables</a><ul>
@@ -111,7 +111,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#commonly-used-subroutines">Commonly used Subroutines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#grid-to-grid-interpolation">Grid-to-Grid Interpolation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#generating-a-mesh-with-genbox">Generating a Mesh with Genbox</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#uniformly-distributed-mesh">Uniformly Distributed Mesh</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#graded-mesh">Graded Mesh</a></li>
@@ -284,7 +283,7 @@ Available configurations options:</p>
 </table>
 <p>The <code class="docutils literal"><span class="pre">PPLIST</span></code> field can be used to activate several features at compilation time.
 A list of possible options is below:</p>
-<table border="1" class="docutils" id="id2">
+<span id="tab-pplist"></span><table border="1" class="docutils" id="id2">
 <caption><span class="caption-number">Table 19 </span><span class="caption-text">PPLIST options</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="50%" />
@@ -463,8 +462,8 @@ Global and static data larger than 2GB requires <code class="docutils literal"><
 <p><strong>IFSYNC</strong> use upfront synchronization</p>
 <p><strong>IFUSERVP</strong> user-defined properties</p>
 </div>
-<div class="section" id="other-inut-varaibles">
-<h3>Other Inut Varaibles<a class="headerlink" href="#other-inut-varaibles" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="other-input-variables">
+<h3>Other Input Variables<a class="headerlink" href="#other-input-variables" title="Permalink to this headline">¶</a></h3>
 <p><strong>filterType</strong> 0: explicit, 1: HPT-RT</p>
 <p><strong>restol(:)</strong> field solver tolerance</p>
 </div>
@@ -886,30 +885,21 @@ Global and static data larger than 2GB requires <code class="docutils literal"><
 </dl>
 <p><code class="docutils literal"><span class="pre">function</span> <span class="pre">glsc2(a,b,n)</span></code></p>
 <p><code class="docutils literal"><span class="pre">function</span> <span class="pre">glsc3(a,b,mult,n)</span></code></p>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">glsc23(a,b,c,n)</span></code></p>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">glsum(a,n)</span></code></p>
+<blockquote>
+<div>Computes the global sum of the real arrays <code class="docutils literal"><span class="pre">a</span></code>, with number of local entries <code class="docutils literal"><span class="pre">n</span></code></div></blockquote>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">iglsum(a,n)</span></code></p>
+<blockquote>
+<div>Computes the global sum of the integer arrays <code class="docutils literal"><span class="pre">a</span></code>, with number of local entries <code class="docutils literal"><span class="pre">n</span></code></div></blockquote>
+<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">i8glsum(a,n)</span></code></p>
+<blockquote>
+<div>Computes the global sum of the integer*8 arrays <code class="docutils literal"><span class="pre">a</span></code>, with number of local entries <code class="docutils literal"><span class="pre">n</span></code></div></blockquote>
 <dl class="docutils">
-<dt><code class="docutils literal"><span class="pre">function</span> <span class="pre">glsc23(z,y,z,n)</span></code></dt>
-<dd>Performs the inner product in double precision. <code class="docutils literal"><span class="pre">glsc3</span></code> uses a multiplier, <code class="docutils literal"><span class="pre">mult</span></code> and <code class="docutils literal"><span class="pre">glsc23</span></code> performs <code class="docutils literal"><span class="pre">x*x*y*z</span></code>.</dd>
-</dl>
-<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">glsum(x,n)</span></code></p>
-<p><code class="docutils literal"><span class="pre">function</span> <span class="pre">iglsum(x,n)</span></code></p>
-<dl class="docutils">
-<dt><code class="docutils literal"><span class="pre">function</span> <span class="pre">i8glsum(x,n)</span></code></dt>
-<dd>Computes the global sum of <code class="docutils literal"><span class="pre">x</span></code>, where the prefix, <code class="docutils literal"><span class="pre">i</span></code> specifies type integer, and <code class="docutils literal"><span class="pre">i8</span></code> specifies type integer*8.</dd>
 <dt><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">surface_int(dphi,dS,phi,ielem,iside)</span></code></dt>
 <dd>Computes the surface integral of scalar array <code class="docutils literal"><span class="pre">phi</span></code> over face <code class="docutils literal"><span class="pre">iside</span></code> of element <code class="docutils literal"><span class="pre">ielem</span></code>.
 The resulting integral is storted in <code class="docutils literal"><span class="pre">dphi</span></code> and the area in <code class="docutils literal"><span class="pre">dS</span></code>.</dd>
 </dl>
-</div>
-<div class="section" id="grid-to-grid-interpolation">
-<span id="append-g2g"></span><h2>Grid-to-Grid Interpolation<a class="headerlink" href="#grid-to-grid-interpolation" title="Permalink to this headline">¶</a></h2>
-<p>To restart from an existing field file onto a new mesh you can call the generic field file reader interpolation subroutine in userchk.
-Note that selection of specific fields to read is not currently supported and the source file must include the coordinates.
-That means all fields included in <code class="docutils literal"><span class="pre">foo.f00001</span></code> will be overwritten. Usage example:</p>
-<blockquote>
-<div><div class="highlight-none"><div class="highlight"><pre><span></span>if (istep.eq.0) call gfldr(&#39;foo.f00001&#39;)
-</pre></div>
-</div>
-</div></blockquote>
 </div>
 <div class="section" id="generating-a-mesh-with-genbox">
 <span id="mesh-gen"></span><h2>Generating a Mesh with Genbox<a class="headerlink" href="#generating-a-mesh-with-genbox" title="Permalink to this headline">¶</a></h2>
@@ -918,7 +908,7 @@ That means all fields included in <code class="docutils literal"><span class="pr
 <p>Suppose you wish to simulate flow through an axisymmetric pipe,
 of radius <span class="math">\(R=0.5\)</span> and length <span class="math">\(L=4\)</span>.  You estimate that you will
 need 3 elements in radial <span class="math">\((y)\)</span> direction, and 5 in the <span class="math">\(x\)</span> direction,
-as depicted in <code class="xref std std-numref docutils literal"><span class="pre">fig:mesh_axi1</span></code>.
+as depicted in <a class="reference internal" href="#fig-mesh-axi1"><span class="std std-numref">Fig. 12</span></a>.
 This would be specified by the following input file (called <code class="docutils literal"><span class="pre">pipe.box</span></code>)
 to <code class="docutils literal"><span class="pre">genbox</span></code>:</p>
 <div class="highlight-none"><div class="highlight"><pre><span></span>axisymmetric.rea
@@ -940,7 +930,7 @@ v  ,O  ,A  ,W  ,   ,          BC&#39;s:  (cbx0, cbx1, cby0, cby1, cbz0, cbz1)
 </div>
 <div class="align-center figure" id="id3">
 <span id="fig-mesh-axi1"></span><img alt="axis-pipe-mesh" src="_images/mesh_axi1.png" />
-<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Axisymmetric pipe mesh.</span></p>
+<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Axisymmetric pipe mesh.</span></p>
 </div>
 <ul class="simple">
 <li>The first line of this file supplies the name of an existing 2D <code class="docutils literal"><span class="pre">.rea</span></code> file that has the appropriate run parameters (viscosity, timestep size, etc.). These parameters can be modified later, but it is important that <code class="docutils literal"><span class="pre">axisymmetric.rea</span></code> be a 2D file, and not a 3D file.</li>
@@ -978,7 +968,7 @@ equivalent to a <em>v</em> or <em>V</em> boundary condition, with <span class="m
 <h3>Graded Mesh<a class="headerlink" href="#graded-mesh" title="Permalink to this headline">¶</a></h3>
 <div class="align-center figure" id="id4">
 <span id="fig-mesh-axi2"></span><img alt="axis-pipe-mesh-graded" src="_images/mesh_axi2.png" />
-<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">Axisymmetric pipe mesh, graded</span></p>
+<p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text">Axisymmetric pipe mesh, graded</span></p>
 </div>
 <p>Suppose you wish to have the mesh be graded,
 that you have increased resolution near the wall.
@@ -996,13 +986,13 @@ in the above <code class="docutils literal"><span class="pre">genbox</span></cod
 0.0   0.5   0.7               y0  y1   ratio
 </pre></div>
 </div>
-<p>yields the mesh shown in <code class="xref std std-numref docutils literal"><span class="pre">fig:mesh_axi2</span></code>.</p>
+<p>yields the mesh shown in <a class="reference internal" href="#fig-mesh-axi2"><span class="std std-numref">Fig. 13</span></a>.</p>
 </div>
 <div class="section" id="user-specified-distribution">
 <h3>User-Specified Distribution<a class="headerlink" href="#user-specified-distribution" title="Permalink to this headline">¶</a></h3>
 <div class="align-center figure" id="id5">
 <span id="fig-mesh-axi3"></span><img alt="axis-pipe-mesh-user" src="_images/mesh_axi3.png" />
-<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Axisymmetric pipe mesh, user specified.</span></p>
+<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Axisymmetric pipe mesh, user specified.</span></p>
 </div>
 <p>You can also specify your own, precise, distribution of element
 locations.   For example, another graded mesh similar to the
@@ -1017,7 +1007,7 @@ one of the preceding example could be built by changing the
 that <code class="docutils literal"><span class="pre">genbox</span></code> is expecting <code class="docutils literal"><span class="pre">Nely+1</span></code> values of <span class="math">\(y\)</span> positions on the
 <span class="math">\(y\)</span>-element distribution line.   This is the <code class="docutils literal"><span class="pre">genbox</span></code> default, which
 explains why it corresponds to <code class="docutils literal"><span class="pre">Nely</span></code> <span class="math">\(&gt;\)</span> 0.  The corresponding mesh
-is shown in <code class="xref std std-numref docutils literal"><span class="pre">fig:mesh_axi3</span></code>.</p>
+is shown in <a class="reference internal" href="#fig-mesh-axi3"><span class="std std-numref">Fig. 14</span></a>.</p>
 </div>
 </div>
 <div class="section" id="mesh-modification">
@@ -1068,27 +1058,27 @@ looks to the <code class="docutils literal"><span class="pre">.rea</span></code>
 Nek5000 to communicate the new mesh to <code class="docutils literal"><span class="pre">postx</span></code> is via the <code class="docutils literal"><span class="pre">.fld</span></code>
 file, so you must request that the geometry be dumped to the
 <code class="docutils literal"><span class="pre">.fld</span></code> file.
-The result of above changes is shown in <code class="xref std std-numref docutils literal"><span class="pre">fig:wavypipe</span></code>.</p>
+The result of above changes is shown in <a class="reference internal" href="#fig-wavypipe"><span class="std std-numref">Fig. 15</span></a>.</p>
 <div class="align-center figure" id="id6">
 <span id="fig-wavypipe"></span><img alt="axis-pipe-mesh-wavy" src="_images/wavypipe.png" />
-<p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text">Axisymmetric pipe mesh.</span></p>
+<p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text">Axisymmetric pipe mesh.</span></p>
 </div>
 <div class="section" id="cylindrical-cartesian-transition-annuli">
 <span id="sec-genbox"></span><h3>Cylindrical/Cartesian-transition Annuli<a class="headerlink" href="#cylindrical-cartesian-transition-annuli" title="Permalink to this headline">¶</a></h3>
 <div class="align-center figure" id="id7">
 <span id="fig-cylbox-2d"></span><img alt="annuli-mesh-1" src="_images/cylbox_2d.png" />
-<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Cylinder mesh</span></p>
+<p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text">Cylinder mesh</span></p>
 </div>
 <div class="align-center figure" id="id8">
 <span id="fig-cylbox-2da"></span><img alt="annuli-mesh-2" src="_images/cylbox_2da.png" />
-<p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text">Cylinder mesh</span></p>
+<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text">Cylinder mesh</span></p>
 </div>
 <p>More sophisticated
 transition treatments may be generated using the GLOBAL REFINE options in
 <code class="docutils literal"><span class="pre">prenek</span></code> or through an upgrade of <code class="docutils literal"><span class="pre">genb7</span></code>, as demand warrants.
 Example 2D and 3D input files are provided in the <code class="docutils literal"><span class="pre">nek5000/doc</span></code> files
 <code class="docutils literal"><span class="pre">box7.2d</span></code> and <code class="docutils literal"><span class="pre">box7.3d</span></code>.
-<code class="xref std std-numref docutils literal"><span class="pre">fig:cylbox_2d</span></code> shows a 2D example generated using
+<a class="reference internal" href="#fig-cylbox-2d"><span class="std std-numref">Fig. 16</span></a> shows a 2D example generated using
 the <code class="docutils literal"><span class="pre">box7.2d</span></code> input file, which reads:</p>
 <div class="highlight-none"><div class="highlight"><pre><span></span>x2d.rea
 2                      spatial dimension
@@ -1108,7 +1098,7 @@ ccbb                descriptors: c-cyl, o-oct, b-box (1 character + space)
 v  ,W  ,E  ,E  ,    bc&#39;s (3 characters + comma)
 </pre></div>
 </div>
-<p>An example of a mesh is shown in <code class="xref std std-numref docutils literal"><span class="pre">fig:cylbox_2d</span></code>.   The mesh has been quad-refined
+<p>An example of a mesh is shown in <a class="reference internal" href="#fig-cylbox-2d"><span class="std std-numref">Fig. 16</span></a>.   The mesh has been quad-refined
 once with oct-refine option of <code class="docutils literal"><span class="pre">prenek</span></code>. The 3D counterpart to this
 mesh could joined to a hemisphere/Cartesian transition built with
 the spherical mesh option in <code class="docutils literal"><span class="pre">prenek</span></code>.</p>
@@ -1153,7 +1143,7 @@ problem is solved consists of two distinct subdomains. The
 first subdomain is that part of the region occupied by
 fluid, denoted <span class="math">\(\Omega_f\)</span>, while the second subdomain is that part
 of the region occupied by a solid, denoted <span class="math">\(\Omega_s\)</span>. These two
-subdomains are depicted in <a class="reference internal" href="theory.html#fig-walls"><span class="std std-numref">Fig. 9</span></a>. The entire domain is denoted as <span class="math">\(D=\Omega_f \cup \Omega_s\)</span>.
+subdomains are depicted in <a class="reference internal" href="theory.html#fig-walls"><span class="std std-numref">Fig. 11</span></a>. The entire domain is denoted as <span class="math">\(D=\Omega_f \cup \Omega_s\)</span>.
 The fluid problem is solved in the domain <span class="math">\(\Omega_f\)</span>, while the
 temperature in the energy equation is solved in the
 entire domain; the passive scalars can be solved in either
@@ -1164,7 +1154,7 @@ of the boundary of <span class="math">\(\Omega_f\)</span> which is not shared by
 that part of the boundary of <span class="math">\(\Omega_f\)</span> which is shared by <span class="math">\(\Omega_s\)</span>.
 In addition, <span class="math">\(\partial \Omega_{s}, \overline{\partial \Omega_s}\)</span> are analogously defined.
 These distinct portions of the
-domain boundary are illustrated in <a class="reference internal" href="theory.html#fig-walls"><span class="std std-numref">Fig. 9</span></a>.
+domain boundary are illustrated in <a class="reference internal" href="theory.html#fig-walls"><span class="std std-numref">Fig. 11</span></a>.
 The restrictions on the domain for Nek5000 are itemized below.</p>
 <ul class="simple">
 <li>The domain <span class="math">\(\Omega=\Omega_f \cup \Omega_s\)</span> must correspond either to a
@@ -1189,7 +1179,7 @@ but only <span class="math">\(y\)</span>, that is, radius, <span class="math">\(
 relevant equations to “two-dimensional” form.</li>
 </ul>
 <p>Fully general three-dimensional meshes generated by other softwares
-packages can be input to <code class="docutils literal"><span class="pre">prenek</span></code> as import meshes.</p>
+packages can be input to <code class="docutils literal"><span class="pre">prenek</span></code> as imported meshes.</p>
 </div>
 </div>
 
