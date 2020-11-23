@@ -115,6 +115,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../problem_setup.html">Problem Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix.html">Appendices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
             
@@ -314,7 +315,7 @@ Exiting session
 <div class="highlight-none"><div class="highlight"><pre><span></span>cp $HOME/Nek5000/examples/conj_ht/conj_ht.usr cht2d.usr
 </pre></div>
 </div>
-<p>Note: in  <a class="reference internal" href="../problem_setup/case_files.html#case-files-uservp"><span class="std std-ref">the uservp subroutine</span></a>, users can specifiy different variable properties for fluid and solid subdomain.</p>
+<p>Note: in  <span class="xref std std-ref">the uservp subroutine</span>, users can specifiy different variable properties for fluid and solid subdomain.</p>
 <div class="section" id="initial-boundary-conditions">
 <h3>Initial &amp; boundary conditions<a class="headerlink" href="#initial-boundary-conditions" title="Permalink to this headline">¶</a></h3>
 <p>In this study, the volumetric heat source is set to be zero <em>qvol=0</em> in <em>t mesh</em> which can be done in <code class="docutils literal"><span class="pre">userq</span></code> subroutine. The next step is to specify the initial and boundary conditions. We apply a linear variation of temperature in fluid mesh in <em>y</em>-direction where the lower plate is heated and the upper one is cooled, uniformly. Subsequently, we modify <code class="docutils literal"><span class="pre">userf</span></code>, <code class="docutils literal"><span class="pre">userbc</span></code> and <code class="docutils literal"><span class="pre">useric</span></code> as:</p>
