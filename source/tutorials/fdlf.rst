@@ -427,9 +427,9 @@ Plots of the velocity and temperature varying along the y-axis as evaluated by N
 
    Nek5000 temperature solutions plotted against analytical solutions.
 
-........................
+............................
 Nondimensionalizing the case
-........................
+............................
 
 This case can also be ran nondimensionally in Nek5000 to yield the same results. 
 
@@ -455,13 +455,13 @@ The time step ``dt`` can be nondimensionalized as follows:
 .. math::
    dt^* = \frac{dt*u_m}{D_h} = \frac{(0.0001 \ s)(0.5 \ m/s)}{0.02 \ m} = 2.5*10^{-3}
 
-Before editing the ``fdlf.par`` file further the Reynold's number and Peclet number need to be calculated in order to define the case nondimensionally.
-The Reynold's number is calculated as shown :ref:`here _https://nek5000.github.io/NekDoc/theory.html#non-dimensional-navier-stokes` and for this case can be calculated as follows:
+Before editing the ``fdlf.par`` file further the Reynolds number and Peclet number need to be calculated in order to define the case nondimensionally.
+The Reynold's number is calculated as shown :ref:`here<intro_ns_nondim>` and for this case can be calculated as follows:
 
 .. math::
    Re = \frac{\rho u_m D_h}{\mu} = \frac{(1.2 \ kg/m^3)(0.5 \ m/s)(0.02 \ m)}{0.00002 \ kg/m-s} = 600
 
-The Peclet number is calculated as shown :ref:`here _https://nek5000.github.io/NekDoc/theory.html#non-dimensional-energy-passive-scalar-equation`:
+The Peclet number is calculated as shown :ref:`here <intro_energy_nondim>`:
 
 .. math::
    Pe = \frac{\rho u_m D_h c_p}{k} = {(1.2 \ kg/m^3)(0.5 \ m/s)(0.02 \ m)(1000 \ J/kg-K)}{0.025 \ W/m-K} = 480  
