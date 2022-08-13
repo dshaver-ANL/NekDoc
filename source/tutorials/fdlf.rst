@@ -431,7 +431,8 @@ Plots of the velocity and temperature varying along the y-axis as evaluated by N
 Nondimensionalizing the case
 ............................
 
-This case can also be ran nondimensionally in Nek5000 to yield the same results. 
+This case can also be run nondimensionally in Nek5000 to yield the same results.
+To do so, we must choose apprpriate scaling values for length, velocity (time), mass, etc. 
 
 First, the length scale needs to be determined to nondimensionalize the fluid domain. 
 The length scale can be found by calculating the hydraulic diameter.
@@ -456,17 +457,18 @@ The time step ``dt`` can be nondimensionalized as follows:
    dt^* = \frac{dt*u_m}{D_h} = \frac{(0.0001 \ s)(0.5 \ m/s)}{0.02 \ m} = 2.5*10^{-3}
 
 Before editing the ``fdlf.par`` file further the Reynolds number and Peclet number need to be calculated in order to define the case nondimensionally.
-The Reynold's number is calculated as shown :ref:`here<intro_ns_nondim>` and for this case can be calculated as follows:
+The Reynold's number is calculated consitent with the method used :ref:`here<intro_ns_nondim>`.
+For this case it can be calculated as follows:
 
 .. math::
    Re = \frac{\rho u_m D_h}{\mu} = \frac{(1.2 \ kg/m^3)(0.5 \ m/s)(0.02 \ m)}{0.00002 \ kg/m-s} = 600
 
-The Peclet number is calculated as shown :ref:`here <intro_energy_nondim>`:
+The Peclet number is calculated consistent with the method used :ref:`here <intro_energy_nondim>`:
 
 .. math::
-   Pe = \frac{\rho u_m D_h c_p}{k} = {(1.2 \ kg/m^3)(0.5 \ m/s)(0.02 \ m)(1000 \ J/kg-K)}{0.025 \ W/m-K} = 480  
+   Pe = \frac{\rho u_m D_h c_p}{k} = \frac{(1.2 \ kg/m^3)(0.5 \ m/s)(0.02 \ m)(1000 \ J/kg-K)}{0.025 \ W/m-K} = 480  
 
-Both ``rho`` and ``rhoCp`` become 1 and ``viscosity`` is set to -600 to define the Reynolds number while ``conductivity`` is set to -480 to define the Peclet number.
+Both ``rho`` and ``rhoCp`` become 1 and ``viscosity`` is set to -600 in the `.par` file to define the Reynolds number while ``conductivity`` is set to -480 to define the Peclet number.
 The time step size was also increased because the case took longer to develop and the CFL was low enough to support the increase in step size.
 
 .. .. literalinclude:: fdlf/NDfdlf.par
