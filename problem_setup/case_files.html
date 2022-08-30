@@ -1,33 +1,72 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8" />
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Case Files &mdash; Nek5000  documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  
+  <title>Case Files &mdash; Nek5000  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script type="text/javascript" src="../_static/jquery.js"></script>
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
         <script type="text/javascript" src="../_static/language_data.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script src="../_static/js/theme.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Additional Features" href="features.html" />
-    <link rel="prev" title="Boundary Conditions" href="boundary_conditions.html" /> 
+    <link rel="next" title="User Routines File (.usr)" href="usr_file.html" />
+    <link rel="prev" title="Boundary Conditions" href="BCs.html" /> 
 </head>
 
-<body class="wy-body-for-nav"> 
+<body class="wy-body-for-nav">
+
+   
   <div class="wy-grid-for-nav">
+    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
+          
+
+          
             <a href="../index.html" class="icon icon-home"> Nek5000
+          
+
+          
           </a>
+
+          
+            
+            
+          
+
+          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -35,13 +74,24 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../problem_setup.html">Problem Setup</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="boundary_conditions.html">Boundary Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BCs.html">Boundary Conditions</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Case Files</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#session-name">SESSION.NAME</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#parameter-file-par">Parameter File (.par)</a></li>
@@ -52,24 +102,12 @@
 <li class="toctree-l4"><a class="reference internal" href="#boundaries">Boundaries</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#user-routines-file-usr">User Routines File (.usr)</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#uservp">uservp</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#userf">userf</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#userq">userq</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#userbc">userbc</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#useric">useric</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#userchk">userchk</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#userqtl">userqtl</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#usrdat">usrdat</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#usrdat2">usrdat2</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#usrdat3">usrdat3</a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="#size">SIZE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mesh-partitioning-file-map-ma2">Mesh Partitioning File (.map/.ma2)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#restart-output-files-f">Restart/Output files (.f#####)</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="usr_file.html">User Routines File (.usr)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="features.html">Additional Features</a></li>
 </ul>
 </li>
@@ -79,31 +117,73 @@
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
+            
+          
         </div>
+        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Nek5000</a>
+        
       </nav>
 
+
       <div class="wy-nav-content">
+        
         <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
+    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
           <li><a href="../problem_setup.html">Problem Setup</a> &raquo;</li>
+        
       <li>Case Files</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
+        
+          
             <a href="../_sources/problem_setup/case_files.rst.txt" rel="nofollow"> View page source</a>
+          
+        
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-             
+            
   <div class="section" id="case-files">
 <span id="id1"></span><h1>Case Files<a class="headerlink" href="#case-files" title="Permalink to this headline">¶</a></h1>
 <p>Each simulation is defined by six <em>required</em> case files:</p>
@@ -122,7 +202,7 @@
 </ul>
 <div class="section" id="session-name">
 <h2>SESSION.NAME<a class="headerlink" href="#session-name" title="Permalink to this headline">¶</a></h2>
-<p>To run Nek5000, each simulation must have a <code class="docutils literal notranslate"><span class="pre">SESSION.NAME</span></code> file.
+<p>To run <em>Nek5000</em>, each simulation must have a <code class="docutils literal notranslate"><span class="pre">SESSION.NAME</span></code> file.
 This file is read in by the code and gives the path to the relevant files describing the structure and parameters of the simulation.
 The <code class="docutils literal notranslate"><span class="pre">SESSION.NAME</span></code> file is a file that contains the name of the simulation and the full path to supporting files.
 For example, to run the eddy example from the repository, the <code class="docutils literal notranslate"><span class="pre">SESSION.NAME</span></code> file would look like:</p>
@@ -1060,7 +1140,7 @@ are in the fluid mesh (100).</p>
 </div></blockquote>
 <p>Following the header, all elements are listed. The fluid elements are listed
 first, followed by all solid elements if present.</p>
-<p>The data following the header is formatted as shown in <a class="reference internal" href="#tab-element"><span class="std std-numref">Table 17</span></a>. This provides all the coordinates of an element for top and bottom faces. The numbering of the vertices is shown in Fig. <a class="reference internal" href="#fig-elorder"><span class="std std-numref">Fig. 13</span></a>. The header for each element as in <a class="reference internal" href="#tab-element"><span class="std std-numref">Table 17</span></a>, i.e. <code class="docutils literal notranslate"><span class="pre">[1A]</span> <span class="pre">GROUP</span></code> is reminiscent of older Nek5000 format and does not impact the mesh generation at this stage.</p>
+<p>The data following the header is formatted as shown in <a class="reference internal" href="#tab-element"><span class="std std-numref">Table 17</span></a>. This provides all the coordinates of an element for top and bottom faces. The numbering of the vertices is shown in Fig. <a class="reference internal" href="#fig-elorder"><span class="std std-numref">Fig. 13</span></a>. The header for each element as in <a class="reference internal" href="#tab-element"><span class="std std-numref">Table 17</span></a>, i.e. <code class="docutils literal notranslate"><span class="pre">[1A]</span> <span class="pre">GROUP</span></code> is reminiscent of older <em>Nek5000</em> format and does not impact the mesh generation at this stage.</p>
 <blockquote>
 <div><div class="align-center figure" id="id13">
 <span id="fig-elorder"></span><img alt="rea-geometry" src="../_images/3dcube_1.png" />
@@ -1260,75 +1340,6 @@ numbers represent vertices.</span></p>
 </table>
 </div></blockquote>
 </div></blockquote>
-</div>
-</div>
-<div class="section" id="user-routines-file-usr">
-<span id="case-files-usr"></span><h2>User Routines File (.usr)<a class="headerlink" href="#user-routines-file-usr" title="Permalink to this headline">¶</a></h2>
-<p>This file implements the the user interface to Nek5000. What follows is a brief description of the available
-subroutines.</p>
-<div class="section" id="uservp">
-<span id="case-files-uservp"></span><h3>uservp<a class="headerlink" href="#uservp" title="Permalink to this headline">¶</a></h3>
-<p>This function can be used  to specify customized or solution dependent material
-properties.</p>
-<p>Example:</p>
-<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">ifield</span><span class="p">.</span><span class="n">eq</span><span class="p">.</span><span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
-<span class="k">   </span><span class="n">udiff</span>  <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="nb">exp</span><span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="o">*</span><span class="n">temp</span><span class="p">)</span> <span class="c">! dynamic viscosity</span>
-   <span class="n">utrans</span> <span class="o">=</span> <span class="mf">1.0</span>              <span class="c">! density</span>
-<span class="k">else if</span> <span class="p">(</span><span class="n">ifield</span><span class="p">.</span><span class="n">eq</span><span class="p">.</span><span class="mi">2</span><span class="p">)</span> <span class="k">then</span>
-<span class="k">   </span><span class="n">udiff</span>  <span class="o">=</span> <span class="mf">1.0</span>              <span class="c">! conductivity</span>
-   <span class="n">utrans</span> <span class="o">=</span> <span class="mf">1.0</span>              <span class="c">! rho*cp</span>
-<span class="n">endif</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="userf">
-<h3>userf<a class="headerlink" href="#userf" title="Permalink to this headline">¶</a></h3>
-<p>This functions sets the source term (which will be subsequently be multiplied by
-the density) for the momentum equation.</p>
-<p>Example:</p>
-<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">parameter</span><span class="p">(</span><span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span><span class="p">)</span>
-
-<span class="n">ffx</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="n">ffy</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="n">ffz</span> <span class="o">=</span> <span class="o">-</span><span class="n">g</span> <span class="c">! gravitational acceleration</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="userq">
-<h3>userq<a class="headerlink" href="#userq" title="Permalink to this headline">¶</a></h3>
-<p>This functions sets the source term for the energy (temperature) and passive scalar equations.</p>
-</div>
-<div class="section" id="userbc">
-<h3>userbc<a class="headerlink" href="#userbc" title="Permalink to this headline">¶</a></h3>
-<p>This functions sets boundary conditions. Note, this function is only called
-for special boundary condition types and only for points on the boundary surface.</p>
-</div>
-<div class="section" id="useric">
-<h3>useric<a class="headerlink" href="#useric" title="Permalink to this headline">¶</a></h3>
-<p>This functions sets the initial conditions.</p>
-</div>
-<div class="section" id="userchk">
-<h3>userchk<a class="headerlink" href="#userchk" title="Permalink to this headline">¶</a></h3>
-<p>This is a general purpose function that gets executed before the time stepper and after every time
-step.</p>
-</div>
-<div class="section" id="userqtl">
-<h3>userqtl<a class="headerlink" href="#userqtl" title="Permalink to this headline">¶</a></h3>
-<p>This function can be used  to specify a cutomzized thermal diveregence for the low Mach solver.
-step.</p>
-</div>
-<div class="section" id="usrdat">
-<h3>usrdat<a class="headerlink" href="#usrdat" title="Permalink to this headline">¶</a></h3>
-<p>This function can be used to modify the element vertices and is called before the spectral element mesh (GLL points) has been laid out.</p>
-</div>
-<div class="section" id="usrdat2">
-<h3>usrdat2<a class="headerlink" href="#usrdat2" title="Permalink to this headline">¶</a></h3>
-<p>This function can be used to modify the spectral element mesh.
-The geometry information (mass matrix, surface normals, etc.) will be rebuilt after this routine is called.</p>
-</div>
-<div class="section" id="usrdat3">
-<h3>usrdat3<a class="headerlink" href="#usrdat3" title="Permalink to this headline">¶</a></h3>
-<p>This function can be used to initialize case/user specific data.</p>
 </div>
 </div>
 <div class="section" id="size">
@@ -1590,33 +1601,50 @@ coordinates and any field data are optional.  Their presence of coordinates and 
 
 
            </div>
+           
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="boundary_conditions.html" class="btn btn-neutral float-left" title="Boundary Conditions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="features.html" class="btn btn-neutral float-right" title="Additional Features" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="usr_file.html" class="btn btn-neutral float-right" title="User Routines File (.usr)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="BCs.html" class="btn btn-neutral float-left" title="Boundary Conditions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2015-2022, UCHICAGO ARGONNE, LLC.</p>
-  </div>
+    <p>
+        &#169; Copyright 2015-2022, UCHICAGO ARGONNE, LLC.
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
         </div>
       </div>
+
     </section>
+
   </div>
-  <script>
+  
+
+  <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
