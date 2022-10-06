@@ -336,15 +336,16 @@ This list was explicitly set with the legacy <code class="docutils literal notra
 <span id="sec-commonvars"></span><h2>Commonly Used Variables<a class="headerlink" href="#commonly-used-variables" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="solution-variables">
 <h3>Solution Variables<a class="headerlink" href="#solution-variables" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
+<table border="1" class="docutils" id="id1">
+<caption><span class="caption-number">Table 32 </span><span class="caption-text">Solution Variables</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
 <colgroup>
-<col width="15%" />
-<col width="35%" />
-<col width="9%" />
-<col width="41%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">Variable Name</th>
+<tr class="row-odd"><th class="head">Name</th>
 <th class="head">Size</th>
 <th class="head">Type</th>
 <th class="head">Short Description</th>
@@ -354,62 +355,62 @@ This list was explicitly set with the legacy <code class="docutils literal notra
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">vx</span></code></td>
 <td>(lx1,ly1,lz1,lelv)</td>
 <td>real</td>
-<td>x-velocity (u)</td>
+<td>x-velocity (<span class="math notranslate nohighlight">\(u\)</span>)</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">vy</span></code></td>
 <td>(lx1,ly1,lz1,lelv)</td>
 <td>real</td>
-<td>y-velocity (v)</td>
+<td>y-velocity (<span class="math notranslate nohighlight">\(v\)</span>)</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">vz</span></code></td>
 <td>(lx1,ly1,lz1,lelv)</td>
 <td>real</td>
-<td>z-velocity (w)</td>
+<td>z-velocity (<span class="math notranslate nohighlight">\(w\)</span>)</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">pr</span></code></td>
 <td>(lx2,ly2,lz2,lelv)</td>
 <td>real</td>
-<td>pressure (pr)</td>
+<td>pressure (<span class="math notranslate nohighlight">\(P\)</span>)</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">t</span></code></td>
 <td>(lx1,ly1,lz1,lelt,ldimt)</td>
 <td>real</td>
-<td>temperature (t) and passive scalars (ps)</td>
+<td>temperature (<span class="math notranslate nohighlight">\(T\)</span>) and passives calars (<span class="math notranslate nohighlight">\(\phi_i\)</span>)</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">vtrans</span></code></td>
 <td>(lx1,ly1,lz1,lelt,ldimt+1)</td>
 <td>real</td>
-<td>convective coefficient</td>
+<td>convective coefficient – <span class="math notranslate nohighlight">\(\rho\)</span>, <span class="math notranslate nohighlight">\((\rho c_p)\)</span>, <span class="math notranslate nohighlight">\(\rho_i\)</span></td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">vdiff</span></code></td>
 <td>(lx1,ly1,lz1,lelt,ldimt+1)</td>
 <td>real</td>
-<td>diffusion coefficient</td>
+<td>diffusion coefficient – <span class="math notranslate nohighlight">\(\mu\)</span>, <span class="math notranslate nohighlight">\(\lambda\)</span>, <span class="math notranslate nohighlight">\(\Gamma_i\)</span></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">vxlag</span></code></td>
 <td>(lx1,ly1,lz1,lelv,2)</td>
 <td>real</td>
-<td>x-velocity at previous time steps</td>
+<td><span class="math notranslate nohighlight">\(u\)</span> at previous time steps</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">vylag</span></code></td>
 <td>(lx1,ly1,lz1,lelv,2)</td>
 <td>real</td>
-<td>y-velocity at previous time steps</td>
+<td><span class="math notranslate nohighlight">\(v\)</span> at previous time steps</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">vzlag</span></code></td>
 <td>(lx1,ly1,lz1,lelv,2)</td>
 <td>real</td>
-<td>z-velocity at previous time steps</td>
+<td><span class="math notranslate nohighlight">\(w\)</span> at previous time steps</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">prlag</span></code></td>
 <td>(lx2,ly2,lz2,lelv,lorder2)</td>
 <td>real</td>
-<td>pressure at previous time steps</td>
+<td><span class="math notranslate nohighlight">\(P\)</span> at previous time steps</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">tlag</span></code></td>
 <td>(lx1,ly1,lz1,lelv,lorder-1,ldimt+1)</td>
 <td>real</td>
-<td>t and ps at previous time steps</td>
+<td><span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(\phi_i\)</span> at previous time steps</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">time</span></code></td>
 <td>–</td>
@@ -422,7 +423,10 @@ This list was explicitly set with the legacy <code class="docutils literal notra
 <td>time step size</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">dtlag</span></code></td>
-<td>( 10 )</td>
+<td><ol class="first last arabic simple" start="10">
+<li></li>
+</ol>
+</td>
 <td>real</td>
 <td>previous time step sizes</td>
 </tr>
@@ -600,7 +604,7 @@ This list was explicitly set with the legacy <code class="docutils literal notra
 </table>
 </div>
 <div class="section" id="averaging-variables">
-<h3>Averaging Variables<a class="headerlink" href="#averaging-variables" title="Permalink to this headline">¶</a></h3>
+<span id="sec-avgvars"></span><h3>Averaging Variables<a class="headerlink" href="#averaging-variables" title="Permalink to this headline">¶</a></h3>
 <p>Arrays associated with the <code class="docutils literal notranslate"><span class="pre">avg_all</span></code> subroutine</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -774,7 +778,7 @@ The resulting integral is storted in <code class="docutils literal notranslate">
 <p>Suppose you wish to simulate flow through an axisymmetric pipe,
 of radius <span class="math notranslate nohighlight">\(R=0.5\)</span> and length <span class="math notranslate nohighlight">\(L=4\)</span>.  You estimate that you will
 need 3 elements in radial <span class="math notranslate nohighlight">\((y)\)</span> direction, and 5 in the <span class="math notranslate nohighlight">\(x\)</span> direction,
-as depicted in <a class="reference internal" href="#fig-mesh-axi1"><span class="std std-numref">Fig. 18</span></a>.
+as depicted in <a class="reference internal" href="#fig-mesh-axi1"><span class="std std-numref">Fig. 20</span></a>.
 This would be specified by the following input file (called <code class="docutils literal notranslate"><span class="pre">pipe.box</span></code>)
 to <code class="docutils literal notranslate"><span class="pre">genbox</span></code>:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>axisymmetric.rea
@@ -794,9 +798,9 @@ Box 1                         Pipe
 v  ,O  ,A  ,W  ,   ,          BC&#39;s:  (cbx0, cbx1, cby0, cby1, cbz0, cbz1)
 </pre></div>
 </div>
-<div class="align-center figure" id="id1">
+<div class="align-center figure" id="id2">
 <span id="fig-mesh-axi1"></span><img alt="axis-pipe-mesh" src="_images/mesh_axi1.png" />
-<p class="caption"><span class="caption-number">Fig. 18 </span><span class="caption-text">Axisymmetric pipe mesh.</span></p>
+<p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text">Axisymmetric pipe mesh.</span></p>
 </div>
 <ul>
 <li><p class="first">The first line of this file supplies the name of an existing 2D <code class="docutils literal notranslate"><span class="pre">.rea</span></code> file that has the appropriate run parameters (viscosity, timestep size, etc.). These parameters can be modified later, but it is important that <code class="docutils literal notranslate"><span class="pre">axisymmetric.rea</span></code> be a 2D file, and not a 3D file.</p>
@@ -841,9 +845,9 @@ equivalent to a <em>v</em> or <em>V</em> boundary condition, with <span class="m
 </div>
 <div class="section" id="graded-mesh">
 <h3>Graded Mesh<a class="headerlink" href="#graded-mesh" title="Permalink to this headline">¶</a></h3>
-<div class="align-center figure" id="id2">
+<div class="align-center figure" id="id3">
 <span id="fig-mesh-axi2"></span><img alt="axis-pipe-mesh-graded" src="_images/mesh_axi2.png" />
-<p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text">Axisymmetric pipe mesh, graded</span></p>
+<p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text">Axisymmetric pipe mesh, graded</span></p>
 </div>
 <p>Suppose you wish to have the mesh be graded,
 that you have increased resolution near the wall.
@@ -861,13 +865,13 @@ in the above <code class="docutils literal notranslate"><span class="pre">genbox
 0.0   0.5   0.7               y0  y1   ratio
 </pre></div>
 </div>
-<p>yields the mesh shown in <a class="reference internal" href="#fig-mesh-axi2"><span class="std std-numref">Fig. 19</span></a>.</p>
+<p>yields the mesh shown in <a class="reference internal" href="#fig-mesh-axi2"><span class="std std-numref">Fig. 21</span></a>.</p>
 </div>
 <div class="section" id="user-specified-distribution">
 <h3>User-Specified Distribution<a class="headerlink" href="#user-specified-distribution" title="Permalink to this headline">¶</a></h3>
-<div class="align-center figure" id="id3">
+<div class="align-center figure" id="id4">
 <span id="fig-mesh-axi3"></span><img alt="axis-pipe-mesh-user" src="_images/mesh_axi3.png" />
-<p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text">Axisymmetric pipe mesh, user specified.</span></p>
+<p class="caption"><span class="caption-number">Fig. 22 </span><span class="caption-text">Axisymmetric pipe mesh, user specified.</span></p>
 </div>
 <p>You can also specify your own, precise, distribution of element
 locations.   For example, another graded mesh similar to the
@@ -882,7 +886,7 @@ one of the preceding example could be built by changing the
 that <code class="docutils literal notranslate"><span class="pre">genbox</span></code> is expecting <code class="docutils literal notranslate"><span class="pre">Nely+1</span></code> values of <span class="math notranslate nohighlight">\(y\)</span> positions on the
 <span class="math notranslate nohighlight">\(y\)</span>-element distribution line.   This is the <code class="docutils literal notranslate"><span class="pre">genbox</span></code> default, which
 explains why it corresponds to <code class="docutils literal notranslate"><span class="pre">Nely</span></code> <span class="math notranslate nohighlight">\(&gt;\)</span> 0.  The corresponding mesh
-is shown in <a class="reference internal" href="#fig-mesh-axi3"><span class="std std-numref">Fig. 20</span></a>.</p>
+is shown in <a class="reference internal" href="#fig-mesh-axi3"><span class="std std-numref">Fig. 22</span></a>.</p>
 </div>
 </div>
 <div class="section" id="mesh-modification">
@@ -933,27 +937,27 @@ looks to the <code class="docutils literal notranslate"><span class="pre">.rea</
 Nek5000 to communicate the new mesh to <code class="docutils literal notranslate"><span class="pre">postx</span></code> is via the <code class="docutils literal notranslate"><span class="pre">.fld</span></code>
 file, so you must request that the geometry be dumped to the
 <code class="docutils literal notranslate"><span class="pre">.fld</span></code> file.
-The result of above changes is shown in <a class="reference internal" href="#fig-wavypipe"><span class="std std-numref">Fig. 21</span></a>.</p>
-<div class="align-center figure" id="id4">
+The result of above changes is shown in <a class="reference internal" href="#fig-wavypipe"><span class="std std-numref">Fig. 23</span></a>.</p>
+<div class="align-center figure" id="id5">
 <span id="fig-wavypipe"></span><img alt="axis-pipe-mesh-wavy" src="_images/wavypipe.png" />
-<p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text">Axisymmetric pipe mesh.</span></p>
+<p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text">Axisymmetric pipe mesh.</span></p>
 </div>
 <div class="section" id="cylindrical-cartesian-transition-annuli">
 <h3>Cylindrical/Cartesian-transition Annuli<a class="headerlink" href="#cylindrical-cartesian-transition-annuli" title="Permalink to this headline">¶</a></h3>
-<div class="align-center figure" id="id5">
-<span id="fig-cylbox-2d"></span><img alt="annuli-mesh-1" src="_images/cylbox_2d.png" />
-<p class="caption"><span class="caption-number">Fig. 22 </span><span class="caption-text">Cylinder mesh</span></p>
-</div>
 <div class="align-center figure" id="id6">
+<span id="fig-cylbox-2d"></span><img alt="annuli-mesh-1" src="_images/cylbox_2d.png" />
+<p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text">Cylinder mesh</span></p>
+</div>
+<div class="align-center figure" id="id7">
 <span id="fig-cylbox-2da"></span><img alt="annuli-mesh-2" src="_images/cylbox_2da.png" />
-<p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text">Cylinder mesh</span></p>
+<p class="caption"><span class="caption-number">Fig. 25 </span><span class="caption-text">Cylinder mesh</span></p>
 </div>
 <p>More sophisticated
 transition treatments may be generated using the GLOBAL REFINE options in
 <em>preNek</em> or through an upgrade of <code class="docutils literal notranslate"><span class="pre">genb7</span></code>, as demand warrants.
 Example 2D and 3D input files are provided in the <code class="docutils literal notranslate"><span class="pre">nek5000/doc</span></code> files
 <code class="docutils literal notranslate"><span class="pre">box7.2d</span></code> and <code class="docutils literal notranslate"><span class="pre">box7.3d</span></code>.
-<a class="reference internal" href="#fig-cylbox-2d"><span class="std std-numref">Fig. 22</span></a> shows a 2D example generated using
+<a class="reference internal" href="#fig-cylbox-2d"><span class="std std-numref">Fig. 24</span></a> shows a 2D example generated using
 the <code class="docutils literal notranslate"><span class="pre">box7.2d</span></code> input file, which reads:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>x2d.rea
 2                      spatial dimension
@@ -973,7 +977,7 @@ ccbb                descriptors: c-cyl, o-oct, b-box (1 character + space)
 v  ,W  ,E  ,E  ,    bc&#39;s (3 characters + comma)
 </pre></div>
 </div>
-<p>An example of a mesh is shown in <a class="reference internal" href="#fig-cylbox-2d"><span class="std std-numref">Fig. 22</span></a>.   The mesh has been quad-refined
+<p>An example of a mesh is shown in <a class="reference internal" href="#fig-cylbox-2d"><span class="std std-numref">Fig. 24</span></a>.   The mesh has been quad-refined
 once with oct-refine option of <em>preNek</em>. The 3D counterpart to this
 mesh could joined to a hemisphere/Cartesian transition built with
 the spherical mesh option in <em>preNek</em>.</p>
@@ -1018,7 +1022,7 @@ problem is solved consists of two distinct subdomains. The
 first subdomain is that part of the region occupied by
 fluid, denoted <span class="math notranslate nohighlight">\(\Omega_f\)</span>, while the second subdomain is that part
 of the region occupied by a solid, denoted <span class="math notranslate nohighlight">\(\Omega_s\)</span>. These two
-subdomains are depicted in <a class="reference internal" href="theory.html#fig-walls"><span class="std std-numref">Fig. 17</span></a>. The entire domain is denoted as <span class="math notranslate nohighlight">\(D=\Omega_f \cup \Omega_s\)</span>.
+subdomains are depicted in <a class="reference internal" href="theory.html#fig-walls"><span class="std std-numref">Fig. 19</span></a>. The entire domain is denoted as <span class="math notranslate nohighlight">\(D=\Omega_f \cup \Omega_s\)</span>.
 The fluid problem is solved in the domain <span class="math notranslate nohighlight">\(\Omega_f\)</span>, while the
 temperature in the energy equation is solved in the
 entire domain; the passive scalars can be solved in either
@@ -1029,7 +1033,7 @@ of the boundary of <span class="math notranslate nohighlight">\(\Omega_f\)</span
 that part of the boundary of <span class="math notranslate nohighlight">\(\Omega_f\)</span> which is shared by <span class="math notranslate nohighlight">\(\Omega_s\)</span>.
 In addition, <span class="math notranslate nohighlight">\(\partial \Omega_{s}, \overline{\partial \Omega_s}\)</span> are analogously defined.
 These distinct portions of the
-domain boundary are illustrated in <a class="reference internal" href="theory.html#fig-walls"><span class="std std-numref">Fig. 17</span></a>.
+domain boundary are illustrated in <a class="reference internal" href="theory.html#fig-walls"><span class="std std-numref">Fig. 19</span></a>.
 The restrictions on the domain for Nek5000 are itemized below.</p>
 <ul class="simple">
 <li>The domain <span class="math notranslate nohighlight">\(\Omega=\Omega_f \cup \Omega_s\)</span> must correspond either to a

@@ -182,28 +182,20 @@
 <div class="section" id="computational-approach">
 <span id="intro-comput-approach"></span><h2>Computational Approach<a class="headerlink" href="#computational-approach" title="Permalink to this headline">¶</a></h2>
 <p>The spatial discretization is based on the spectral element method (SEM) <a class="reference internal" href="references.html#patera1984" id="id1">[Patera1984]</a>, which is a
-high-order weighted residual technique similar to the finite element method.   In the SEM, the
-solution and data are represented in terms of <span class="math notranslate nohighlight">\(N\)</span> th-order tensor-product polynomials within each
-of <span class="math notranslate nohighlight">\(E\)</span> deformable hexahedral (brick) elements. Typical discretizations involve
-<span class="math notranslate nohighlight">\(E\)</span>=100–10,000 elements of order <span class="math notranslate nohighlight">\(N\)</span>=8–16 (corresponding to 512–4096 points per
-element).  Vectorization and cache efficiency derive from the local lexicographical ordering within
-each macro-element and from the fact that the action of discrete operators, which nominally have
-<span class="math notranslate nohighlight">\(O(EN^6)\)</span> nonzeros, can be evaluated in only <span class="math notranslate nohighlight">\(O(EN^4)\)</span> work and <span class="math notranslate nohighlight">\(O(EN^3)\)</span> storage
-through the use of tensor-product-sum factorization <a class="reference internal" href="references.html#orszag1980" id="id2">[Orszag1980]</a>.   The SEM exhibits very little
-numerical dispersion and dissipation, which can be important, for example, in stability
-calculations, for long time integrations, and for high Reynolds number flows. We refer to
-<a class="reference internal" href="references.html#denville2002" id="id3">[Denville2002]</a> for more details.</p>
-<p>Nek5000 solves the unsteady incompressible two-dimensional, axisymmetric, or three-dimensional
-Stokes or Navier-Stokes equations with forced or natural convection heat transfer in both
-stationary (fixed) or time-dependent geometry. It also solves the compressible Navier-Stokes in the
-Low Mach regime, the magnetohydrodynamic equation (MHD).  The solution variables are the fluid
-velocity <span class="math notranslate nohighlight">\(\mathbf u=(u_{x},u_{y},u_{z})\)</span>, the pressure <span class="math notranslate nohighlight">\(p\)</span>, the temperature <span class="math notranslate nohighlight">\(T\)</span>.
-All of the above field variables are functions of space <span class="math notranslate nohighlight">\({\bf x}=(x,y,z)\)</span> and time <span class="math notranslate nohighlight">\(t\)</span>
-in domains <span class="math notranslate nohighlight">\(\Omega_f\)</span> and/or <span class="math notranslate nohighlight">\(\Omega_s\)</span> defined in <a class="reference internal" href="#fig-walls"><span class="std std-numref">Fig. 17</span></a>.
+high-order weighted residual technique similar to the finite element method.
+In the SEM, the solution and data are represented in terms of <span class="math notranslate nohighlight">\(N^{th}\)</span>-order tensor-product polynomials within each of <span class="math notranslate nohighlight">\(E\)</span> deformable hexahedral (brick) elements.
+Typical discretizations involve <span class="math notranslate nohighlight">\(E=\)</span> 100–1,000,000 elements of order <span class="math notranslate nohighlight">\(N=\)</span> 8–16 (corresponding to 512–4096 points per element).
+Vectorization and cache efficiency derive from the local lexicographical ordering within each macro-element and from the fact that the action of discrete operators, which nominally have <span class="math notranslate nohighlight">\(O(EN^6)\)</span> nonzeros, can be evaluated in only <span class="math notranslate nohighlight">\(O(EN^4)\)</span> work and <span class="math notranslate nohighlight">\(O(EN^3)\)</span> storage through the use of tensor-product-sum factorization <a class="reference internal" href="references.html#orszag1980" id="id2">[Orszag1980]</a>.
+The SEM exhibits very little numerical dispersion and dissipation, which can be important, for example, in stability calculations, for long time integrations, and for high Reynolds number flows.
+We refer to <a class="reference internal" href="references.html#denville2002" id="id3">[Denville2002]</a> for more details.</p>
+<p>Nek5000 solves the unsteady incompressible two-dimensional, axisymmetric, or three-dimensional Stokes or Navier-Stokes equations with forced or natural convection heat transfer in both stationary (fixed) or time-dependent geometry.
+It also solves the compressible Navier-Stokes in the Low Mach regime, and the magnetohydrodynamic equation (MHD).
+The solution variables are the fluid velocity <span class="math notranslate nohighlight">\(\mathbf u=(u_{x},u_{y},u_{z})\)</span>, the pressure <span class="math notranslate nohighlight">\(p\)</span>, the temperature <span class="math notranslate nohighlight">\(T\)</span>.
+All of the above field variables are functions of space <span class="math notranslate nohighlight">\({\bf x}=(x,y,z)\)</span> and time <span class="math notranslate nohighlight">\(t\)</span> in domains <span class="math notranslate nohighlight">\(\Omega_f\)</span> and/or <span class="math notranslate nohighlight">\(\Omega_s\)</span> defined in <a class="reference internal" href="#fig-walls"><span class="std std-numref">Fig. 19</span></a>.
 Additionally Nek5000 can handle conjugate heat transfer problems.</p>
 <div class="align-center figure" id="id6">
 <span id="fig-walls"></span><img alt="domains" src="_images/walls.png" />
-<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text">Computational domain showing respective fluid and solid subdomains, <span class="math notranslate nohighlight">\(\Omega_f\)</span> and
+<p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text">Computational domain showing respective fluid and solid subdomains, <span class="math notranslate nohighlight">\(\Omega_f\)</span> and
 <span class="math notranslate nohighlight">\(\Omega_s\)</span>.  The shared boundaries are denoted <span class="math notranslate nohighlight">\(\partial\Omega_f=\partial\Omega_s\)</span>
 and the solid boundary which is not shared by fluid is <span class="math notranslate nohighlight">\(\overline{\partial\Omega_s}\)</span>,
 while the fluid boundary not shared by solid <span class="math notranslate nohighlight">\(\overline{\partial\Omega_f}\)</span>.</span></p>
@@ -213,17 +205,17 @@ while the fluid boundary not shared by solid <span class="math notranslate nohig
 <span id="intro-ns"></span><h2>Incompressible Navier-Stokes Equations<a class="headerlink" href="#incompressible-navier-stokes-equations" title="Permalink to this headline">¶</a></h2>
 <p>The governing equations of flow motion in dimensional form are</p>
 <div class="math notranslate nohighlight" id="equation-ns-momentum">
-<span class="eqno">(3)<a class="headerlink" href="#equation-ns-momentum" title="Permalink to this equation">¶</a></span>\[\rho\left(\frac{\partial\mathbf u}{\partial t} +\mathbf u \cdot \nabla \mathbf u\right) = - \nabla p + \nabla \cdot \boldsymbol\tau + \rho {\bf f} \,\, , \text{in } \Omega_f , \quad \text{  (Momentum)  }\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol\tau=\mu[\nabla \mathbf u+\nabla \mathbf u^{T}]\)</span> and <span class="math notranslate nohighlight">\(\mathbf f\)</span> is a user defined acceleration.</p>
+<span class="eqno">(3)<a class="headerlink" href="#equation-ns-momentum" title="Permalink to this equation">¶</a></span>\[\rho\left(\frac{\partial\mathbf u}{\partial t} +\mathbf u \cdot \nabla \mathbf u\right) = - \nabla p + \nabla \cdot \boldsymbol{\underline\tau} + \rho {\bf f} \,\, , \text{in } \Omega_f , \quad \text{  (Momentum)  }\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\underline\tau}=\mu[\nabla \mathbf u+\nabla \mathbf u^{T}]\)</span> and <span class="math notranslate nohighlight">\(\mathbf f\)</span> is a user defined acceleration.</p>
 <div class="math notranslate nohighlight" id="equation-ns-cont">
 <span class="eqno">(4)<a class="headerlink" href="#equation-ns-cont" title="Permalink to this equation">¶</a></span>\[\nabla \cdot \mathbf u =0 \,\, , \text{in } \Omega_f, \quad \text{  (Continuity)  }\]</div>
 <p>If the fluid viscosity is constant in the entire domain the viscous stress tensor can be contracted
-<span class="math notranslate nohighlight">\(\nabla\cdot\boldsymbol\tau=\mu\Delta \mathbf u\)</span>, therefore one may solve the Navier–Stokes equations
+<span class="math notranslate nohighlight">\(\nabla\cdot\boldsymbol{\underline\tau}=\mu\Delta \mathbf u\)</span>, therefore one may solve the Navier–Stokes equations
 in either the stress formulation, or no stress</p>
 <ul class="simple">
-<li>Variable viscosity requires the full stress tensor <span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol\tau=\nabla \cdot
+<li>Variable viscosity requires the full stress tensor <span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol{\underline\tau}=\nabla \cdot
 \mu[\nabla \mathbf u+\nabla \mathbf u^{T}]\)</span>, and we shall refer to this as the stress formulation</li>
-<li>Constant viscosity leads to a simpler stress tensor <span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol\tau=\mu\Delta \mathbf u\)</span>,
+<li>Constant viscosity leads to a simpler stress tensor <span class="math notranslate nohighlight">\(\nabla \cdot \boldsymbol{\underline\tau}=\mu\Delta \mathbf u\)</span>,
 which we refer to as the ‘no stress’ formulation</li>
 </ul>
 </div>
@@ -239,8 +231,8 @@ two options:</p>
 <p>For highly convective flows we choose the first scaling of the pressure and obtain the
 non-dimensional Navier-Stokes:</p>
 <div class="math notranslate nohighlight" id="equation-ns-nondim">
-<span class="eqno">(5)<a class="headerlink" href="#equation-ns-nondim" title="Permalink to this equation">¶</a></span>\[\frac{\partial \mathbf{u^*}}{\partial t^*} + \mathbf{u^*} \cdot \nabla \mathbf{u^*}\ = -\nabla p^* + \frac{1}{Re} \nabla\cdot \boldsymbol\tau^* + \mathbf f^*.\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol\tau^*=[\nabla \mathbf u^*+\nabla \mathbf u^{*T}]\)</span> and <span class="math notranslate nohighlight">\(\mathbf f^*\)</span> is the dimensionless user defined forcing function, e.g. gravity.</p>
+<span class="eqno">(5)<a class="headerlink" href="#equation-ns-nondim" title="Permalink to this equation">¶</a></span>\[\frac{\partial \mathbf{u^*}}{\partial t^*} + \mathbf{u^*} \cdot \nabla \mathbf{u^*}\ = -\nabla p^* + \frac{1}{Re} \nabla\cdot \boldsymbol{\underline\tau}^* + \mathbf f^*.\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\underline\tau}^*=[\nabla \mathbf u^*+\nabla \mathbf u^{*T}]\)</span> and <span class="math notranslate nohighlight">\(\mathbf f^*\)</span> is the dimensionless user defined forcing function, e.g. gravity.</p>
 <p>The non-dimensional number here is the Reynolds number <span class="math notranslate nohighlight">\(Re=\frac{\rho U L}{\mu}\)</span>.</p>
 </div>
 <div class="section" id="energy-equation">
@@ -258,14 +250,14 @@ non-dimensional Navier-Stokes:</p>
 <div class="math notranslate nohighlight" id="equation-energy-nondim">
 <span class="eqno">(7)<a class="headerlink" href="#equation-energy-nondim" title="Permalink to this equation">¶</a></span>\[\frac{\partial T^*}{\partial t^*} + \mathbf u^* \cdot \nabla T^* =
   \frac{1}{Pe} \nabla \cdot \nabla T^* + q'''\,\, ,\text{in } \Omega_f\cup \Omega_s  \text{  (Energy)  }\]</div>
-<p>where <span class="math notranslate nohighlight">\(Pe=LU/\alpha\)</span>, with <span class="math notranslate nohighlight">\(\alpha=k/\rho c_p\)</span>.</p>
+<p>where <span class="math notranslate nohighlight">\(Pe=LU/\alpha\)</span>, with <span class="math notranslate nohighlight">\(\alpha=\lambda/\rho c_p\)</span>.</p>
 </div>
 <div class="section" id="passive-scalars">
 <span id="intro-pass-scal"></span><h2>Passive Scalars<a class="headerlink" href="#passive-scalars" title="Permalink to this headline">¶</a></h2>
 <p>We can additionally solve a convection-diffusion equation for each passive scalar <span class="math notranslate nohighlight">\(\phi_i\)</span>,
 <span class="math notranslate nohighlight">\(i = 1,2,\ldots\)</span> in <span class="math notranslate nohighlight">\(\Omega_f \cup \Omega_s\)</span></p>
 <div class="math notranslate nohighlight" id="equation-pass-scal">
-<span class="eqno">(8)<a class="headerlink" href="#equation-pass-scal" title="Permalink to this equation">¶</a></span>\[(\rho c_{p})_i \left( \frac{\partial \phi_{i}}{\partial t} + \mathbf u \cdot \nabla \phi_{i} \right) =
+<span class="eqno">(8)<a class="headerlink" href="#equation-pass-scal" title="Permalink to this equation">¶</a></span>\[\rho_i \left( \frac{\partial \phi_{i}}{\partial t} + \mathbf u \cdot \nabla \phi_{i} \right) =
 \nabla \cdot (\Gamma_i \nabla \phi_{i}) + (q''')_i.\]</div>
 <p>The terminology and restrictions of the temperature equations are retained for the passive scalars,
 so that it is the responsibility of the user to convert the notation of the passive scalar
@@ -285,8 +277,8 @@ Navier-Stokes for flow stability, magnetohydrodynamic flows etc.</p>
 <span id="intro-ns-stokes"></span><h2>Unsteady Stokes<a class="headerlink" href="#unsteady-stokes" title="Permalink to this headline">¶</a></h2>
 <p>In the case of flows dominated by viscous effects Nek5000 can solve the reduced Stokes equations</p>
 <div class="math notranslate nohighlight" id="equation-ns-momentum-stokes">
-<span class="eqno">(9)<a class="headerlink" href="#equation-ns-momentum-stokes" title="Permalink to this equation">¶</a></span>\[\rho\left(\frac{\partial \mathbf u}{\partial t} \right) = - \nabla p + \nabla \cdot \boldsymbol\tau + \rho {\bf f} \,\, , \text{in } \Omega_f \text{  (Momentum)  }\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol\tau=\mu[\nabla \mathbf u+\nabla \mathbf u^{T}]\)</span> and</p>
+<span class="eqno">(9)<a class="headerlink" href="#equation-ns-momentum-stokes" title="Permalink to this equation">¶</a></span>\[\rho\left(\frac{\partial \mathbf u}{\partial t} \right) = - \nabla p + \nabla \cdot \boldsymbol{\underline\tau} + \rho {\bf f} \,\, , \text{in } \Omega_f \text{  (Momentum)  }\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\underline\tau}=\mu[\nabla \mathbf u+\nabla \mathbf u^{T}]\)</span> and</p>
 <div class="math notranslate nohighlight" id="equation-ns-cont-stokes">
 <span class="eqno">(10)<a class="headerlink" href="#equation-ns-cont-stokes" title="Permalink to this equation">¶</a></span>\[\nabla \cdot \mathbf u =0 \,\, , \text{in } \Omega_f  \text{  (Continuity)  }\]</div>
 <p>Also here we can distinguish between the stress and non-stress formulation according to whether the
@@ -297,8 +289,8 @@ viscous scaling of the pressure.</p>
 <span id="intro-ns-steady-stokes"></span><h2>Steady Stokes<a class="headerlink" href="#steady-stokes" title="Permalink to this headline">¶</a></h2>
 <p>If there is no time-dependence, then Nek5000 can further reduce to</p>
 <div class="math notranslate nohighlight" id="equation-ns-momentum-steady-stokes">
-<span class="eqno">(11)<a class="headerlink" href="#equation-ns-momentum-steady-stokes" title="Permalink to this equation">¶</a></span>\[- \nabla p + \nabla \cdot \boldsymbol\tau + \rho {\bf f}=0 \,\, , \text{in } \Omega_f \text{  (Momentum)  }\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol\tau=\mu[\nabla \mathbf u+\nabla {\mathbf u}^{T}]\)</span> and</p>
+<span class="eqno">(11)<a class="headerlink" href="#equation-ns-momentum-steady-stokes" title="Permalink to this equation">¶</a></span>\[- \nabla p + \nabla \cdot \boldsymbol{\underline\tau} + \rho {\bf f}=0 \,\, , \text{in } \Omega_f \text{  (Momentum)  }\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\underline\tau}=\mu[\nabla \mathbf u+\nabla {\mathbf u}^{T}]\)</span> and</p>
 <div class="math notranslate nohighlight" id="equation-ns-cont-steady-stokes">
 <span class="eqno">(12)<a class="headerlink" href="#equation-ns-cont-steady-stokes" title="Permalink to this equation">¶</a></span>\[\nabla \cdot \mathbf u =0 \,\, , \text{in } \Omega_f  \text{  (Continuity)  }\]</div>
 </div>
@@ -331,10 +323,10 @@ Nek5000 includes the ability to solve the low-Mach approximation of the compress
 The low-Mach approximation decouples the pressure from the velocity leading to a system of equations which can be solved numerically in a similar fashion as the incompressible Navier-Stokes.</p>
 <p>The low-Mach equations are</p>
 <div class="math notranslate nohighlight" id="equation-lowmach">
-<span class="eqno">(14)<a class="headerlink" href="#equation-lowmach" title="Permalink to this equation">¶</a></span>\[\begin{split}\rho\left(\frac{\partial \mathbf u}{\partial t}+ \mathbf u\cdot\nabla\mathbf u\right)&amp;=-\nabla p+\nabla \cdot\boldsymbol\tau+\rho\mathbf f\ \\
+<span class="eqno">(14)<a class="headerlink" href="#equation-lowmach" title="Permalink to this equation">¶</a></span>\[\begin{split}\rho\left(\frac{\partial \mathbf u}{\partial t}+ \mathbf u\cdot\nabla\mathbf u\right)&amp;=-\nabla p+\nabla \cdot\boldsymbol{\underline\tau}+\rho\mathbf f\ \\
 \nabla \cdot \mathbf u &amp;= -\frac{1}{\rho}\frac{\mathrm d \rho}{\mathrm d T}\left(\frac{\partial T}{\partial t}+ \mathbf u\cdot\nabla T\right) \\
 \rho c_p\left(\frac{\partial T}{\partial t}+ \mathbf u\cdot\nabla T\right)&amp;=-\nabla \cdot k \nabla T + q'''\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol\tau=\mu[\nabla \mathbf u+\nabla \mathbf u^{T}-\frac{2}{3}\nabla \cdot
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\underline\tau}=\mu[\nabla \mathbf u+\nabla \mathbf u^{T}-\frac{2}{3}\nabla \cdot
 \mathbf u \mathbf I]\)</span>.</p>
 <p>This allows for both variable density and variable viscosity.
 The system is solved by substituting <span class="math notranslate nohighlight">\(\rho\approx f(T)\)</span> into the continuity equation and obtaining a so-called thermal divergence.</p>

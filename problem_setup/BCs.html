@@ -98,6 +98,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="case_files.html">Case Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usr_file.html">User Routines File (.usr)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter.html">Stabilizing Filters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="features.html">Additional Features</a></li>
 </ul>
 </li>
@@ -181,7 +182,7 @@
 <ul class="simple">
 <li>when the mesh is generated, e.g. with <code class="docutils literal notranslate"><span class="pre">genbox</span></code>, as is explained in <a class="reference internal" href="../appendix.html#sec-genbox"><span class="std std-ref">Generating a Mesh with Genbox</span></a></li>
 <li>when an <code class="docutils literal notranslate"><span class="pre">.rea</span></code> file is read in <em>preNek</em></li>
-<li>translated from side-set numbers in <code class="docutils literal notranslate"><span class="pre">usrdat</span></code> when using <code class="docutils literal notranslate"><span class="pre">exotonek</span></code> or similar</li>
+<li>translated from side-set numbers in <code class="docutils literal notranslate"><span class="pre">usrdat</span></code> when using <code class="docutils literal notranslate"><span class="pre">exotonek</span></code> or similar. For an example see <a class="reference internal" href="usr_file.html#sec-usrdat"><span class="std std-ref">here</span></a>.</li>
 </ul>
 <p>The general convention for boundary conditions is</p>
 <ul class="simple">
@@ -193,12 +194,14 @@
 <div class="section" id="fluid-velocity">
 <h2>Fluid Velocity<a class="headerlink" href="#fluid-velocity" title="Permalink to this headline">¶</a></h2>
 <p>Two types of boundary conditions are applicable to the fluid velocity : essential (Dirichlet) boundary condition in which the velocity is specified and natural (Neumann) boundary condition in which the traction is specified.
-For segments that constitute the boundary <span class="math notranslate nohighlight">\(\partial \Omega_f\)</span>, see <a class="reference internal" href="../theory.html#fig-walls"><span class="std std-numref">Fig. 17</span></a>, one of these two types of boundary conditions must be assigned to each component of the fluid velocity.
-The fluid boundary condition can be <em>all Dirichlet</em> if all velocity components of <span class="math notranslate nohighlight">\({\bf u}\)</span> are specified; or it can be <em>all Neumann</em> if all traction components <span class="math notranslate nohighlight">\({\bf t} = [-p {\bf I} + \mu (\nabla {\bf u} + (\nabla {\bf u})^{T})] \cdot {\bf n}\)</span>, where <span class="math notranslate nohighlight">\({\bf I}\)</span> is the identity tensor, <span class="math notranslate nohighlight">\({\bf n}\)</span> is the unit normal and <span class="math notranslate nohighlight">\(\mu\)</span> is the dynamic viscosity, are specified; or it can be <em>mixed Dirichlet/Neumann</em> if Dirichlet and Neumann conditions are selected for different velocity components.
-If the nonstress formulation is selected, then traction is not defined on the boundary.
+For segments that constitute the boundary <span class="math notranslate nohighlight">\(\partial \Omega_f\)</span>, see <a class="reference internal" href="../theory.html#fig-walls"><span class="std std-numref">Fig. 19</span></a>, one of these two types of boundary conditions must be assigned to each component of the fluid velocity.
+The fluid boundary condition can be <em>all Dirichlet</em> if all velocity components of <span class="math notranslate nohighlight">\({\bf u}\)</span> are specified, or it can be <em>all Neumann</em> if all traction components (<span class="math notranslate nohighlight">\(\boldsymbol{\underline \tau} = [-P {\bf \underline I} + \mu (\nabla {\bf u} + (\nabla {\bf u})^{T})] \cdot {\bf \hat e_n}\)</span>) are specified.
+Where <span class="math notranslate nohighlight">\({\bf \underline I}\)</span> is the identity tensor, <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span> is the unit normal and <span class="math notranslate nohighlight">\(\mu\)</span> is the dynamic viscosity, are specified.
+It can also be <em>mixed Dirichlet/Neumann</em> if Dirichlet and Neumann conditions are selected for different velocity components.
+If the no stress formulation is selected, then traction is not defined on the boundary.
 In this case, any Neumann boundary condition imposed must be homogeneous, i.e. equal to zero.
 .. In addition, mixed Dirichlet/Neumann boundaries must be aligned with one of the Cartesian axes.
-For flow geometry which consists of a periodic repetition of a particular geometric unit, the periodic boundary conditions can be imposed, as illustrated in <a class="reference internal" href="../theory.html#fig-walls"><span class="std std-numref">Fig. 17</span></a> .
+For flow geometry which consists of a periodic repetition of a particular geometric unit, the periodic boundary conditions can be imposed, as illustrated in <a class="reference internal" href="../theory.html#fig-walls"><span class="std std-numref">Fig. 19</span></a> .
 The available primitive boundary conditions for the fluid are given in <a class="reference internal" href="#tab-bcf"><span class="std std-numref">Table 1</span></a> , with the user-specified boundary conditions in <a class="reference internal" href="#tab-ubcf"><span class="std std-numref">Table 2</span></a> .</p>
 <span id="tab-bcf"></span><table border="1" class="docutils" id="id2">
 <caption><span class="caption-number">Table 1 </span><span class="caption-text">Primitive boundary conditions for velocity</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
@@ -346,33 +349,32 @@ The available primitive boundary conditions for the fluid are given in <a class=
 </tr>
 </tbody>
 </table>
-<span class="target" id="tab-lbcf"></span><p>The open(outflow) boundary condition (“O”) arises as a natural boundary condition from the variational formulation of Navier Stokes.
+<p>The open(outflow) boundary condition (“O”) arises as a natural boundary condition from the variational formulation of Navier Stokes.
 We identify two situations</p>
 <ul>
 <li><p class="first">In the non-stress formulation, open boundary condition (‘Do nothing’)</p>
 <div class="math notranslate nohighlight">
-\[[-p{\bf I} + \nu(\nabla {\bf u})]\cdot {\bf n}=0\]</div>
+\[[-p{\bf I} + \nu(\nabla {\bf u})]\cdot {\bf \hat e_n}=0\]</div>
 </li>
 <li><p class="first">In the stress formulation, free traction boundary condition</p>
 <div class="math notranslate nohighlight">
-\[[-p{\bf I} + \nu(\nabla {\bf u}+\nabla {\bf u}^T)]\cdot {\bf n}=0\]</div>
+\[[-p{\bf I} + \nu(\nabla {\bf u}+\nabla {\bf u}^T)]\cdot {\bf \hat e_n}=0\]</div>
 </li>
 <li><p class="first">the symmetric boundary condition (“SYM”) is given as</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}{\bf u} \cdot {\bf n} &amp;= 0\ ,\\
-(\nabla {\bf u} \cdot {\bf t})\cdot {\bf n} &amp;= 0\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\({\bf n}\)</span> is the normal vector and <span class="math notranslate nohighlight">\({\bf t}\)</span> the tangent vector.
-If the normal and tangent vector are not aligned with the mesh the stress formulation has to be used.</p>
-</li>
-<li><p class="first">the periodic boundary condition (“P”) needs to be prescribed in the <code class="docutils literal notranslate"><span class="pre">.rea</span></code> or <code class="docutils literal notranslate"><span class="pre">.re2</span></code> file since it already assigns the last point to first via <span class="math notranslate nohighlight">\({\bf u}({\bf x})={\bf u}({\bf x} + L)\)</span>, where <span class="math notranslate nohighlight">\(L\)</span> is the periodic length.</p>
-</li>
-<li><p class="first">the wall boundary condition (“W”) corresponds to <span class="math notranslate nohighlight">\({\bf u}=0\)</span>.</p>
+\[\begin{split}{\bf u} \cdot {\bf \hat e_n} &amp;= 0\ ,\\
+(\nabla {\bf u} \cdot {\bf \hat e_t})\cdot {\bf \hat e_n} &amp;= 0\,\\
+(\nabla {\bf u} \cdot {\bf \hat e_b})\cdot {\bf \hat e_n} &amp;= 0\end{split}\]</div>
 </li>
 </ul>
+<p>where <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span> is the unit normal vector, <span class="math notranslate nohighlight">\({\bf \hat e_t}\)</span> the unit tangent vector and <span class="math notranslate nohighlight">\({\bf \hat e_b}\)</span> is the unit bitangent vector.
+If the normal, tangent, and bitangent vectors are not aligned with the mesh the stress formulation has to be used.
+- the periodic boundary condition (“P”) needs to be prescribed in the <code class="docutils literal notranslate"><span class="pre">.rea</span></code> or <code class="docutils literal notranslate"><span class="pre">.re2</span></code> file since it already assigns the last point to first via <span class="math notranslate nohighlight">\({\bf u}({\bf x})={\bf u}({\bf x} + L)\)</span>, where <span class="math notranslate nohighlight">\(L\)</span> is the periodic length.
+- the wall boundary condition (“W”) corresponds to <span class="math notranslate nohighlight">\({\bf u}=0\)</span>.</p>
 <p>For a fully-developed flow in such a configuration, one can effect great computational efficiencies by considering the problem in a single geometric unit (here taken to be of length <span class="math notranslate nohighlight">\(L\)</span>), and requiring periodicity of the field variables.
 Nek5000 requires that the pairs of sides (or faces, in the case of a three-dimensional mesh) identified as periodic be identical (i.e., that the geometry be periodic).</p>
 <p>For an axisymmetric flow geometry, the axis boundary condition is provided for boundary segments that lie entirely on the axis of symmetry.
-This is essentially a symmetry (mixed Dirichlet/Neumann) boundary conditionin which the normal velocity and the tangential traction are set to zero.</p>
+This is essentially a symmetry (mixed Dirichlet/Neumann) boundary condition in which the normal velocity and the tangential traction are set to zero.</p>
 <p>For free-surface boundary segments, the inhomogeneous traction boundary conditions involve both the surface tension coefficient <span class="math notranslate nohighlight">\(\sigma\)</span> and the mean curvature of the free surface.</p>
 </div>
 <div class="section" id="temperature-and-passive-scalars">
@@ -494,22 +496,25 @@ Thus, the temperature boundary condition menu will reappear for each passive sca
 <ul>
 <li><p class="first">open boundary condition (“O”)</p>
 <div class="math notranslate nohighlight">
-\[k(\nabla T)\cdot {\bf n} =0\]</div>
+\[k(\nabla T)\cdot {\bf \hat e_n} =0\]</div>
 </li>
 <li><p class="first">insulated boundary condition (“I”)</p>
 <div class="math notranslate nohighlight">
-\[k(\nabla T)\cdot {\bf n} =0\]</div>
-<p>where <span class="math notranslate nohighlight">\({\bf n}\)</span> is the normal vector and <span class="math notranslate nohighlight">\({\bf t}\)</span> the tangent vector. If the normal and tangent vector are not aligned with the mesh the stress formulation has to be used.</p>
+\[k(\nabla T)\cdot {\bf \hat e_n} =0\]</div>
 </li>
-<li><p class="first">the periodic boundary condition (“P”) needs to be prescribed in the <code class="docutils literal notranslate"><span class="pre">.rea</span></code> file since it already assigns the last point to first via <span class="math notranslate nohighlight">\({\bf u}({\bf x})={\bf u}({\bf x} + L)\)</span>, where <span class="math notranslate nohighlight">\(L\)</span> is the periodic length.</p>
-</li>
-<li><p class="first">Newton cooling boundary condition (“c”)</p>
-<div class="math notranslate nohighlight">
-\[k(\nabla T)\cdot {\bf n}=h(T-T_{\infty})\]</div>
-</li>
+</ul>
+<p>where <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span> is the unit normal vector, <span class="math notranslate nohighlight">\({\bf \hat e_t}\)</span> the unit tangent vector and <span class="math notranslate nohighlight">\({\bf \hat e_b}\)</span> is the unit bitangent vector.
+If the normal, tangent, and bitangent vectors are not aligned with the mesh the stress formulation has to be used.
+- the periodic boundary condition (“P”) needs to be prescribed in the <code class="docutils literal notranslate"><span class="pre">.rea</span></code> file since it already assigns the last point to first via <span class="math notranslate nohighlight">\({\bf u}({\bf x})={\bf u}({\bf x} + L)\)</span>, where <span class="math notranslate nohighlight">\(L\)</span> is the periodic length.
+- Newton cooling boundary condition (“c”)</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[k(\nabla T)\cdot {\bf \hat e_n}=h(T-T_{\infty})\]</div>
+</div></blockquote>
+<ul>
 <li><p class="first">flux boundary condition (“f”)</p>
 <div class="math notranslate nohighlight">
-\[k(\nabla T)\cdot {\bf n} =f\]</div>
+\[k(\nabla T)\cdot {\bf \hat e_n} =f\]</div>
 </li>
 </ul>
 </div>
@@ -545,7 +550,7 @@ If the fluid flow problem is considered, i.e., the energy
 equation is solved in conjunction with the momentum and
 continuity equations, then only
 the common boundary between the fluid and the solid
-(i.e., all or portion of <span class="math notranslate nohighlight">\(\partial \overline{\Omega}_f'\)</span> in <a class="reference internal" href="../theory.html#fig-walls"><span class="std std-numref">Fig. 17</span></a>)
+(i.e., all or portion of <span class="math notranslate nohighlight">\(\partial \overline{\Omega}_f'\)</span> in <a class="reference internal" href="../theory.html#fig-walls"><span class="std std-numref">Fig. 19</span></a>)
 can be defined as the melting front.
 In this case, segments on <span class="math notranslate nohighlight">\(\partial \overline{\Omega}_f'\)</span> that
 belong to the dynamic melting/freezing interface need to be

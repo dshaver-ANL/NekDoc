@@ -40,7 +40,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Additional Features" href="features.html" />
+    <link rel="next" title="Stabilizing Filters" href="filter.html" />
     <link rel="prev" title="Case Files" href="case_files.html" /> 
 </head>
 
@@ -115,6 +115,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="filter.html">Stabilizing Filters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="features.html">Additional Features</a></li>
 </ul>
 </li>
@@ -253,7 +254,7 @@ For a more complete list see <a class="reference internal" href="../appendix.htm
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">ifield</span></code></td>
 <td>active solution field</td>
-<td>see <a class="reference internal" href="#tab-ifield"><span class="std std-numref">Table 20</span></a></td>
+<td>see <a class="reference internal" href="#tab-ifield"><span class="std std-numref">Table 21</span></a></td>
 </tr>
 </tbody>
 </table>
@@ -261,7 +262,71 @@ For a more complete list see <a class="reference internal" href="../appendix.htm
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Note:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">nelt</span></code> is always greater than or equal to <code class="docutils literal notranslate"><span class="pre">nelv</span></code>. For non-conjugate heat transfer cases, <code class="docutils literal notranslate"><span class="pre">nelv</span></code> and <code class="docutils literal notranslate"><span class="pre">nelt</span></code> are identical. Similarly for <code class="docutils literal notranslate"><span class="pre">nelgv</span></code> and <code class="docutils literal notranslate"><span class="pre">nelgt</span></code>.</td>
+<tr class="field-odd field"><th class="field-name">Note:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">nelt</span></code> is always greater than or equal to <code class="docutils literal notranslate"><span class="pre">nelv</span></code>.
+For non-conjugate heat transfer cases, <code class="docutils literal notranslate"><span class="pre">nelv</span></code> and <code class="docutils literal notranslate"><span class="pre">nelt</span></code> are identical.
+Similarly for <code class="docutils literal notranslate"><span class="pre">nelgv</span></code> and <code class="docutils literal notranslate"><span class="pre">nelgt</span></code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Also included in the <code class="docutils literal notranslate"><span class="pre">TOTAL</span></code> block is the field coefficient array.
+This array contains reference values for fluid properties that are inherited directly from the <code class="docutils literal notranslate"><span class="pre">.par</span></code> file.
+For a simulation with constant properties, this array corresponds directly to density, viscosity, etc.
+as the values from this array are copied directly into the <code class="docutils literal notranslate"><span class="pre">vtrans</span></code> and <code class="docutils literal notranslate"><span class="pre">vdiff</span></code> arrays internally by <em>Nek5000</em> (See <a class="reference internal" href="#sec-uservp"><span class="std std-ref">uservp</span></a> for more information on <code class="docutils literal notranslate"><span class="pre">vtrans</span></code> and <code class="docutils literal notranslate"><span class="pre">vdiff</span></code>).
+For simulations with variable properties, this array can be useful as it retains the values assigned in the <code class="docutils literal notranslate"><span class="pre">.par</span></code> file.</p>
+<span id="tab-cpfld"></span><table border="1" class="docutils" id="id6">
+<caption><span class="caption-number">Table 19 </span><span class="caption-text">The field coefficient array</span><a class="headerlink" href="#id6" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Variable</th>
+<th class="head">Entry in <code class="docutils literal notranslate"><span class="pre">.par</span></code> file</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">cpfld(1,1)</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">velocity:density</span></code></td>
+<td>Reference density</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">cpfld(1,2)</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">velocity:viscosity</span></code></td>
+<td>Reference viscosity</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">cpfld(2,1)</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">temperature:rhocp</span></code></td>
+<td>Reference rho-cp</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">cpfld(2,2)</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">temperature:conductivity</span></code></td>
+<td>Reference conductivity</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">cpfld(3,1)</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">scalar01:density</span></code></td>
+<td>Reference density for scalar 1</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">cpfld(3,2)</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">scalar01:diffusivity</span></code></td>
+<td>Reference diffusivity for scalar 1</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">cpfld(i+2,1)</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">scalar</span> <span class="pre">i:density</span></code></td>
+<td>Reference density for scalar <span class="math notranslate nohighlight">\(i\)</span></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">cpfld(i+2,2)</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">scalar</span> <span class="pre">i:diffusivity</span></code></td>
+<td>Reference diffusivity for <span class="math notranslate nohighlight">\(i\)</span></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Note:</th><td class="field-body">The entries in the field coefficient array for velocity and temperature correspond directly to parameters 1, 2, 7, and 8 from the old <code class="docutils literal notranslate"><span class="pre">.rea</span></code> format.
+However, no corresponding parameters exist for the passive scalars.</td>
 </tr>
 </tbody>
 </table>
@@ -277,9 +342,9 @@ Note that the local element number can be accessed via the <code class="docutils
 This block contains solver variables that may be useful for defining custom models, such as variable properties, or a localized heating rate.
 Immediately before a local routine is called by <em>Nek5000</em>, the subroutine <code class="docutils literal notranslate"><span class="pre">nekasgn</span></code> is called.
 This routine sets many of the commonly used values in <code class="docutils literal notranslate"><span class="pre">NEKUSE</span></code>, making them available for use in the local subroutines.
-<a class="reference internal" href="#tab-nekusepre"><span class="std std-numref">Table 19</span></a> describes the variables that are assigned in <code class="docutils literal notranslate"><span class="pre">nekasgn</span></code>.</p>
-<span id="tab-nekusepre"></span><table border="1" class="colwidths-given docutils" id="id6">
-<caption><span class="caption-number">Table 19 </span><span class="caption-text">Prepopulated <code class="docutils literal notranslate"><span class="pre">NEKUSE</span></code> variables</span><a class="headerlink" href="#id6" title="Permalink to this table">¶</a></caption>
+<a class="reference internal" href="#tab-nekusepre"><span class="std std-numref">Table 20</span></a> describes the variables that are assigned in <code class="docutils literal notranslate"><span class="pre">nekasgn</span></code>.</p>
+<span id="tab-nekusepre"></span><table border="1" class="colwidths-given docutils" id="id7">
+<caption><span class="caption-number">Table 20 </span><span class="caption-text">Prepopulated <code class="docutils literal notranslate"><span class="pre">NEKUSE</span></code> variables</span><a class="headerlink" href="#id7" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="15%" />
 <col width="50%" />
@@ -357,21 +422,21 @@ This routine sets many of the commonly used values in <code class="docutils lite
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">udiff</span></code></td>
 <td>diffusion coeffcient</td>
 <td><code class="docutils literal notranslate"><span class="pre">vdiff(ix,iy,iz,ie,ifield)</span></code></td>
-<td>See <a class="reference internal" href="#tab-uservp"><span class="std std-numref">Table 21</span></a></td>
+<td>See <a class="reference internal" href="#tab-uservp"><span class="std std-numref">Table 22</span></a></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">utrans</span></code></td>
 <td>convective coefficient</td>
 <td><code class="docutils literal notranslate"><span class="pre">vtrans(ix,iy,iz,ie,ifield)</span></code></td>
-<td>See <a class="reference internal" href="#tab-uservp"><span class="std std-numref">Table 21</span></a></td>
+<td>See <a class="reference internal" href="#tab-uservp"><span class="std std-numref">Table 22</span></a></td>
 </tr>
 </tbody>
 </table>
 <p>The active solution field – velocity, temperature, etc. – is indicated by the global variable <code class="docutils literal notranslate"><span class="pre">ifield</span></code>.
-The value that corresponds to each field is described in <a class="reference internal" href="#tab-ifield"><span class="std std-numref">Table 20</span></a>.
+The value that corresponds to each field is described in <a class="reference internal" href="#tab-ifield"><span class="std std-numref">Table 21</span></a>.
 <code class="docutils literal notranslate"><span class="pre">ifield</span></code> is not explicitly passed as an input to any of the user subroutines, rather it is controlled at a higher level directly by <em>Nek5000</em>.
 It is set by the solver for all of the local routines, but not any of the initialization or global routines.</p>
-<span id="tab-ifield"></span><table border="1" class="docutils" id="id7">
-<caption><span class="caption-number">Table 20 </span><span class="caption-text">Corresponding solution fields for <code class="docutils literal notranslate"><span class="pre">ifield</span></code></span><a class="headerlink" href="#id7" title="Permalink to this table">¶</a></caption>
+<span id="tab-ifield"></span><table border="1" class="docutils" id="id8">
+<caption><span class="caption-number">Table 21 </span><span class="caption-text">Corresponding solution fields for <code class="docutils literal notranslate"><span class="pre">ifield</span></code></span><a class="headerlink" href="#id8" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="33%" />
 <col width="33%" />
@@ -415,8 +480,8 @@ It is called for every GLL-point for every field at every time step.
 The diffusion and transport coefficients should be set using the variables described in the table below.
 The diffusion coefficient refers the viscosity, thermal conductivity, or diffusivity for passive scalars.
 The transport coefficient refers to the coefficient attached to the convective term, typically density for velocity and passive scalars and the product of density and specific heat for temperature.</p>
-<span id="tab-uservp"></span><table border="1" class="docutils" id="id8">
-<caption><span class="caption-number">Table 21 </span><span class="caption-text">Terms set in <code class="docutils literal notranslate"><span class="pre">uservp</span></code></span><a class="headerlink" href="#id8" title="Permalink to this table">¶</a></caption>
+<span id="tab-uservp"></span><table border="1" class="docutils" id="id9">
+<caption><span class="caption-number">Table 22 </span><span class="caption-text">Terms set in <code class="docutils literal notranslate"><span class="pre">uservp</span></code></span><a class="headerlink" href="#id9" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="8%" />
 <col width="16%" />
@@ -450,7 +515,7 @@ The transport coefficient refers to the coefficient attached to the convective t
 <tr class="row-even"><td><span class="math notranslate nohighlight">\((\rho c_p)\)</span> in the <a class="reference internal" href="../theory.html#intro-energy"><span class="std std-ref">energy equation</span></a></td>
 <td><code class="docutils literal notranslate"><span class="pre">ifield</span> <span class="pre">=</span> <span class="pre">2</span></code></td>
 </tr>
-<tr class="row-odd"><td><span class="math notranslate nohighlight">\((\rho c_p)_i\)</span> in the <a class="reference internal" href="../theory.html#intro-pass-scal"><span class="std std-ref">passive scalar equations</span></a></td>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\rho_i\)</span> in the <a class="reference internal" href="../theory.html#intro-pass-scal"><span class="std std-ref">passive scalar equations</span></a></td>
 <td><code class="docutils literal notranslate"><span class="pre">ifield</span> <span class="pre">=</span> <span class="pre">3</span> <span class="pre">..</span> <span class="pre">npscal+2</span></code></td>
 </tr>
 </tbody>
@@ -461,7 +526,7 @@ The transport coefficient refers to the coefficient attached to the convective t
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Warning:</th><td class="field-body">The coresponding entries in <code class="docutils literal notranslate"><span class="pre">vdiff</span></code> and <code class="docutils literal notranslate"><span class="pre">vtrans</span></code> are overwritten by whatever is assigned to <code class="docutils literal notranslate"><span class="pre">udiff</span></code> and <code class="docutils literal notranslate"><span class="pre">utrans</span></code>. Setting <code class="docutils literal notranslate"><span class="pre">vdiff</span></code> and <code class="docutils literal notranslate"><span class="pre">vtrans</span></code> directly is not supported.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body">The code block below shows how to implement a variable viscosity as a function of temperature, with the density, rho-cp, and thermal conductivity set from the values in the <code class="docutils literal notranslate"><span class="pre">.par</span></code> file.</td>
+<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body">The code block below shows how to implement a variable viscosity as a function of temperature, with the density, rho-cp, and thermal conductivity set from the values in the <code class="docutils literal notranslate"><span class="pre">.par</span></code> file using the <a class="reference internal" href="#tab-cpfld"><span class="std std-ref">field coefficient array</span></a>.</td>
 </tr>
 </tbody>
 </table>
@@ -497,7 +562,7 @@ The transport coefficient refers to the coefficient attached to the convective t
 </div>
 <div class="section" id="userf">
 <span id="id2"></span><h3>userf<a class="headerlink" href="#userf" title="Permalink to this headline">¶</a></h3>
-<p>This functions sets the source term (which will be subsequently be multiplied by he density) for the momentum equation.
+<p>This functions sets the source term (which will be subsequently be multiplied by the density) for the momentum equation.
 It allows the user to effectively add an acceleration term.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -545,7 +610,10 @@ In the latest version available from the master branch on github, an implicit so
 \[q'''=\alpha -\beta T\]</div>
 <p>can be implemented either entirely explicitly, or semi-implicitly.
 In general, the implicit term should be used wherever possible as it tends to stabilize the solution.
-Both approaches are shown below.</p>
+Both approaches are shown below.
+It is not necessary for <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> to be constants.
+They can vary with time, position, or any of the solution variables – including temperature.
+However, using a solution variable may impose limits on the stability of the solution.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -617,10 +685,11 @@ Both implementations will yield the same solution for a converged result.</td>
 It is only called for special boundary condition types – any lowercase value in the <code class="docutils literal notranslate"><span class="pre">cbc</span></code> array – and only for points on the boundary surface.
 It includes an additional argument compared to the other Local Routines.
 The <code class="docutils literal notranslate"><span class="pre">iside</span></code> variable refers to which side of the element the boundary condition is on.
-This can be used for accessing the appropriate entry in the <code class="docutils literal notranslate"><span class="pre">boundaryID</span></code> or <code class="docutils literal notranslate"><span class="pre">cbc</span></code> arrays.</p>
-<p>The available values that can be set for velocity are listed in <a class="reference internal" href="#tab-velbcs"><span class="std std-numref">Table 22</span></a> along with their definitions and the corresponding entry in the <code class="docutils literal notranslate"><span class="pre">cbc</span></code> array, where <span class="math notranslate nohighlight">\(\mathbf{\hat e}\)</span> denotes a unit vector.</p>
-<span id="tab-velbcs"></span><table border="1" class="colwidths-given docutils" id="id9">
-<caption><span class="caption-number">Table 22 </span><span class="caption-text">Velocity boundary conditions set in <code class="docutils literal notranslate"><span class="pre">userbc</span></code></span><a class="headerlink" href="#id9" title="Permalink to this table">¶</a></caption>
+This can be used for accessing the appropriate entry in the <code class="docutils literal notranslate"><span class="pre">boundaryID</span></code> or <code class="docutils literal notranslate"><span class="pre">cbc</span></code> arrays.
+For a more complete list of all supported boundary conditions, see <a class="reference internal" href="BCs.html#boundary-conditions"><span class="std std-ref">Boundary Conditions</span></a>.</p>
+<p>The available values that can be set for velocity are listed in <a class="reference internal" href="#tab-velbcs"><span class="std std-numref">Table 23</span></a> along with their definitions and the corresponding entry in the <code class="docutils literal notranslate"><span class="pre">cbc</span></code> array, where <span class="math notranslate nohighlight">\(\mathbf{\hat e}\)</span> denotes a unit vector.</p>
+<span id="tab-velbcs"></span><table border="1" class="colwidths-given docutils" id="id10">
+<caption><span class="caption-number">Table 23 </span><span class="caption-text">Velocity boundary conditions set in <code class="docutils literal notranslate"><span class="pre">userbc</span></code></span><a class="headerlink" href="#id10" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="10%" />
 <col width="45%" />
@@ -705,10 +774,10 @@ This can be used for accessing the appropriate entry in the <code class="docutil
 </tr>
 </tbody>
 </table>
-<p>The available values that can be set for temperature are listed in <a class="reference internal" href="#tab-tbcs"><span class="std std-numref">Table 23</span></a> along with their definitions and the corresponding entry in the <code class="docutils literal notranslate"><span class="pre">cbc</span></code> array.
+<p>The available values that can be set for temperature are listed in <a class="reference internal" href="#tab-tbcs"><span class="std std-numref">Table 24</span></a> along with their definitions and the corresponding entry in the <code class="docutils literal notranslate"><span class="pre">cbc</span></code> array.
 These correspond to standard Dirichlet, Neumann, and Robin boundary conditions.</p>
-<span id="tab-tbcs"></span><table border="1" class="docutils" id="id10">
-<caption><span class="caption-number">Table 23 </span><span class="caption-text">Temperature boundary conditions set in <code class="docutils literal notranslate"><span class="pre">userbc</span></code></span><a class="headerlink" href="#id10" title="Permalink to this table">¶</a></caption>
+<span id="tab-tbcs"></span><table border="1" class="docutils" id="id11">
+<caption><span class="caption-number">Table 24 </span><span class="caption-text">Temperature boundary conditions set in <code class="docutils literal notranslate"><span class="pre">userbc</span></code></span><a class="headerlink" href="#id11" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="8%" />
 <col width="32%" />
@@ -843,9 +912,9 @@ This example corresponds to the example setup shown in <a class="reference inter
 </div>
 <p>The temperature and passive scalars use the same form of governing equation and are handled practically identically by <em>Nek5000</em>.
 The boundary conditions available for passive scalars are therefore the same as those available for temperature.
-These are listed in <a class="reference internal" href="#tab-psbcs"><span class="std std-numref">Table 24</span></a> along with their definitions and the corresponding entry in the <code class="docutils literal notranslate"><span class="pre">cbc</span></code> array.</p>
-<span id="tab-psbcs"></span><table border="1" class="docutils" id="id11">
-<caption><span class="caption-number">Table 24 </span><span class="caption-text">Passive scalar boundary conditions set in <code class="docutils literal notranslate"><span class="pre">userbc</span></code></span><a class="headerlink" href="#id11" title="Permalink to this table">¶</a></caption>
+These are listed in <a class="reference internal" href="#tab-psbcs"><span class="std std-numref">Table 25</span></a> along with their definitions and the corresponding entry in the <code class="docutils literal notranslate"><span class="pre">cbc</span></code> array.</p>
+<span id="tab-psbcs"></span><table border="1" class="docutils" id="id12">
+<caption><span class="caption-number">Table 25 </span><span class="caption-text">Passive scalar boundary conditions set in <code class="docutils literal notranslate"><span class="pre">userbc</span></code></span><a class="headerlink" href="#id12" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="7%" />
 <col width="28%" />
@@ -884,7 +953,7 @@ These are listed in <a class="reference internal" href="#tab-psbcs"><span class=
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Note:</th><td class="field-body">Temperature and passive scalar boundary conditions are contextual and will set the boundary condition for the active solution field. See <a class="reference internal" href="#tab-ifield"><span class="std std-numref">Table 20</span></a>.</td>
+<tr class="field-odd field"><th class="field-name">Note:</th><td class="field-body">Temperature and passive scalar boundary conditions are contextual and will set the boundary condition for the active solution field. See <a class="reference internal" href="#tab-ifield"><span class="std std-numref">Table 21</span></a>.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Warning:</th><td class="field-body">The <code class="docutils literal notranslate"><span class="pre">ps(i)</span></code> variable array provided by <code class="docutils literal notranslate"><span class="pre">NEKUSE</span></code> is <strong>NOT</strong> used to set the passive scalar boundary conditions.</td>
 </tr>
@@ -1064,6 +1133,15 @@ This example corresponds with the setup shown in the <a class="reference interna
 <p>This function can be used to modify the spectral element mesh.
 The geometry information (mass matrix, surface normals, etc.) will be rebuilt after this routine is called.
 Any changes to the <code class="docutils literal notranslate"><span class="pre">cbc</span></code> array must be made before or during this call.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body">In the code below, the mesh is scaled by a factor of <span class="math notranslate nohighlight">\(1/D_h\)</span>, where <span class="math notranslate nohighlight">\(D_h\)</span> is the hydraulic diameter.
+It is typically convenient to generate a mesh with dimensions, this allows the user to non-dimensionalize the mesh at runtime.</td>
+</tr>
+</tbody>
+</table>
 <div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span>      <span class="k">subroutine </span><span class="n">usrdat2</span><span class="p">()</span>   <span class="c">! This routine to modify mesh coordinates</span>
 
       <span class="k">implicit none</span>
@@ -1072,9 +1150,11 @@ Any changes to the <code class="docutils literal notranslate"><span class="pre">
       <span class="k">include</span> <span class="s1">&#39;TOTAL&#39;</span>
 
       <span class="kt">integer </span><span class="n">n</span>
-      <span class="n">Dhyd</span> <span class="o">=</span> <span class="mf">0.00915</span> <span class="c">!hydraulic diameter in meters</span>
+      <span class="kt">real </span><span class="n">Dhyd</span>
 
-      <span class="n">n</span><span class="o">=</span><span class="n">lx1</span><span class="o">*</span><span class="n">ly1</span><span class="o">*</span><span class="n">lz1</span><span class="o">*</span><span class="n">nelv</span>
+      <span class="n">n</span><span class="o">=</span><span class="n">lx1</span><span class="o">*</span><span class="n">ly1</span><span class="o">*</span><span class="n">lz1</span><span class="o">*</span><span class="n">nelv</span> <span class="c">!number of GLL points on the local MPI rank</span>
+
+      <span class="n">Dhyd</span> <span class="o">=</span> <span class="mf">0.00915</span> <span class="c">!hydraulic diameter in meters</span>
 
       <span class="k">call </span><span class="n">cmult</span><span class="p">(</span><span class="n">xm1</span><span class="p">,</span><span class="mf">1.0</span><span class="o">/</span><span class="n">Dhyd</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
       <span class="k">call </span><span class="n">cmult</span><span class="p">(</span><span class="n">ym1</span><span class="p">,</span><span class="mf">1.0</span><span class="o">/</span><span class="n">Dhyd</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
@@ -1087,7 +1167,8 @@ Any changes to the <code class="docutils literal notranslate"><span class="pre">
 </div>
 <div class="section" id="usrdat3">
 <span id="sec-usrdat3"></span><h3>usrdat3<a class="headerlink" href="#usrdat3" title="Permalink to this headline">¶</a></h3>
-<p>This function can be used to initialize case/user specific data.</p>
+<p>This function can be used to initialize any additional case/user specific data.
+The GLL mesh should not be further modified in this routine as the geometric factors are not automatically recomputed.</p>
 </div>
 </div>
 </div>
@@ -1098,7 +1179,7 @@ Any changes to the <code class="docutils literal notranslate"><span class="pre">
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="features.html" class="btn btn-neutral float-right" title="Additional Features" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="filter.html" class="btn btn-neutral float-right" title="Stabilizing Filters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="case_files.html" class="btn btn-neutral float-left" title="Case Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
