@@ -1,0 +1,16 @@
+.. _RANSCI:
+
+=======================================
+Continuous Integration Testing for RANS
+=======================================
+
+The following tutorials are provided to familiarize beginners with the features and typical workflow of Nek5000.
+For a user brand new to Nek5000, we strongly recommend beginning with the fully developed laminar flow tutorial.
+
+.. toctree::
+  :maxdepth: 1
+
+  RANSCI/channel
+  RANSCI/bfs
+  RANSCI/wirewrap
+  RANSCI/pebble

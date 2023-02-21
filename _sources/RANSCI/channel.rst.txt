@@ -1,0 +1,21 @@
+.. _RANSCI_channel:
+
+------------
+Channel Flow
+------------
+
+................
+Case Description
+................
+
+.. include:: description.txt
+
+.. csv-table:: Tested Quantities
+   :header: Variable, Expected Value, Acceptable Range
+
+   Friction factor, ,
+   Nusselt Number , , 
+
+.......
+Results
+.......

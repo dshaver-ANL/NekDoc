@@ -1,72 +1,33 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>User Routines File (.usr) &mdash; Nek5000  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>User Routines File (.usr) &mdash; Nek5000  documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script type="text/javascript" src="../_static/jquery.js"></script>
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
         <script type="text/javascript" src="../_static/language_data.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Stabilizing Filters" href="filter.html" />
     <link rel="prev" title="Case Files" href="case_files.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Nek5000
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -74,18 +35,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
@@ -119,83 +69,43 @@
 <li class="toctree-l2"><a class="reference internal" href="features.html">Additional Features</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../tools.html">Nek Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../build.html">Build Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RANSCI.html">Continuous Integration Testing for RANS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix.html">Appendices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Nek5000</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../problem_setup.html">Problem Setup</a> &raquo;</li>
-        
       <li>User Routines File (.usr)</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/problem_setup/usr_file.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="user-routines-file-usr">
 <span id="case-files-usr"></span><h1>User Routines File (.usr)<a class="headerlink" href="#user-routines-file-usr" title="Permalink to this headline">¶</a></h1>
-<p>The user file is a special case file that implements the the user interface to <em>Nek5000</em>.
+<p>The user file is a special case file that implements the user interface to <em>Nek5000</em>.
 What follows is a brief description of the available subroutines and a primer on writing your own user code.
 An empty user file template can be found in the source directory at <code class="docutils literal notranslate"><span class="pre">Nek5000/core/zero.usr</span></code>.
 When setting up a new case, it is recommended to start by copying this file to your run directory when you don’t already have a similar case to use as a template.</p>
@@ -204,7 +114,7 @@ These subroutines can be broadly divided into 3 categories:</p>
 <ul class="simple">
 <li>Local routines - called every time step for every field and GLL point</li>
 <li>Global routines - called once per time step</li>
-<li>Intialization routines - only called once during intialization</li>
+<li>Initialization routines - only called once during initialization</li>
 </ul>
 <p>All of the routines in the <code class="docutils literal notranslate"><span class="pre">.usr</span></code> file have access to a common set of global variables and arrays.
 These are included in the <code class="docutils literal notranslate"><span class="pre">TOTAL</span></code> common block, included at the beginning of each subroutine.
@@ -258,16 +168,12 @@ For a more complete list see <a class="reference internal" href="../appendix.htm
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Note:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">nelt</span></code> is always greater than or equal to <code class="docutils literal notranslate"><span class="pre">nelv</span></code>.
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">nelt</span></code> is always greater than or equal to <code class="docutils literal notranslate"><span class="pre">nelv</span></code>.
 For non-conjugate heat transfer cases, <code class="docutils literal notranslate"><span class="pre">nelv</span></code> and <code class="docutils literal notranslate"><span class="pre">nelt</span></code> are identical.
-Similarly for <code class="docutils literal notranslate"><span class="pre">nelgv</span></code> and <code class="docutils literal notranslate"><span class="pre">nelgt</span></code>.</td>
-</tr>
-</tbody>
-</table>
+Similarly for <code class="docutils literal notranslate"><span class="pre">nelgv</span></code> and <code class="docutils literal notranslate"><span class="pre">nelgt</span></code>.</p>
+</div>
 <p>Also included in the <code class="docutils literal notranslate"><span class="pre">TOTAL</span></code> block is the field coefficient array.
 This array contains reference values for fluid properties that are inherited directly from the <code class="docutils literal notranslate"><span class="pre">.par</span></code> file.
 For a simulation with constant properties, this array corresponds directly to density, viscosity, etc.
@@ -321,15 +227,11 @@ For simulations with variable properties, this array can be useful as it retains
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Note:</th><td class="field-body">The entries in the field coefficient array for velocity and temperature correspond directly to parameters 1, 2, 7, and 8 from the old <code class="docutils literal notranslate"><span class="pre">.rea</span></code> format.
-However, no corresponding parameters exist for the passive scalars.</td>
-</tr>
-</tbody>
-</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The entries in the field coefficient array for velocity and temperature correspond directly to parameters 1, 2, 7, and 8 from the old <code class="docutils literal notranslate"><span class="pre">.rea</span></code> format.
+However, no corresponding parameters exist for the passive scalars.</p>
+</div>
 <div class="section" id="local-routines">
 <span id="id1"></span><h2>Local Routines<a class="headerlink" href="#local-routines" title="Permalink to this headline">¶</a></h2>
 <p>The local subroutines <code class="docutils literal notranslate"><span class="pre">uservp</span></code>, <code class="docutils literal notranslate"><span class="pre">userf</span></code>, and <code class="docutils literal notranslate"><span class="pre">userq</span></code> are called at every GLL point, for every field at every time step.
@@ -520,13 +422,15 @@ The transport coefficient refers to the coefficient attached to the convective t
 </tr>
 </tbody>
 </table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The corresponding entries in <code class="docutils literal notranslate"><span class="pre">vdiff</span></code> and <code class="docutils literal notranslate"><span class="pre">vtrans</span></code> are overwritten by whatever is assigned to <code class="docutils literal notranslate"><span class="pre">udiff</span></code> and <code class="docutils literal notranslate"><span class="pre">utrans</span></code>. Setting <code class="docutils literal notranslate"><span class="pre">vdiff</span></code> and <code class="docutils literal notranslate"><span class="pre">vtrans</span></code> directly is not supported.</p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Warning:</th><td class="field-body">The coresponding entries in <code class="docutils literal notranslate"><span class="pre">vdiff</span></code> and <code class="docutils literal notranslate"><span class="pre">vtrans</span></code> are overwritten by whatever is assigned to <code class="docutils literal notranslate"><span class="pre">udiff</span></code> and <code class="docutils literal notranslate"><span class="pre">utrans</span></code>. Setting <code class="docutils literal notranslate"><span class="pre">vdiff</span></code> and <code class="docutils literal notranslate"><span class="pre">vtrans</span></code> directly is not supported.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Example:</th><td class="field-body">The code block below shows how to implement a variable viscosity as a function of temperature, with the density, rho-cp, and thermal conductivity set from the values in the <code class="docutils literal notranslate"><span class="pre">.par</span></code> file using the <a class="reference internal" href="#tab-cpfld"><span class="std std-ref">field coefficient array</span></a>.</td>
+<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body">The code block below shows how to implement a variable viscosity as a function of temperature, with the density, rho-cp, and thermal conductivity set from the values in the <code class="docutils literal notranslate"><span class="pre">.par</span></code> file using the <a class="reference internal" href="#tab-cpfld"><span class="std std-ref">field coefficient array</span></a>.</td>
 </tr>
 </tbody>
 </table>
@@ -766,14 +670,10 @@ For a more complete list of all supported boundary conditions, see <a class="ref
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Warning:</th><td class="field-body">*The tangent and bitangent directions are not guaranteed to be consistent between elements in 3D domains.</td>
-</tr>
-</tbody>
-</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">*The tangent and bitangent directions are not guaranteed to be consistent between elements in 3D domains.</p>
+</div>
 <p>The available values that can be set for temperature are listed in <a class="reference internal" href="#tab-tbcs"><span class="std std-numref">Table 24</span></a> along with their definitions and the corresponding entry in the <code class="docutils literal notranslate"><span class="pre">cbc</span></code> array.
 These correspond to standard Dirichlet, Neumann, and Robin boundary conditions.</p>
 <span id="tab-tbcs"></span><table border="1" class="docutils" id="id11">
@@ -805,21 +705,17 @@ These correspond to standard Dirichlet, Neumann, and Robin boundary conditions.<
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">hc</span></code></td>
 <td>heat transfer coefficient, <span class="math notranslate nohighlight">\(h\)</span></td>
 <td rowspan="2"><span class="math notranslate nohighlight">\(\lambda\nabla T\cdot\mathbf{\hat e_n}=h(T-T_{\infty})\)</span></td>
-<td rowspan="2"><code class="docutils literal notranslate"><span class="pre">r</span></code></td>
+<td rowspan="2"><code class="docutils literal notranslate"><span class="pre">c</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">tinf</span></code></td>
 <td>ambient temperature, <span class="math notranslate nohighlight">\(T_{\infty}\)</span></td>
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Note:</th><td class="field-body">Both heat transfer coefficient and ambient temperature must be specified for a Robin boundary condition.</td>
-</tr>
-</tbody>
-</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Both heat transfer coefficient and ambient temperature must be specified for a Robin boundary condition.</p>
+</div>
 <p>A few examples are shown next to demonstrate how to set simple boundary conditions.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -827,7 +723,7 @@ These correspond to standard Dirichlet, Neumann, and Robin boundary conditions.<
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body">In the example below, the code sets a parabolic inlet velocity with a constant inlet temperature of zero and a constant wall temperature of one.
 The temperature field has the same BC of <code class="docutils literal notranslate"><span class="pre">t</span></code>  on both the inlet and the wall, so the velocity BC is accessed to differentiate between the two.
-Also note that this routine will not be called for <code class="docutils literal notranslate"><span class="pre">ifield=1</span></code> for the <code class="docutils literal notranslate"><span class="pre">W</span></code> boundary, but it will be called for <code class="docutils literal notranslate"><span class="pre">ifield=2</span></code> for the <code class="docutils literal notranslate"><span class="pre">t</span></code> boundary colocated with the <code class="docutils literal notranslate"><span class="pre">W</span></code> boundary.</td>
+Also note that this routine will not be called for <code class="docutils literal notranslate"><span class="pre">ifield=1</span></code> for the <code class="docutils literal notranslate"><span class="pre">W</span></code> boundary, but it will be called for <code class="docutils literal notranslate"><span class="pre">ifield=2</span></code> for the <code class="docutils literal notranslate"><span class="pre">t</span></code> boundary co-located with the <code class="docutils literal notranslate"><span class="pre">W</span></code> boundary.</td>
 </tr>
 </tbody>
 </table>
@@ -942,21 +838,25 @@ These are listed in <a class="reference internal" href="#tab-psbcs"><span class=
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">hc</span></code></td>
 <td>transfer coefficient, <span class="math notranslate nohighlight">\(\eta\)</span></td>
 <td rowspan="2"><span class="math notranslate nohighlight">\(\Gamma_i\nabla \phi_i\cdot\mathbf{\hat e_n}=\eta(\phi_i-\phi_{i,\infty})\)</span></td>
-<td rowspan="2"><code class="docutils literal notranslate"><span class="pre">r</span></code></td>
+<td rowspan="2"><code class="docutils literal notranslate"><span class="pre">c</span></code></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">tinf</span></code></td>
 <td>ambient value, <span class="math notranslate nohighlight">\(\phi_{i,\infty}\)</span></td>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Temperature and passive scalar boundary conditions are contextual and will set the boundary condition for the active solution field. See <a class="reference internal" href="#tab-ifield"><span class="std std-numref">Table 21</span></a>.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">ps(i)</span></code> variable array provided by <code class="docutils literal notranslate"><span class="pre">NEKUSE</span></code> is <strong>NOT</strong> used to set the passive scalar boundary conditions.</p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Note:</th><td class="field-body">Temperature and passive scalar boundary conditions are contextual and will set the boundary condition for the active solution field. See <a class="reference internal" href="#tab-ifield"><span class="std std-numref">Table 21</span></a>.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Warning:</th><td class="field-body">The <code class="docutils literal notranslate"><span class="pre">ps(i)</span></code> variable array provided by <code class="docutils literal notranslate"><span class="pre">NEKUSE</span></code> is <strong>NOT</strong> used to set the passive scalar boundary conditions.</td>
-</tr>
 <tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body">In this example, the <code class="docutils literal notranslate"><span class="pre">ifield</span></code> variable is used to distinguish between a constant inlet temperature of 0 and a transient concentration for passive scalar 1 which is distributed normally in time.</td>
 </tr>
 </tbody>
@@ -993,30 +893,26 @@ These are listed in <a class="reference internal" href="#tab-psbcs"><span class=
 </pre></div>
 </div>
 <p>It is not uncommon to use multiple methods of discerning between different boundary conditions.
-The user may need to implement specific conditions for different fields on differeny boundaries at different times.
+The user may need to implement specific conditions for different fields on different boundaries at different times.
 This can quickly lead to complex, embedded if-then statements.
 Use care to ensure you’re setting the correct boundary conditions!</p>
 </div>
 <div class="section" id="useric">
 <span id="sec-useric"></span><h3>useric<a class="headerlink" href="#useric" title="Permalink to this headline">¶</a></h3>
 <p>This functions sets the initial conditions and behaves similarly to <code class="docutils literal notranslate"><span class="pre">userbc</span></code>.
-It is called only during intialization after <code class="docutils literal notranslate"><span class="pre">usrdat3</span></code> for every solution field on every GLL point in the domain.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Warning:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">useric</span></code> is <strong>NOT</strong> called for any fields loaded from a restart file.</td>
-</tr>
-</tbody>
-</table>
+It is called only during initialization after <code class="docutils literal notranslate"><span class="pre">usrdat3</span></code> for every solution field on every GLL point in the domain.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">useric</span></code> is <strong>NOT</strong> called for any fields loaded from a restart file.</p>
+</div>
 </div>
 </div>
 <div class="section" id="global-routines">
 <span id="id3"></span><h2>Global Routines<a class="headerlink" href="#global-routines" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="userchk">
 <span id="sec-userchk"></span><h3>userchk<a class="headerlink" href="#userchk" title="Permalink to this headline">¶</a></h3>
-<p>This is a general purpose routine that is executed both during intialization and after every time step.
-It can be used for a wide variety of purposes, such as monitoring the the solution, post-processing results, or implementing entirely new physical solvers.</p>
+<p>This is a general purpose routine that is executed both during initialization and after every time step.
+It can be used for a wide variety of purposes, such as monitoring the solution, post-processing results, or implementing entirely new physical solvers.</p>
 <p>It is helpful for users to familiarize themselves with the included utility subroutines in <em>Nek5000</em> as they can make performing complex calculations on the entire dataset much easier.
 For a list of some of the commonly used subroutines, see <a class="reference internal" href="../appendix.html#append-subroutines"><span class="std std-ref">here</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1025,7 +921,7 @@ For a list of some of the commonly used subroutines, see <a class="reference int
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body">Most of the code shown below will only be executed if <em>Nek5000</em> is run in “post-processing” mode, i.e. <code class="docutils literal notranslate"><span class="pre">numSteps</span> <span class="pre">=</span> <span class="pre">0</span></code> is specified in the <code class="docutils literal notranslate"><span class="pre">.par</span></code> file.
 The solution is rescaled by reference length, velocity, and pressure and written to an output file.
-The name of the output file will be prepended with the charachters <code class="docutils literal notranslate"><span class="pre">dim</span></code> and it will contain dimensional quantities that can be loaded into Paraview or VisIt for further post processing.</td>
+The name of the output file will be prepended with the characters <code class="docutils literal notranslate"><span class="pre">dim</span></code> and it will contain dimensional quantities that can be loaded into Paraview or VisIt for further post processing.</td>
 </tr>
 </tbody>
 </table>
@@ -1175,50 +1071,33 @@ The GLL mesh should not be further modified in this routine as the geometric fac
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="filter.html" class="btn btn-neutral float-right" title="Stabilizing Filters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="case_files.html" class="btn btn-neutral float-left" title="Case Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="filter.html" class="btn btn-neutral float-right" title="Stabilizing Filters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2015-2022, UCHICAGO ARGONNE, LLC.
-
-    </p>
+    <p>&#169; Copyright 2015-2022, UCHICAGO ARGONNE, LLC.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

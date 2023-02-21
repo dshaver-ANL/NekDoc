@@ -1,72 +1,33 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Boundary Conditions &mdash; Nek5000  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>Boundary Conditions &mdash; Nek5000  documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script type="text/javascript" src="../_static/jquery.js"></script>
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
         <script type="text/javascript" src="../_static/language_data.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Case Files" href="case_files.html" />
     <link rel="prev" title="Problem Setup" href="../problem_setup.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Nek5000
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -74,18 +35,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
@@ -102,85 +52,45 @@
 <li class="toctree-l2"><a class="reference internal" href="features.html">Additional Features</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../tools.html">Nek Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../build.html">Build Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RANSCI.html">Continuous Integration Testing for RANS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix.html">Appendices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Nek5000</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../problem_setup.html">Problem Setup</a> &raquo;</li>
-        
       <li>Boundary Conditions</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/problem_setup/BCs.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="boundary-conditions">
 <span id="id1"></span><h1>Boundary Conditions<a class="headerlink" href="#boundary-conditions" title="Permalink to this headline">¶</a></h1>
 <p>The boundary conditions can be imposed in various ways:</p>
 <ul class="simple">
-<li>when the mesh is generated, e.g. with <code class="docutils literal notranslate"><span class="pre">genbox</span></code>, as is explained in <a class="reference internal" href="../appendix.html#sec-genbox"><span class="std std-ref">Generating a Mesh with Genbox</span></a></li>
+<li>when the mesh is generated, e.g. with <code class="docutils literal notranslate"><span class="pre">genbox</span></code>, as is explained in <a class="reference internal" href="../tools/genbox.html#tools-genbox"><span class="std std-ref">Genbox</span></a></li>
 <li>when an <code class="docutils literal notranslate"><span class="pre">.rea</span></code> file is read in <em>preNek</em></li>
 <li>translated from side-set numbers in <code class="docutils literal notranslate"><span class="pre">usrdat</span></code> when using <code class="docutils literal notranslate"><span class="pre">exotonek</span></code> or similar. For an example see <a class="reference internal" href="usr_file.html#sec-usrdat"><span class="std std-ref">here</span></a>.</li>
 </ul>
@@ -194,14 +104,14 @@
 <div class="section" id="fluid-velocity">
 <h2>Fluid Velocity<a class="headerlink" href="#fluid-velocity" title="Permalink to this headline">¶</a></h2>
 <p>Two types of boundary conditions are applicable to the fluid velocity : essential (Dirichlet) boundary condition in which the velocity is specified and natural (Neumann) boundary condition in which the traction is specified.
-For segments that constitute the boundary <span class="math notranslate nohighlight">\(\partial \Omega_f\)</span>, see <a class="reference internal" href="../theory.html#fig-walls"><span class="std std-numref">Fig. 19</span></a>, one of these two types of boundary conditions must be assigned to each component of the fluid velocity.
+For segments that constitute the boundary <span class="math notranslate nohighlight">\(\partial \Omega_f\)</span>, see <a class="reference internal" href="../theory.html#fig-walls"><span class="std std-numref">Fig. 31</span></a>, one of these two types of boundary conditions must be assigned to each component of the fluid velocity.
 The fluid boundary condition can be <em>all Dirichlet</em> if all velocity components of <span class="math notranslate nohighlight">\({\bf u}\)</span> are specified, or it can be <em>all Neumann</em> if all traction components (<span class="math notranslate nohighlight">\(\boldsymbol{\underline \tau} = [-P {\bf \underline I} + \mu (\nabla {\bf u} + (\nabla {\bf u})^{T})] \cdot {\bf \hat e_n}\)</span>) are specified.
 Where <span class="math notranslate nohighlight">\({\bf \underline I}\)</span> is the identity tensor, <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span> is the unit normal and <span class="math notranslate nohighlight">\(\mu\)</span> is the dynamic viscosity, are specified.
 It can also be <em>mixed Dirichlet/Neumann</em> if Dirichlet and Neumann conditions are selected for different velocity components.
 If the no stress formulation is selected, then traction is not defined on the boundary.
 In this case, any Neumann boundary condition imposed must be homogeneous, i.e. equal to zero.
 .. In addition, mixed Dirichlet/Neumann boundaries must be aligned with one of the Cartesian axes.
-For flow geometry which consists of a periodic repetition of a particular geometric unit, the periodic boundary conditions can be imposed, as illustrated in <a class="reference internal" href="../theory.html#fig-walls"><span class="std std-numref">Fig. 19</span></a> .
+For flow geometry which consists of a periodic repetition of a particular geometric unit, the periodic boundary conditions can be imposed, as illustrated in <a class="reference internal" href="../theory.html#fig-walls"><span class="std std-numref">Fig. 31</span></a> .
 The available primitive boundary conditions for the fluid are given in <a class="reference internal" href="#tab-bcf"><span class="std std-numref">Table 1</span></a> , with the user-specified boundary conditions in <a class="reference internal" href="#tab-ubcf"><span class="std std-numref">Table 2</span></a> .</p>
 <span id="tab-bcf"></span><table border="1" class="docutils" id="id2">
 <caption><span class="caption-number">Table 1 </span><span class="caption-text">Primitive boundary conditions for velocity</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
@@ -550,7 +460,7 @@ If the fluid flow problem is considered, i.e., the energy
 equation is solved in conjunction with the momentum and
 continuity equations, then only
 the common boundary between the fluid and the solid
-(i.e., all or portion of <span class="math notranslate nohighlight">\(\partial \overline{\Omega}_f'\)</span> in <a class="reference internal" href="../theory.html#fig-walls"><span class="std std-numref">Fig. 19</span></a>)
+(i.e., all or portion of <span class="math notranslate nohighlight">\(\partial \overline{\Omega}_f'\)</span> in <a class="reference internal" href="../theory.html#fig-walls"><span class="std std-numref">Fig. 31</span></a>)
 can be defined as the melting front.
 In this case, segments on <span class="math notranslate nohighlight">\(\partial \overline{\Omega}_f'\)</span> that
 belong to the dynamic melting/freezing interface need to be
@@ -576,50 +486,33 @@ which is also assumed to be constant, should be specified.</p>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="case_files.html" class="btn btn-neutral float-right" title="Case Files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../problem_setup.html" class="btn btn-neutral float-left" title="Problem Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="case_files.html" class="btn btn-neutral float-right" title="Case Files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2015-2022, UCHICAGO ARGONNE, LLC.
-
-    </p>
+    <p>&#169; Copyright 2015-2022, UCHICAGO ARGONNE, LLC.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
