@@ -11,6 +11,7 @@ Nek5000
    tutorials
    theory
    build
+   RANSCI
    appendix
    references
 

@@ -1,0 +1,20 @@
+.. _RANSCI_wirewrap:
+
+---------------------
+Wire-wrapped LMFR Pin
+---------------------
+
+................
+Case Description
+................
+
+.. include:: description.txt
+
+.. csv-table:: Tested Quantities
+   :header: Variable, Expected Value, Acceptable Range
+
+   Pressure Drop, , 
+
+.......
+Results
+.......
