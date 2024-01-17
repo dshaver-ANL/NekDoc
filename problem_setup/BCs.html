@@ -103,7 +103,7 @@
              
   <div class="section" id="boundary-conditions">
 <span id="id1"></span><h1>Boundary Conditions<a class="headerlink" href="#boundary-conditions" title="Permalink to this headline">¶</a></h1>
-<p>For all boundaries, it is necessary to provide <em>Nek5000</em> with the boundary condition <em>type</em> (e.g. that the velocity is to be specified), and for some types, the boundary condition <em>value</em> (e.g. what the velocity is speficied as).
+<p>For all boundaries, it is necessary to provide <em>Nek5000</em> with the boundary condition <em>type</em> (e.g. that the velocity is to be specified), and for some types, the boundary condition <em>value</em> (e.g. what the velocity is specified as).
 Boundary condition values are assigned in the <code class="docutils literal notranslate"><span class="pre">.usr</span></code> file in the <code class="docutils literal notranslate"><span class="pre">userbc</span></code> subroutine (see <a class="reference internal" href="usr_file.html#sec-userbc"><span class="std std-ref">userbc</span></a> for details).
 This section focuses on what boundary condition types are available in <em>Nek5000</em> and how to assign them.</p>
 <p>We first discuss how <em>Nek5000</em> stores the boundary condition information in the code itself.
@@ -112,7 +112,7 @@ These are stored in memory in the <code class="docutils literal notranslate"><sp
 It is declared in a common block in <code class="docutils literal notranslate"><span class="pre">Nek5000/core/INPUT</span></code> as <code class="docutils literal notranslate"><span class="pre">cbc(6,lelt,0:ldimt1)</span></code>, which is then included in the user subroutines in the <code class="docutils literal notranslate"><span class="pre">.usr</span></code> file as well as any relevant source code files.
 Each boundary condition type has a corresponding <em>character identifier code</em> which tells <em>Nek5000</em> how to treat the boundary on each element.
 The <code class="docutils literal notranslate"><span class="pre">cbc</span></code> array is set at runtime either from information carried directly in the mesh file (<code class="docutils literal notranslate"><span class="pre">.rea</span></code>/<code class="docutils literal notranslate"><span class="pre">.re2</span></code>), from information provided in the <code class="docutils literal notranslate"><span class="pre">.par</span></code> file, or (for advanced users) directly in <code class="docutils literal notranslate"><span class="pre">usrdat</span></code> or <code class="docutils literal notranslate"><span class="pre">usrdat2</span></code>.</p>
-<p>The general conventions for boundary conditions identifiers are:</p>
+<p>The general conventions for boundary condition identifiers are:</p>
 <ul class="simple">
 <li>uppercase letters correspond to boundary conditions which do not require any additional user input.</li>
 <li>lowercase letters correspond to user defined boundary conditions which require values to be set in the <a class="reference internal" href="usr_file.html#sec-userbc"><span class="std std-ref">user file</span></a>.</li>
@@ -123,36 +123,46 @@ The <code class="docutils literal notranslate"><span class="pre">cbc</span></cod
 <span id="sec-velbcs"></span><h2>Fluid Velocity and Pressure<a class="headerlink" href="#fluid-velocity-and-pressure" title="Permalink to this headline">¶</a></h2>
 <p>Two kinds of boundary conditions are applicable to the fluid velocity: essential (Dirichlet) boundary conditions in which the velocity is specified, and natural (Neumann) boundary conditions in which the traction is specified.
 For segments that constitute the boundary <span class="math notranslate nohighlight">\(\partial \Omega_f\)</span>, see <a class="reference internal" href="../theory.html#fig-walls"><span class="std std-numref">Fig. 31</span></a>, one of these two types of boundary conditions must be assigned to each component of the fluid velocity.</p>
-<p>The fluid boundary condition can be <em>all Dirichlet</em> if all velocity components of <span class="math notranslate nohighlight">\({\bf u}\)</span> are specified, or it can be <em>all Neumann</em> if all three traction components (<span class="math notranslate nohighlight">\(\boldsymbol{\tau} = [\mu (\nabla {\bf u} + (\nabla {\bf u})^{T})] \cdot {\bf \hat e_n}\)</span>) are specified on the boundary face.
-Where <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span> is the unit vector normal to the boundary face and <span class="math notranslate nohighlight">\(\mu\)</span> is the local dynamic viscosity.
+<p>The fluid boundary condition can be <em>all Dirichlet</em> if all velocity components of <span class="math notranslate nohighlight">\({\bf u}\)</span> are specified, or it can be <em>all Neumann</em> if all three traction components (<span class="math notranslate nohighlight">\(\boldsymbol{\underline \tau} \cdot {\bf \hat e_n}\)</span>) are specified on the boundary face.
+Where <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span> is the unit vector normal to the boundary face.
 It can also be <em>mixed Dirichlet/Neumann</em> if Dirichlet and Neumann conditions are selected for different velocity components.
 If the <a class="reference internal" href="../theory.html#sec-nostress"><span class="std std-ref">no-stress formulation</span></a> is selected, then traction is not defined on the boundary.
 In this case, any Neumann boundary condition imposed must be homogeneous, i.e. equal to zero, and mixed Dirichlet/Neumann boundaries must be aligned with one of the Cartesian axes.
-These conditions are not required for the <a class="reference internal" href="../theory.html#sec-fullstress"><span class="std std-ref">full-stress formulation</span></a>.
-.. For flow geometries which consist of a periodic repetition of a particular geometric unit, periodic boundary conditions can be imposed, as illustrated in <a class="reference internal" href="../theory.html#fig-walls"><span class="std std-numref">Fig. 31</span></a> .</p>
+These conditions are not required for the <a class="reference internal" href="../theory.html#sec-fullstress"><span class="std std-ref">full-stress formulation</span></a>.</p>
+<p>Neumann boundary conditions for velocity are assigned differently depending on if the no-stress or full-stress formulation is used.
+In the no-stress formulation, the non-diagonal terms are neglected and we define the stress tensor as:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\boldsymbol{\underline \tau} \equiv \mu \nabla \bf u\]</div>
+</div></blockquote>
+<p>and in the full-stress formulation as:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\boldsymbol{\underline \tau} \equiv \mu\left[\nabla {\bf u} + \left(\nabla {\bf u}\right)^T\right]\]</div>
+</div></blockquote>
 <div class="section" id="inlet-dirichlet-v">
 <h3>Inlet (Dirichlet), <code class="docutils literal notranslate"><span class="pre">v</span></code><a class="headerlink" href="#inlet-dirichlet-v" title="Permalink to this headline">¶</a></h3>
 <p>Standard Dirichlet boundary condition for velocity.</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[\begin{split}\nabla p \cdot {\bf \hat e_n} &amp;= 0\\
+\[\begin{split}\nabla p \cdot {\bf \hat e_n} &amp;= \mu\left(\nabla\times\boldsymbol{\omega}\right) \cdot {\bf \hat e_n}\\
 {\bf u} \cdot {\bf \hat e_x} &amp;= u_x\\
 {\bf u} \cdot {\bf \hat e_y} &amp;= u_y\\
 {\bf u} \cdot {\bf \hat e_z} &amp;= u_z\end{split}\]</div>
 </div></blockquote>
-<p>Where, <span class="math notranslate nohighlight">\({\bf \hat e_x}\)</span>, <span class="math notranslate nohighlight">\({\bf \hat e_y}\)</span>, and <span class="math notranslate nohighlight">\({\bf \hat e_z}\)</span> are unit vectors aligned with the Cartesian axes and <span class="math notranslate nohighlight">\(u_x\)</span>, <span class="math notranslate nohighlight">\(u_y\)</span>, and <span class="math notranslate nohighlight">\(u_z\)</span> are set in the <a class="reference internal" href="usr_file.html#sec-userbc"><span class="std std-ref">user file</span></a>.</p>
+<p>Where, <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span> is the unit vector normal to the boundary face, <span class="math notranslate nohighlight">\(\boldsymbol{\omega}\)</span> is the vorticity, <span class="math notranslate nohighlight">\({\bf \hat e_x}\)</span>, <span class="math notranslate nohighlight">\({\bf \hat e_y}\)</span>, and <span class="math notranslate nohighlight">\({\bf \hat e_z}\)</span> are unit vectors aligned with the Cartesian axes and <span class="math notranslate nohighlight">\(u_x\)</span>, <span class="math notranslate nohighlight">\(u_y\)</span>, and <span class="math notranslate nohighlight">\(u_z\)</span> are set in the <a class="reference internal" href="usr_file.html#sec-userbc"><span class="std std-ref">user file</span></a>.</p>
 </div>
 <div class="section" id="inlet-dirichlet-local-vl">
 <h3>Inlet (Dirichlet) - local <code class="docutils literal notranslate"><span class="pre">vl</span></code><a class="headerlink" href="#inlet-dirichlet-local-vl" title="Permalink to this headline">¶</a></h3>
 <p>Standard Dirichlet boundary condition for velocity in local coordinates.</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[\begin{split}\nabla p \cdot {\bf \hat e_n} &amp;= 0\\
+\[\begin{split}\nabla p \cdot {\bf \hat e_n} &amp;= \mu\left(\nabla\times\boldsymbol{\omega}\right) \cdot {\bf \hat e_n}\\
 {\bf u} \cdot {\bf \hat e_n} &amp;= u_n\\
 {\bf u} \cdot {\bf \hat e_t} &amp;= u_1\\
 {\bf u} \cdot {\bf \hat e_b} &amp;= u_2\end{split}\]</div>
 </div></blockquote>
-<p>Where, <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span>, <span class="math notranslate nohighlight">\({\bf \hat e_t}\)</span>, and <span class="math notranslate nohighlight">\({\bf \hat e_b}\)</span> are the normal, tangent, and bitangent unit vectors on the boundary face and <span class="math notranslate nohighlight">\(u_n\)</span>, <span class="math notranslate nohighlight">\(u_1\)</span>, and <span class="math notranslate nohighlight">\(u_2\)</span> are set in the <a class="reference internal" href="usr_file.html#sec-userbc"><span class="std std-ref">user file</span></a>.</p>
+<p>Where, <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span>, <span class="math notranslate nohighlight">\({\bf \hat e_t}\)</span>, and <span class="math notranslate nohighlight">\({\bf \hat e_b}\)</span> are the normal, tangent, and bitangent unit vectors on the boundary face, <span class="math notranslate nohighlight">\(\boldsymbol{\omega}\)</span> is the vorticity, and <span class="math notranslate nohighlight">\(u_n\)</span>, <span class="math notranslate nohighlight">\(u_1\)</span>, and <span class="math notranslate nohighlight">\(u_2\)</span> are set in the <a class="reference internal" href="usr_file.html#sec-userbc"><span class="std std-ref">user file</span></a>.</p>
 </div>
 <div class="section" id="outlet-o">
 <h3>Outlet, <code class="docutils literal notranslate"><span class="pre">O</span></code><a class="headerlink" href="#outlet-o" title="Permalink to this headline">¶</a></h3>
@@ -160,10 +170,10 @@ These conditions are not required for the <a class="reference internal" href="..
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\begin{split}p &amp;= 0\\
-\mu(\nabla {\bf u}+\nabla {\bf u}^T)\cdot {\bf \hat e_n} &amp;= 0\end{split}\]</div>
+\boldsymbol{\underline \tau} \cdot {\bf \hat e_n} &amp;= 0\end{split}\]</div>
 </div></blockquote>
 <p>Where <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span> is the unit vector normal to the boundary face.
-The <code class="docutils literal notranslate"><span class="pre">userbc</span></code> subroutine is not called for this face.</p>
+The <code class="docutils literal notranslate"><span class="pre">userbc</span></code> subroutine is not called for this boundary condition type.</p>
 </div>
 <div class="section" id="pressure-outlet-o">
 <h3>Pressure Outlet, <code class="docutils literal notranslate"><span class="pre">o</span></code><a class="headerlink" href="#pressure-outlet-o" title="Permalink to this headline">¶</a></h3>
@@ -171,10 +181,9 @@ The <code class="docutils literal notranslate"><span class="pre">userbc</span></
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\begin{split}p &amp;= p_a\\
-\mu(\nabla {\bf u}+\nabla {\bf u}^T)\cdot {\bf \hat e_n} &amp;= 0\end{split}\]</div>
+\boldsymbol{\underline \tau} \cdot {\bf \hat e_n} &amp;= 0\end{split}\]</div>
 </div></blockquote>
-<p>Where <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span> is the unit vector normal to the boundary face and <span class="math notranslate nohighlight">\(p_a\)</span> is set in the <a class="reference internal" href="usr_file.html#sec-userbc"><span class="std std-ref">user file</span></a>.
-The <code class="docutils literal notranslate"><span class="pre">userbc</span></code> subroutine is not called for this face.</p>
+<p>Where <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span> is the unit vector normal to the boundary face and <span class="math notranslate nohighlight">\(p_a\)</span> is set in the <a class="reference internal" href="usr_file.html#sec-userbc"><span class="std std-ref">user file</span></a>.</p>
 </div>
 <div class="section" id="outlet-normal-on">
 <h3>Outlet - Normal, <code class="docutils literal notranslate"><span class="pre">ON</span></code><a class="headerlink" href="#outlet-normal-on" title="Permalink to this headline">¶</a></h3>
@@ -182,13 +191,13 @@ The <code class="docutils literal notranslate"><span class="pre">userbc</span></
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\begin{split}p &amp;= 0\\
-\mu(\nabla {\bf u}+\nabla {\bf u}^T) \cdot {\bf \hat e_n} \cdot {\bf \hat e_n} &amp;= 0\\
+\left(\boldsymbol{\underline \tau} \cdot {\bf \hat e_n}\right) \cdot {\bf \hat e_n} &amp;= 0\\
 {\bf u} \cdot {\bf \hat e_t} &amp;= 0\\
 {\bf u} \cdot {\bf \hat e_b} &amp;= 0\end{split}\]</div>
 </div></blockquote>
 <p>Where, <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span>, <span class="math notranslate nohighlight">\({\bf \hat e_t}\)</span>, and <span class="math notranslate nohighlight">\({\bf \hat e_b}\)</span> are the normal, tangent, and bitangent unit vectors on the boundary face.
-If the normal, tangent, and bitangent vectors are not aligned with the principal Cartesian axes, the <a class="reference internal" href="../theory.html#sec-fullstress"><span class="std std-ref">full-stress formulation</span></a> must be used.
-The <code class="docutils literal notranslate"><span class="pre">userbc</span></code> subroutine is not called for this face.</p>
+If the surface normal vector is not aligned with a principal Cartesian axis, the <a class="reference internal" href="../theory.html#sec-fullstress"><span class="std std-ref">full-stress formulation</span></a> must be used.
+The <code class="docutils literal notranslate"><span class="pre">userbc</span></code> subroutine is not called for this boundary condition type.</p>
 </div>
 <div class="section" id="pressure-outlet-normal-on">
 <h3>Pressure Outlet - normal, <code class="docutils literal notranslate"><span class="pre">on</span></code><a class="headerlink" href="#pressure-outlet-normal-on" title="Permalink to this headline">¶</a></h3>
@@ -196,12 +205,12 @@ The <code class="docutils literal notranslate"><span class="pre">userbc</span></
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\begin{split}p &amp;= p_a\\
-\mu(\nabla {\bf u}+\nabla {\bf u}^T) \cdot {\bf \hat e_n} \cdot {\bf \hat e_n} &amp;= 0\\
+\left(\boldsymbol{\underline \tau} \cdot {\bf \hat e_n}\right) \cdot {\bf \hat e_n} &amp;= 0\\
 {\bf u} \cdot {\bf \hat e_t} &amp;= 0\\
 {\bf u} \cdot {\bf \hat e_b} &amp;= 0\end{split}\]</div>
 </div></blockquote>
 <p>Where, <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span>, <span class="math notranslate nohighlight">\({\bf \hat e_t}\)</span>, and <span class="math notranslate nohighlight">\({\bf \hat e_b}\)</span> are the normal, tangent, and bitangent unit vectors on the boundary face, and <span class="math notranslate nohighlight">\(p_a\)</span> is set in the <a class="reference internal" href="usr_file.html#sec-userbc"><span class="std std-ref">user file</span></a>.
-If the normal, tangent, and bitangent vectors are not aligned with the principal Cartesian axes, the <a class="reference internal" href="../theory.html#sec-fullstress"><span class="std std-ref">full-stress formulation</span></a> must be used.</p>
+If the surface normal vector is not aligned with a principal Cartesian axis, the <a class="reference internal" href="../theory.html#sec-fullstress"><span class="std std-ref">full-stress formulation</span></a> must be used.</p>
 </div>
 <div class="section" id="symmetry-sym">
 <h3>Symmetry, <code class="docutils literal notranslate"><span class="pre">SYM</span></code><a class="headerlink" href="#symmetry-sym" title="Permalink to this headline">¶</a></h3>
@@ -210,12 +219,12 @@ If the normal, tangent, and bitangent vectors are not aligned with the principal
 <div><div class="math notranslate nohighlight">
 \[\begin{split}\nabla p \cdot {\bf \hat e_n} &amp;= 0\\
 {\bf u} \cdot {\bf \hat e_n} &amp;= 0\\
-\mu\left(\nabla {\bf u} + \nabla {\bf u}^T\right) \cdot {\bf \hat e_n}\cdot {\bf \hat e_t} &amp;= 0\\
-\mu\left(\nabla {\bf u} + \nabla {\bf u}^T\right) \cdot {\bf \hat e_n}\cdot {\bf \hat e_b} &amp;= 0\end{split}\]</div>
+\left(\boldsymbol{\underline \tau} \cdot {\bf \hat e_n}\right)\cdot {\bf \hat e_t} &amp;= 0\\
+\left(\boldsymbol{\underline \tau} \cdot {\bf \hat e_n}\right)\cdot {\bf \hat e_b} &amp;= 0\end{split}\]</div>
 </div></blockquote>
 <p>Where, <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span>, <span class="math notranslate nohighlight">\({\bf \hat e_t}\)</span>, and <span class="math notranslate nohighlight">\({\bf \hat e_b}\)</span> are the normal, tangent, and bitangent unit vectors on the boundary face.
-If the normal, tangent, and bitangent vectors are not aligned with the principal Cartesian axes, the <a class="reference internal" href="../theory.html#sec-fullstress"><span class="std std-ref">full-stress formulation</span></a> must be used.
-The <code class="docutils literal notranslate"><span class="pre">userbc</span></code> subroutine is not called for this face.</p>
+If the surface normal vector is not aligned with a principal Cartesian axis, the <a class="reference internal" href="../theory.html#sec-fullstress"><span class="std std-ref">full-stress formulation</span></a> must be used.
+The <code class="docutils literal notranslate"><span class="pre">userbc</span></code> subroutine is not called for this boundary condition type.</p>
 </div>
 <div class="section" id="traction-s">
 <h3>Traction, <code class="docutils literal notranslate"><span class="pre">s</span></code><a class="headerlink" href="#traction-s" title="Permalink to this headline">¶</a></h3>
@@ -223,12 +232,12 @@ The <code class="docutils literal notranslate"><span class="pre">userbc</span></
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\begin{split}p &amp;= 0\\
-\mu\left(\nabla {\bf u} + \nabla {\bf u}^T\right) \cdot {\bf \hat e_n}\cdot {\bf \hat e_x} &amp;= tr_x\\
-\mu\left(\nabla {\bf u} + \nabla {\bf u}^T\right) \cdot {\bf \hat e_n}\cdot {\bf \hat e_y} &amp;= tr_y\\
-\mu\left(\nabla {\bf u} + \nabla {\bf u}^T\right) \cdot {\bf \hat e_n}\cdot {\bf \hat e_z} &amp;= tr_z\end{split}\]</div>
+\left(\boldsymbol{\underline \tau} \cdot {\bf \hat e_n}\right)\cdot {\bf \hat e_x} &amp;= tr_x\\
+\left(\boldsymbol{\underline \tau} \cdot {\bf \hat e_n}\right)\cdot {\bf \hat e_y} &amp;= tr_y\\
+\left(\boldsymbol{\underline \tau} \cdot {\bf \hat e_n}\right)\cdot {\bf \hat e_z} &amp;= tr_z\end{split}\]</div>
 </div></blockquote>
 <p>Where, <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span> is the unit vector normal to the boundary face, <span class="math notranslate nohighlight">\({\bf \hat e_x}\)</span>, <span class="math notranslate nohighlight">\({\bf \hat e_y}\)</span>, and <span class="math notranslate nohighlight">\({\bf \hat e_z}\)</span> are unit vectors aligned with the Cartesian axes and <span class="math notranslate nohighlight">\(tr_x\)</span>, <span class="math notranslate nohighlight">\(tr_y\)</span>, and <span class="math notranslate nohighlight">\(tr_z\)</span> are set in the <a class="reference internal" href="usr_file.html#sec-userbc"><span class="std std-ref">user file</span></a>.
-If the normal, tangent, and bitangent vectors are not aligned with the principal Cartesian axes, the <a class="reference internal" href="../theory.html#sec-fullstress"><span class="std std-ref">full-stress formulation</span></a> must be used.</p>
+The <a class="reference internal" href="../theory.html#sec-fullstress"><span class="std std-ref">full-stress formulation</span></a> must be used for the this boundary type.</p>
 </div>
 <div class="section" id="traction-local-sl">
 <h3>Traction - local, <code class="docutils literal notranslate"><span class="pre">sl</span></code><a class="headerlink" href="#traction-local-sl" title="Permalink to this headline">¶</a></h3>
@@ -236,35 +245,36 @@ If the normal, tangent, and bitangent vectors are not aligned with the principal
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\begin{split}p &amp;= 0\\
-\mu\left(\nabla {\bf u} + \nabla {\bf u}^T\right) \cdot {\bf \hat e_n}\cdot {\bf \hat e_n} &amp;= tr_n\\
-\mu\left(\nabla {\bf u} + \nabla {\bf u}^T\right) \cdot {\bf \hat e_n}\cdot {\bf \hat e_t} &amp;= tr_1\\
-\mu\left(\nabla {\bf u} + \nabla {\bf u}^T\right) \cdot {\bf \hat e_n}\cdot {\bf \hat e_b} &amp;= tr_2\end{split}\]</div>
+\left(\boldsymbol{\underline \tau} \cdot {\bf \hat e_n}\right)\cdot {\bf \hat e_n} &amp;= tr_n\\
+\left(\boldsymbol{\underline \tau} \cdot {\bf \hat e_n}\right)\cdot {\bf \hat e_t} &amp;= tr_1\\
+\left(\boldsymbol{\underline \tau} \cdot {\bf \hat e_n}\right)\cdot {\bf \hat e_b} &amp;= tr_2\end{split}\]</div>
 </div></blockquote>
 <p>Where, <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span>, <span class="math notranslate nohighlight">\({\bf \hat e_t}\)</span>, and <span class="math notranslate nohighlight">\({\bf \hat e_b}\)</span> are the normal, tangent, and bitangent unit vectors on the boundary face, and <span class="math notranslate nohighlight">\(tr_n\)</span>, <span class="math notranslate nohighlight">\(tr_1\)</span>, and <span class="math notranslate nohighlight">\(tr_2\)</span> are set in the <a class="reference internal" href="usr_file.html#sec-userbc"><span class="std std-ref">user file</span></a>.
-If the normal, tangent, and bitangent vectors are not aligned with the principal Cartesian axes, the <a class="reference internal" href="../theory.html#sec-fullstress"><span class="std std-ref">full-stress formulation</span></a> must be used.</p>
+The <a class="reference internal" href="../theory.html#sec-fullstress"><span class="std std-ref">full-stress formulation</span></a> must be used for the this boundary type.</p>
 </div>
 <div class="section" id="traction-horizontal-local-shl">
 <h3>Traction - horizontal, local, <code class="docutils literal notranslate"><span class="pre">shl</span></code><a class="headerlink" href="#traction-horizontal-local-shl" title="Permalink to this headline">¶</a></h3>
 <p>Similar to symmetry, but with specified non-zero traction in the tangent and bitangent directions.</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[\begin{split}\nabla p \cdot {\bf \hat e_n} &amp;= 0\\
+\[\begin{split}\nabla p \cdot {\bf \hat e_n} &amp;= \mu\left(\nabla\times\boldsymbol{\omega}\right) \cdot {\bf \hat e_n}\\
 {\bf u} \cdot {\bf \hat e_n} &amp;= 0\\
-\mu\left(\nabla {\bf u} + \nabla {\bf u}^T\right) \cdot {\bf \hat e_n}\cdot {\bf \hat e_t} &amp;= tr_1\\
-\mu\left(\nabla {\bf u} + \nabla {\bf u}^T\right) \cdot {\bf \hat e_n}\cdot {\bf \hat e_b} &amp;= tr_2\end{split}\]</div>
+\left(\boldsymbol{\underline \tau} \cdot {\bf \hat e_n}\right)\cdot {\bf \hat e_t} &amp;= tr_1\\
+\left(\boldsymbol{\underline \tau} \cdot {\bf \hat e_n}\right)\cdot {\bf \hat e_b} &amp;= tr_2\end{split}\]</div>
 </div></blockquote>
-<p>Where, <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span>, <span class="math notranslate nohighlight">\({\bf \hat e_t}\)</span>, and <span class="math notranslate nohighlight">\({\bf \hat e_b}\)</span> are the normal, tangent, and bitangent unit vectors on the boundary face, and <span class="math notranslate nohighlight">\(tr_1\)</span> and <span class="math notranslate nohighlight">\(tr_2\)</span> are set in the <a class="reference internal" href="usr_file.html#sec-userbc"><span class="std std-ref">user file</span></a>.
-If the normal, tangent, and bitangent vectors are not aligned with the principal Cartesian axes, the <a class="reference internal" href="../theory.html#sec-fullstress"><span class="std std-ref">full-stress formulation</span></a> must be used.</p>
+<p>Where, <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span>, <span class="math notranslate nohighlight">\({\bf \hat e_t}\)</span>, and <span class="math notranslate nohighlight">\({\bf \hat e_b}\)</span> are the normal, tangent, and bitangent unit vectors on the boundary face, <span class="math notranslate nohighlight">\(\boldsymbol{\omega}\)</span> is the vorticity, and <span class="math notranslate nohighlight">\(tr_1\)</span> and <span class="math notranslate nohighlight">\(tr_2\)</span> are set in the <a class="reference internal" href="usr_file.html#sec-userbc"><span class="std std-ref">user file</span></a>.
+The <a class="reference internal" href="../theory.html#sec-fullstress"><span class="std std-ref">full-stress formulation</span></a> must be used for the this boundary type.</p>
 </div>
 <div class="section" id="wall-w">
 <h3>Wall, <code class="docutils literal notranslate"><span class="pre">W</span></code><a class="headerlink" href="#wall-w" title="Permalink to this headline">¶</a></h3>
 <p>Dirichlet boundary condition corresponding to a no-slip wall.</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[\begin{split}\nabla p \cdot {\bf \hat e_n} &amp;= 0\\
+\[\begin{split}\nabla p \cdot {\bf \hat e_n} &amp;= \mu\left(\nabla\times\boldsymbol{\omega}\right) \cdot {\bf \hat e_n}\\
 {\bf u} &amp;= 0\end{split}\]</div>
 </div></blockquote>
-<p>The <code class="docutils literal notranslate"><span class="pre">userbc</span></code> subroutine is not called for this face.</p>
+<p>Where, <span class="math notranslate nohighlight">\({\bf \hat e_n}\)</span> is the unit vector normal to the boundary face and <span class="math notranslate nohighlight">\(\boldsymbol{\omega}\)</span> is the vorticity.
+The <code class="docutils literal notranslate"><span class="pre">userbc</span></code> subroutine is not called for this boundary condition type.</p>
 </div>
 <div class="section" id="other-bcs">
 <h3>Other BCs<a class="headerlink" href="#other-bcs" title="Permalink to this headline">¶</a></h3>
