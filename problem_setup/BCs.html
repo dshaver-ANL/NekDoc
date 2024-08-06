@@ -126,6 +126,7 @@ The <code class="docutils literal notranslate"><span class="pre">cbc</span></cod
 <li>uppercase letters correspond to boundary conditions which do not require any additional user input.</li>
 <li>lowercase letters correspond to user defined boundary conditions which require values to be set in the <code class="docutils literal notranslate"><span class="pre">userbc</span></code> subroutine in the <a class="reference internal" href="usr_file.html#sec-userbc"><span class="std std-ref">user file</span></a>.</li>
 <li>lowercase letters ending with <code class="docutils literal notranslate"><span class="pre">l</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">vl</span></code>, are specified in face-local coordinates, i.e. normal, tangent and bitangent directions.</li>
+<li>lowercase letters including an <code class="docutils literal notranslate"><span class="pre">h</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">sh</span></code>, are a “horizontal” variant where the normal velocity component is zero. This can be combined with <code class="docutils literal notranslate"><span class="pre">l</span></code> to produce a “horizontal, local” variant.</li>
 </ul>
 <p>The available boundary condition types, along with the identifier codes, are described in the following sections for the fluid velocity and pressure, and the temperature and passive scalars.</p>
 <div class="section" id="fluid-velocity-and-pressure">
